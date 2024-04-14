@@ -1,0 +1,15 @@
+{
+  "short_name": "lab4",
+  "name": "Web lab 4",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "type": "image/png",
+      "sizes": "62x62"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

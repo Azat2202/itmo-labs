@@ -1,0 +1,161 @@
+@import url('https://fonts.cdnfonts.com/css/soyuz-grotesk');
+@font-face {
+    font-family: "sans-serif";
+}
+*{
+    font-family: 'Soyuz Grotesk', sans-serif;
+    font-size: 1.05em;
+}
+/*
+Наследование и каскадирование css
+ */
+body {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #E8EDE7;
+    padding: 0 20px 20px 20px;
+    color: #036280;
+}
+header{
+    font-family: serif;
+    color: #012E4A;
+    font-size: 2.5em;
+    text-align: center;
+}
+
+table{
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+label.request-label{
+    color: #036280;
+}
+
+button {
+    background-color: #81BECE;
+    border: none;
+    text-align: center;
+    width: auto;
+    padding: 0.2em;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+tr button{
+    line-height: 2.5em;
+}
+
+button:hover{
+    background-color: #378BA4;
+}
+
+/* Селектор дочерних элементов */
+button > label{
+    color: #012E4A;
+}
+
+/* Селектор идентификатора*/
+#X-input{
+    width: 90%;
+    height: 90%;
+    margin: 5% 5% 5% 5%;
+}
+
+table#X-input{
+    line-height: 200%;
+}
+
+option, select{
+    color:#378BA4;
+    height: 2em;
+    width: 70px;
+    text-align: center;
+}
+
+option:checked{
+    color: #036280;
+}
+
+input{
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+input[type="checkbox"] {
+    transform: scale(2);
+    margin-right: 10%;
+    text-align: center;
+}
+
+input[type="text"] {
+    height: 1.5em;
+    /*margin-right: 10%;*/
+}
+
+.success{
+    color: #87C67A;
+}
+
+.fail{
+    color: #D18189;
+}
+
+#outputTable{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+#outputTable tr th {
+    background-color: #81BECE;
+    color: #E8EDE7;
+    text-align: left;
+}
+
+#outputTable th,
+#outputTable td {
+    padding: 12px 15px;
+}
+/*
+Селектор псевдокласса
+Отступ элемента ввода в процентах
+ */
+td:has(.request-label){
+    text-align: right;
+    padding-right: 2%;
+    color: #012E4A;
+ }
+
+td:has(#R-input), td:has(#Y-input){
+    text-align: left;
+}
+
+td:has(button){
+    text-align: right;
+}
+
+svg{
+    scale: 140%;
+}
+
+/* Селектор потомков*/
+svg rect, svg polygon, svg path{
+    fill: #378BA4;
+    stroke: #036280;
+
+}
+
+svg line{
+    fill: #012E4A;
+}
+
+svg text{
+    fill: #012E4A;
+}

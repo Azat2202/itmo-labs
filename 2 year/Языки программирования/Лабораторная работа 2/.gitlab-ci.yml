@@ -1,0 +1,14 @@
+image: generic-c
+
+stages:
+  - before_script
+  - test
+
+before_script:
+  - echo "TESTING lab 2 by Azat Sirazetdinov"
+  - make main
+  - make clean
+
+test:
+  stage: test
+  script: make test

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://xmlns.jcp.org/jsf/html ">
+<h:head>
+
+    <h:outputScript library="scripts" name="Clock.js"/>
+    <h:outputScript library="scripts" name="index.js"/>
+
+    <link rel="stylesheet" type="text/css" href="resources/styles/mainPageStyle.css"/>
+
+    <title>Web lab3</title>
+</h:head>
+<h:body>
+    <header><h1>Shpineva Uliana Sergeevna<br/>
+        group P3216, variant 1323</h1></header>
+
+    <table id="clockTable">
+        <tr>
+            <td>
+                <div id="clock">
+                    <div id="time">
+                        <a id="h">12</a> :
+                        <a id="m">00</a> :
+                        <a id="s">00</a>
+                    </div>
+                    <div id="date">
+                        <a id="d">1</a>
+                        <a id="mon">January</a>
+                        <a id="y">2045</a>
+                    </div>
+                </div>
+                <h:link id="buttonWrapper" outcome="goMain">
+                    <h:commandButton value="Main" id="goMainButton" action="goMain"/>
+                </h:link>
+            </td>
+        </tr>
+    </table>
+
+    <script src="scripts/index.js"/>
+    <script src="scripts/Clock.js"/>
+</h:body>
+</html>

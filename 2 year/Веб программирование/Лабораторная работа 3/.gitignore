@@ -1,0 +1,17 @@
+target/
+src/main/resources/application.yaml
+.mvn/wrapper/maven-wrapper.jar
+**/src/main/**/target/
+**/src/test/**/target/
+
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+.idea
+.idea/**
+*.iws
+*.iml
+*.ipr
+

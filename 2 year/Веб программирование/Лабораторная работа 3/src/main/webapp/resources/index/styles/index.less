@@ -1,0 +1,72 @@
+@import "clock.css";
+
+.font-names {
+  @font-face {
+    font-family: 'Rostov';
+    src: url('../../fonts/Rostov.ttf') format('truetype');
+  }
+}
+
+
+
+@main-background: #EEEEEE;
+@element-background: #00ADB5;
+@text-color: #222831;
+@green-status: #00b509;
+@red-status: #b50300;
+
+
+//Some mixins
+.shadowing{
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.shadowing-strong{
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.bordering{
+  background-color: @main-background;
+  border-radius: 7px;
+  border: 2px solid @text-color;
+}
+
+*{
+  font-family: 'Rostov', serif;
+  font-size: 1.05em;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 16px;
+  position: relative;
+  transition: all ease 0.2s;
+  background-color: @main-background;
+  color: @text-color;
+}
+
+header{
+  font-size: 2.5em;
+  text-align: center;
+}
+
+input{
+  &.surfing-button{
+    transition: all ease 0.2s;
+    .bordering();
+    .shadowing();
+    padding: 0.5rem 1rem;
+    font-size: 1.2em;
+    margin-right: 1%;
+    &:hover{
+      .shadowing-strong();
+      background-color: @element-background;
+    }
+  }
+}

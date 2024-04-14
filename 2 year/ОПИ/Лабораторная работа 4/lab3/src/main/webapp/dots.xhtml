@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+    <h:outputScript name="dots/scripts/CanvasPrinter.js"/>
+    <h:outputScript name="dots/scripts/onetime.js"/>
+
+    <!-- Библиотека компиляции less -->
+    <link rel="stylesheet/less" type="text/css" href="resources/dots/styles/styles.less" />
+    <script src="https://cdn.jsdelivr.net/npm/less" ></script>
+
+    <!-- Библиотека SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <title>Сиразетдинов Азат | Веб программиирование</title>
+</h:head>
+<h:body>
+    <header>
+        <h1>Сиразетдинов Азат. P3216 Вариант 3856</h1>
+    </header>
+    <div id="main-container">
+        <div id="form-container">
+            <h:form>
+                <div class="input-container" id="X-input-container">
+                    <p:outputLabel styleClass="form-label" for="@next" value="Выберите X:"/>
+                    <p:selectOneMenu styleClass="X-input input-area" value="#{pointHandler.point.x}">
+                        <f:selectItem itemLabel="-2" itemValue="-2"/>
+                        <f:selectItem itemLabel="-1.5" itemValue="-1.5"/>
+                        <f:selectItem itemLabel="-1" itemValue="-1"/>
+                        <f:selectItem itemLabel="-0.5" itemValue="-0.5"/>
+                        <f:selectItem itemLabel="0" itemValue="0"/>
+                        <f:selectItem itemLabel="0.5" itemValue="0.5"/>
+                        <f:selectItem itemLabel="1" itemValue="1"/>
+                        <f:selectItem itemLabel="1.5" itemValue="1.5"/>
+                        <f:selectItem itemLabel="2" itemValue="2"/>
+                        <f:ajax/>
+                    </p:selectOneMenu>
+                </div>
+                <div class="input-container" id="Y-input-container">
+                    <p:outputLabel  styleClass="form-label" for="@next" value="Выберите Y:"/>
+                    <h:inputText id="Y-input"
+                                 name="Y-input"
+                                 type="text"
+                                 value="#{pointHandler.point.y}"
+                                 styleClass="Y-input input-area"
+                                 required="false"
+                                 maxlength="6"
+                                 validatorMessage="Не входит в [-3..3]"
+                                 converterMessage="Введите число">
+                        <f:validateDoubleRange minimum="-3" maximum="3"/>
+                        <f:ajax render="Y-value-message"/>
+                    </h:inputText>
+                    <h:message for="Y-input" id="Y-value-message"/>
+                </div>
+                <div class="input-container" id="R-input-container">
+                    <p:outputLabel styleClass="form-label" for="@next" value="Выберите R:"/>
+                    <div class="input-area">
+                        <h:commandButton value="1" type="button" styleClass="r-button">
+                            <f:ajax onevent="canvasPrinter.redrawAll(1)" render="r" listener="#{pointHandler.point.setR(1)}"/>
+                        </h:commandButton>
+                        <h:commandButton value="1.5" type="button" styleClass="r-button">
+                            <f:ajax onevent="canvasPrinter.redrawAll(1.5)" render="r" listener="#{pointHandler.point.setR(1.5)}"/>
+                        </h:commandButton>
+                        <h:commandButton value="2" type="button" styleClass="r-button">
+                            <f:ajax onevent="canvasPrinter.redrawAll(2)" render="r" listener="#{pointHandler.point.setR(2)}"/>
+                        </h:commandButton>
+                        <h:commandButton value="2.5" type="button" styleClass="r-button">
+                            <f:ajax onevent="canvasPrinter.redrawAll(2.5)" render="r" listener="#{pointHandler.point.setR(2.5)}"/>
+                        </h:commandButton>
+                        <h:commandButton value="3" type="button" styleClass="r-button">
+                            <f:ajax onevent="canvasPrinter.redrawAll(3)" render="r" listener="#{pointHandler.point.setR(3)}"/>
+                        </h:commandButton>
+                    </div>
+                </div>
+                <div class="input-container" id="buttons-container">
+                    <h:button value="Назад" styleClass="surfing-button main-button" outcome="go-to-index" id="go_to_index_button"/>
+<!--                    <h:commandButton type="button"-->
+<!--                                     ajax="false"-->
+<!--                                     id="clear"-->
+<!--                                     styleClass="main-button"-->
+<!--                                     value="Очистить"-->
+<!--                                     update="table @form graphPanel"-->
+<!--                                     action="#{pointHandler.clear()}"/>-->
+                    <h:commandButton type="submit"
+                                     id="check"
+                                     styleClass="main-button"
+                                     value="Проверить"
+                                     action="#{pointHandler.add()}"/>
+                </div>
+            </h:form>
+        </div>
+        <div id="graph-container">
+            <canvas id="graph" width="300" height="300"/>
+        </div>
+        <div class="table-container">
+            <h:dataTable id="table" styleClass="main-table" value="#{pointHandler.points}" var="point" >
+                <p:remoteCommand name=""/>
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    <h:outputText id="x" value="#{point.x}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    <h:outputText id="y" value="#{point.y}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    <h:outputText id="r" value="#{point.r}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Результат</f:facet>
+                    <h:outputText styleClass="#{point.statusHTMLClass}" id="status" value="#{point.statusString}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Текущее время</f:facet>
+                    <h:outputText id="time" value="#{point.time}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Время работы (мкс)</f:facet>
+                    <h:outputText id="script-time" value="#{point.scriptTime}"/>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </div>
+    <h:panelGroup id="graphPanel">
+        <h:outputScript>
+            canvasPrinter.redrawAll(canvasPrinter.lastClickedR);
+        </h:outputScript>
+    </h:panelGroup>
+
+    <p:remoteCommand name="addAttempt" action="#{pointHandler.addFromJS()}" update="table" process="@this"/>
+    <p:remoteCommand name="updateGraph" update="graphPanel" process="@this"/>
+    <p:remoteCommand name="checkUpdate" action="#{pointHandler.loadPointsFromDb()}" process="@this"/>
+</h:body>
+</html>

@@ -1,0 +1,266 @@
+body {
+    background-color: #ffffff;
+    color: darkslategrey;
+}
+table {
+    width: 1000px;
+    margin: auto;
+    table-layout: auto;
+}
+
+header {
+    font-family: cursive;
+    color: darkslategrey;
+    font-size: 0.7em;
+    text-align: center;
+}
+
+canvas {
+    background-color: #fffff4;
+    padding: 10px;
+    border-radius: 8px;
+    border: #dfd3e3 2px solid;
+}
+button, #checkButton {
+    background-color: #fffff4;
+    border-radius: 8px;
+    border: #dfd3e3 2px solid;
+    text-align: center;
+    /*padding: 0.2em;*/
+    width: 40px;
+    height: auto;
+    font-size: 20px;
+    color: darkslategrey;
+    font-family: cursive;
+}
+
+input {
+    border: #dfd3e3 2px solid;
+    border-radius: 8px;
+
+}
+
+input[type="text"] {
+    height: 30px;
+    background-color: #fffff4;
+    color: darkslategrey;
+    font-family: cursive;
+    font-size: 20px;
+}
+
+select {
+    border: #dfd3e3 2px solid;
+    border-radius: 8px;
+    font-size: 20px;
+    background-color: #fffff4;
+    color: darkslategrey;
+    font-family: cursive;
+}
+
+div {
+    padding: 10px;
+    color: darkslategrey;
+    font-family: cursive;
+}
+
+label {
+    padding: 8px;
+    font-size: 1.2em;
+}
+
+input[type=radio] {
+    display: block;
+    margin: 0 auto;
+    accent-color: #c6aec7;
+}
+
+
+.radios {
+    display: inline-block;
+}
+
+fieldset {
+    border: white;
+}
+
+.selected {
+    background-color: #dfd3e3;
+}
+#clearButton {
+    margin: 0 0 0 33px;
+    font-size: 1.4em;
+    height: 40px;
+    background-color: #dfd3e3;
+    width: 90px;
+}
+.btn {
+
+}
+
+#xButtons > button:hover {
+    background-color: #c6aec7;
+}
+
+#clearButton:hover, #goBackButton:hover, #goMainButton:hover, #goStartButton:hover {
+    background-color: #c6aec7;
+}
+
+#outputTable {
+    margin-top: 20px;
+    color: darkslategrey;
+    font-family: cursive;
+    border: #dfd3e3 2px solid;
+    border-radius: 8px;
+    font-size: 20px;
+    background-color: #fffff4;
+
+}
+#outputTable tr, #outputTable th, #outputTable td {
+    border: #dfd3e3 2px solid;
+    border-collapse: collapse;
+    text-align: center;
+    border-radius: 8px;
+}
+
+#outputTable th {
+    background-color: #dfd3e3;
+}
+
+.column-type1 {
+    width: 50px;
+}
+
+.column-type2 {
+    width: 150px;
+}
+
+.column-type3 {
+    width: 300px;
+}
+
+header::after {
+    content: '♥';
+    color: darkslategray;
+    font-size: 1.5em;
+}
+
+#errorTable {
+    text-align: center;
+    color: darkslategrey;
+    font-family: cursive;
+}
+
+#goBackButton {
+    width: auto;
+    height: auto;
+}
+
+#errorMsg {
+    border: #dfd3e3 2px solid;
+    border-radius: 8px;
+    font-size: 20px;
+    background-color: #fffff4;
+}
+
+#outputX, #outputR {
+    text-align: center;
+    color: darkslategrey;
+    font-family: cursive;
+    font-size: 30px;
+    margin-left: 40px;
+}
+
+#clockTable {
+    text-align: center;
+    font-size: 30px;
+    padding-top: 140px;
+    align-items: center;
+}
+
+#clock {
+    border: #dfd3e3 2px solid;
+    border-radius: 8px;
+    background-color: #fffff4;
+    width: fit-content;
+    margin-left: 340px;
+}
+
+#goMainButton {
+    font-size: 30px;
+    height: 60px;
+    background-color: #dfd3e3;
+    width: 110px;
+    font-family: cursive;
+    color: darkslategrey;
+    margin-top: 30px;
+}
+
+#goStartButton{
+    font-size: 20px;
+    height: 40px;
+    background-color: #dfd3e3;
+    width: 90px;
+    font-family: cursive;
+    color: darkslategrey;
+    margin-top: 20px;
+}
+
+#mainForm {
+    width: fit-content;
+}
+
+#canv {
+    float: left;
+    width: 410px;
+    margin-left: 250px;
+}
+
+#formInp {
+    margin-left: 800px;
+    padding-top: 60px;
+}
+
+#resultTable {
+    margin-top: 40px;
+}
+
+#goStartB {
+    /*float: right;*/
+    margin-left: 100px;
+}
+
+#mainForm\:checkButton:hover, #mainForm\:clearButton:hover{
+    background-color: #c6aec7;
+}
+
+#mainForm\:checkButton, #mainForm\:clearButton{
+    font-size: 20px;
+    height: 40px;
+    background-color: #dfd3e3;
+    width: 90px;
+    font-family: cursive;
+    color: darkslategrey;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+
+
+body .ui-slider .ui-slider-handle {
+    width: 1.143rem;
+    height: 1.143rem;
+    background: #fff;
+    border: 2px solid #c6aec7;
+    transition: background-color .2s,color .2s,border-color .2s,box-shadow .2s,opacity .2s;
+    border-radius: 50%;
+    top: 0.08rem;
+}
+
+body .ui-slider .ui-slider-handle:hover {
+    background-color: #c6aec7;
+    border: 2px solid #c6aec7;
+}
+
+body .ui-slider.ui-slider-horizontal .ui-slider-handle {
+    top: 0.08rem;
+}

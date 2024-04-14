@@ -1,0 +1,24 @@
+<ivy-module version="1.0">
+    <info organisation="com.example" module="lab3"/>
+    <configurations>
+        <conf name="compile"  description="Required to compile application"/>
+        <conf name="runtime"  description="Additional run-time dependencies" extends="compile"/>
+        <conf name="test"     description="Required for test only" extends="runtime"/>
+        <conf name="provided" description="Additional compile time dependencies, implementation provided by target platform"/>
+    </configurations>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-web-api -->
+        <dependency org="jakarta.platform" name="jakarta.jakartaee-web-api" rev="10.0.0" conf="provided->default"/>
+        <!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+        <dependency org="org.primefaces" rev="13.0.0" name="primefaces" conf="compile->default">
+            <artifact name="primefaces-jakarta" ext="jar" url="https://repo1.maven.org/maven2/org/primefaces/primefaces/13.0.0/primefaces-13.0.0-jakarta.jar"/>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency org="org.postgresql" name="postgresql" rev="42.6.0" conf="compile->default"/>
+        <dependency org="org.junit.jupiter" name="junit-jupiter-params" rev="5.10.0" conf="test->default"/>
+        <dependency org="org.junit.jupiter" name="junit-jupiter-api" rev="5.9.2" conf="compile->default"/>
+        <!-- https://mvnrepository.com/artifact/xalan/xalan -->
+        <dependency org="xalan" name="xalan" rev="2.7.3"/>
+        <dependency org="xalan" name="serializer" rev="2.7.3"/>
+    </dependencies>
+</ivy-module>

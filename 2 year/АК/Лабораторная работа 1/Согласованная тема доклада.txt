@@ -1,0 +1,16 @@
+Основа методов контейнеризации. Создание Docker контейнера.
+
+Как работает контейнеризация и в чем ее отличие от виртуализации. Какие плюсы есть у контейнеризации и для чего ее применяют. Что такое Dockerfile, Docker Image и Docker Container. Пошаговая инструкция как запустить свой первый контейнер
+
+1) Контейнер - изолированный и ограниченный процесс, в отличие от виртуальной машины
+2) Встроенный в Linux метод контейнеризации - runc, который работает через fork
+3) Что такое Dockerfile, Docker Image, Docker Container 
+4) Что подразумевается под слоями в Docker
+5) Как поднять сервер или базу данных? Volumes, networks
+
+https://iximiuz.com/en/posts/container-learning-path/
+https://habr.com/ru/articles/659049/
+https://habr.com/ru/companies/slurm/articles/530226/
+https://habr.com/ru/companies/slurm/articles/701950/
+
+Что такое контейнеризация и чем она отличается от виртуализации? Что такое Dockerfile, Docker Image, Docker Container и как из одного получить другое?

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://xmlns.jcp.org/jsf/html "
+      xmlns:p="http://primefaces.org/ui"
+      >
+<h:head>
+
+    <h:outputScript library="scripts" name="Printer.js"/>
+    <h:outputScript library="scripts" name="main.js"/>
+
+    <link rel="stylesheet" type="text/css" href="resources/styles/mainPageStyle.css"/>
+
+    <title>Web lab3</title>
+</h:head>
+<h:body>
+    <header>
+        <h1>Shpineva Uliana Sergeevna<br/>
+        group P3216, variant 1323</h1>
+    </header>
+    <div id="goStartB">
+        <h:link id="buttonWrapper" outcome="goStart">
+            <h:commandButton value="Start" id="goStartButton" action="goStart"/>
+        </h:link>
+    </div>
+    <div id="canv">
+        <canvas id="graph" width="408" height="408"/>
+    </div>
+    <div id="formInp">
+        <h:form id="mainForm">
+            <div>
+                <label for="outputX">X:</label>
+                <h:panelGrid columns="1" style="margin-bottom: 10px">
+                    <h:outputText id="outputX" style="width: 300px; margin-left: 7px; font-size: 18px" value="#{userBean.point.x}"/>
+                    <h:inputHidden id="xInput" value="#{userBean.point.x}"/>
+                    <p:slider for="xInput" display="outputX" minValue="-4" maxValue="4" step="0.1" range="false" style="width:327.4px; background-color: #dfd3e3; border-radius: 10px; border-color: #c6aec7">
+                        <p:ajax onevent="slideEnd"  listener="#{userBean.point.onSlideEndX}"/>
+                    </p:slider>
+                </h:panelGrid>
+            </div>
+                <div>
+                    <label for="yInput">Y:</label>
+                    <h:inputText name="y"
+                                 type="text"
+                                 value="#{userBean.point.y}"
+                                 id="yInput"
+                                 maxlength="15"
+                                 converterMessage="Must be a number"
+                                 validatorMessage="Must be in (-5, 5)"
+                                 required="false">
+                        <f:validateDoubleRange minimum="-5" maximum="5"/>
+                                <f:ajax render="Y-value-message"/>
+                    </h:inputText>
+                    <h:message for="yInput" id="Y-value-message"/>
+                </div>
+
+                <div>
+                    <label for="outputR">R:</label>
+                    <h:panelGrid columns="1" style="margin-bottom: 10px">
+                        <h:outputText id="outputR" value="#{userBean.point.r}" style="margin-left: 7px; font-size: 18px"/>
+                        <h:inputHidden id="rInput" value="#{userBean.point.r}"/>
+                        <p:slider for="rInput" display="outputR" minValue="2" maxValue="5" step="0.1" range="false" style="width:327.4px; background-color: #dfd3e3; border-radius: 10px; border-color: #c6aec7">
+                            <p:ajax onevent="slideEnd"  listener="#{userBean.point.onSlideEndR}" update="graphPanel"/>
+                        </p:slider>
+
+                    </h:panelGrid>
+
+                </div>
+            <div id="btns">
+                <h:commandButton id="checkButton"
+                                 value="Submit">
+                    <f:ajax execute="@form"
+                            listener="#{userBean.add()}"
+                            render="outputTable graphPanel"/>
+                </h:commandButton>
+                <h:commandButton id="clearButton"
+                                 value="Clear">
+                    <f:ajax execute="@form"
+                            listener="#{userBean.clearRequests()}"
+                            render="outputTable graphPanel"/>
+                </h:commandButton>
+            </div>
+        </h:form>
+    </div>
+        <div id="resultTable">
+            <h:dataTable id="outputTable" value="#{userBean.requests}" var="point">
+                <p:remoteCommand name=""/>
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    <h:outputText id="x" value="#{point.x}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    <h:outputText id="y" value="#{point.y}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    <h:outputText id="r" value="#{point.r}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Hit fact</f:facet>
+                    <h:outputText id="success" value="#{point.success}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Current time</f:facet>
+                    <h:outputText id="curTime" value="#{point.currentTime}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Execution time</f:facet>
+                    <h:outputText id="execTime" value="#{point.executionTime}"/>
+                </h:column>
+            </h:dataTable>
+        </div>
+    <h:panelGroup id="graphPanel">
+        <h:outputScript>
+            if(printer) printer.redraw(${userBean.point.r});
+        </h:outputScript>
+    </h:panelGroup>
+<!--    printer.setLastR(${userBean.point.r})-->
+
+    <p:remoteCommand name="updateGraph" update="graphPanel" process="@this"/>
+    <p:remoteCommand name="addAttempt" action="#{userBean.addFromJS()}" update="outputTable" process="@this"/>
+</h:body>
+</html>

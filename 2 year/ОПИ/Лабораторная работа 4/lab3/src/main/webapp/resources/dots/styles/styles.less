@@ -1,0 +1,129 @@
+@path-fonts:    '../../fonts';
+.font-names
+{
+  @font-face {
+    font-family: 'Rostov';
+    src: url('@{path-fonts}/Rostov.ttf') format('truetype');
+  }
+}
+*{
+  font-family: 'Rostov', serif;
+  font-weight: normal;
+  font-size: 1.05em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+
+
+@main-background: #EEEEEE;
+@element-background: #00ADB5;
+@text-color: #222831;
+@green-status: #00b509;
+@red-status: #b50300;
+
+
+//Some mixins
+.shadowing{
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.bordering{
+  background-color: @main-background;
+  border-radius: 7px;
+  border: 2px solid @text-color;
+}
+
+//----
+
+body {
+  background-color: @main-background;
+  padding: 0 20px 20px 20px;
+  color: @text-color;
+}
+
+header{
+  font-size: 2.5em;
+  font-family: 'Rostov', Serif, serif;
+  text-align: center;
+}
+
+.form-label{
+  span {
+    margin: 10px 2px 5px 2px;
+    font-size: 1.2em;
+  }
+}
+
+input {
+  .shadowing();
+  &.main-button{
+    .shadowing();
+    .bordering();
+    margin: 0 4% 4% 2%;
+    &:hover{
+      background-color: @element-background;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    }
+  }
+  &[type=button]{
+    .shadowing();
+    .bordering();
+    &.r-button {
+      margin: 0 5px 0 0;
+      width: 2em;
+      height: auto;
+    }
+  }
+}
+
+div {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+  &.input-container {
+    justify-content: flex-start;
+    margin: 10px;
+  }
+  &.input-area{
+    flex-flow: nowrap;
+  }
+}
+
+.input-area{
+  margin: 5px 10px;
+}
+
+table {
+  &.main-table {
+    border-collapse: collapse;
+    margin: 20px;
+    width: 100%;
+    text-align: center;
+    th{
+      background: color-mix(in srgb, @element-background 50%, @main-background);
+      color: @text-color;
+      padding: 15px;
+    }
+    tr{
+      &:nth-of-type(odd){
+        background-color: darken(@main-background, 10%);
+      }
+    }
+  }
+}
+
+.green-status{
+  color: @green-status;
+}
+.red-status{
+  color: @red-status;
+}
+
+// Скрыть последние два столбца на узких экранах
+@media (max-width: 600px) {
+  .hide-me{
+    display: none;
+  }
+}

@@ -1,0 +1,4 @@
+execute_script client\a
+info
+execute_script client\b
+show

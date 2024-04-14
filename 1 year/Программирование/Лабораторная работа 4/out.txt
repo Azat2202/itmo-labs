@@ -1,0 +1,58 @@
+"C:\Program Files\Java\jdk-18.0.1.1\bin\java.exe" -javaagent:C:\Users\azat2\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\222.4345.14\lib\idea_rt.jar=55077:C:\Users\azat2\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\222.4345.14\bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\azat2\IdeaProjects\Prog_lab3\target\classes Main
+дядя Юлиус BOLTING
+дядя Юлиус заходит в Коридор
+В Коридор включается DARKNESS
+Малыш BOLTING
+Карлсон BOLTING
+places.Room$1NoPeopleInRoom: В комнате нет такого человека!
+	at places.Room.delPerson(Room.java:72)
+	at places.Room.movePersonTo(Room.java:43)
+	at story.Story.go(Story.java:118)
+	at Main.main(Main.java:6)
+Прошел 1 час
+Филле CLAPPING
+Рулле GRINDING
+Проволочка используется Карлсон на Дверь в коридор
+дядя Юлиус заходит в Зал
+Малыш GASPING
+дядя Юлиус WISPERING
+дядя Юлиус STEPPING
+дядя Юлиус BOLTING
+Мамочка SCREAMING
+фрекен Бок SCREAMING
+дядя Юлиус BOLTING
+В Зал включается TORCH
+Дядя Юлиус скалит зубы
+В Зал включается DARKNESS
+Мамочка SQUALLING
+дядя Юлиус заходит в Комната Юлиуса
+фрекен Бок заходит в Комната фрекен бок
+Прошел 1 час
+Дверь комнаты Фрекен Бок OPEN
+Дверь комнаты Юлиуса OPEN
+фрекен Бок заходит в Коридор
+дядя Юлиус заходит в Коридор
+фрекен Бок STEPPING
+дядя Юлиус STEPPING
+Мамочка BOLTING
+Ремень используется на Мамочка
+Не удалось включить свет на Кухня
+фрекен Бок не может переключить свет
+Не удалось включить свет на Кухня
+фрекен Бок не может переключить свет
+Не удалось включить свет на Кухня
+фрекен Бок не может переключить свет
+Карлсон говорит: "Проказничать лучше в темноте"
+фрекен Бок BOLTING
+дядя Юлиус BOLTING
+фрекен Бок говорит: "Свет наверняка не включается, потому что на улице идет гром!"
+дядя Юлиус говорит: "шкашошные шушештва"
+Малыш думает "Он ведь остался без зубов"
+Малыш думает "Где Филле и Рулле?"
+Малыш думает "Они.....убежали?...."
+Exception in thread "main" characters.Malysh$1OutOfHumanMemoryError: У малыша нет столько памяти((((((((
+	at characters.Malysh.think(Malysh.java:35)
+	at story.Story.go(Story.java:168)
+	at Main.main(Main.java:6)
+
+Process finished with exit code 1

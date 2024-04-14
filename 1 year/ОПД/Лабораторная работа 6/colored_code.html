@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+<head>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<title>Exported from Notepad++</title>
+<style type="text/css">
+span {
+	font-family: 'Courier New';
+	font-size: 10pt;
+	color: #000000;
+}
+.sc0 {
+	font-weight: bold;
+	color: #000080;
+}
+.sc2 {
+	color: #008000;
+}
+.sc3 {
+	color: #FF8000;
+}
+.sc4 {
+	font-weight: bold;
+	color: #0000FF;
+}
+.sc5 {
+	font-weight: bold;
+	color: #0080FF;
+}
+.sc6 {
+	font-weight: bold;
+	color: #6900C8;
+}
+.sc24 {
+}
+</style>
+</head>
+<body>
+<div style="float: left; white-space: pre; line-height: 1; background: #FFFFFF; "><span class="sc24">                    </span><span class="sc5">ORG</span><span class="sc24">                 </span><span class="sc3">0x0</span><span class="sc24">
+</span><span class="sc0">v0:</span><span class="sc24">                 </span><span class="sc4">WORD</span><span class="sc24">                </span><span class="sc6">$default,</span><span class="sc24">           </span><span class="sc3">0x180</span><span class="sc24">
+</span><span class="sc0">v1:</span><span class="sc24">                 </span><span class="sc4">WORD</span><span class="sc24">                </span><span class="sc6">$default,</span><span class="sc24">           </span><span class="sc3">0x180</span><span class="sc24">
+</span><span class="sc0">v2:</span><span class="sc24">                 </span><span class="sc4">WORD</span><span class="sc24">                </span><span class="sc6">$int2,</span><span class="sc24">              </span><span class="sc3">0x180</span><span class="sc24">
+</span><span class="sc0">v3:</span><span class="sc24">                 </span><span class="sc4">WORD</span><span class="sc24">                </span><span class="sc6">$int3,</span><span class="sc24">              </span><span class="sc3">0x180</span><span class="sc24">
+</span><span class="sc0">v4:</span><span class="sc24">                 </span><span class="sc4">WORD</span><span class="sc24">                </span><span class="sc6">$default,</span><span class="sc24">           </span><span class="sc3">0x180</span><span class="sc24">
+</span><span class="sc0">v5:</span><span class="sc24">                 </span><span class="sc4">WORD</span><span class="sc24">                </span><span class="sc6">$default,</span><span class="sc24">           </span><span class="sc3">0x180</span><span class="sc24">
+</span><span class="sc0">v6:</span><span class="sc24">                 </span><span class="sc4">WORD</span><span class="sc24">                </span><span class="sc6">$default,</span><span class="sc24">           </span><span class="sc3">0x180</span><span class="sc24">
+</span><span class="sc0">v7:</span><span class="sc24">                 </span><span class="sc4">WORD</span><span class="sc24">                </span><span class="sc6">$default,</span><span class="sc24">           </span><span class="sc3">0x180</span><span class="sc24">
+
+</span><span class="sc0">default:</span><span class="sc24">            </span><span class="sc4">IRET</span><span class="sc24">
+
+</span><span class="sc0">int2:</span><span class="sc24">               </span><span class="sc4">NOP</span><span class="sc24">
+                    </span><span class="sc4">PUSH</span><span class="sc24">                                    </span><span class="sc2">;Сохранение аккумулятора
+</span><span class="sc24">                    </span><span class="sc4">IN</span><span class="sc24">                  </span><span class="sc3">0x4</span><span class="sc24">
+                    </span><span class="sc4">NEG</span><span class="sc24">
+                    </span><span class="sc4">CALL</span><span class="sc24">                </span><span class="sc0">CHECK_ODZ</span><span class="sc24">
+                    </span><span class="sc4">ST</span><span class="sc24">                  </span><span class="sc6">$X</span><span class="sc24">
+                    </span><span class="sc4">NOP</span><span class="sc24">
+                    </span><span class="sc4">POP</span><span class="sc24">
+                    </span><span class="sc4">NOP</span><span class="sc24">                                     </span><span class="sc2">;Проверка значения аккумулятора
+</span><span class="sc24">                    </span><span class="sc4">IRET</span><span class="sc24">
+
+</span><span class="sc0">int3:</span><span class="sc24">               </span><span class="sc4">NOP</span><span class="sc24">
+                    </span><span class="sc4">PUSH</span><span class="sc24">                                    </span><span class="sc2">;Сохранение аккумулятора
+</span><span class="sc24">                    </span><span class="sc4">LD</span><span class="sc24">                  </span><span class="sc6">$X</span><span class="sc24">
+                    </span><span class="sc4">NOP</span><span class="sc24">                                     </span><span class="sc2">;Отладочная метка
+</span><span class="sc24">                    </span><span class="sc4">ASL</span><span class="sc24">
+                    </span><span class="sc4">ADD</span><span class="sc24">                 </span><span class="sc6">$X</span><span class="sc24">                  </span><span class="sc2">;Вычисление f(x) = 3x+6
+</span><span class="sc24">                    </span><span class="sc4">ADD</span><span class="sc24">                 </span><span class="sc3">#0x6</span><span class="sc24">
+                    </span><span class="sc4">OUT</span><span class="sc24">                 </span><span class="sc3">0x6</span><span class="sc24">
+                    </span><span class="sc4">POP</span><span class="sc24">
+                    </span><span class="sc4">NOP</span><span class="sc24">                                     </span><span class="sc2">;Проверка значения аккумулятора
+</span><span class="sc24">                    </span><span class="sc4">IRET</span><span class="sc24">
+
+                    </span><span class="sc5">ORG</span><span class="sc24">                 </span><span class="sc3">0x039</span><span class="sc24">
+</span><span class="sc0">X:</span><span class="sc24">                  </span><span class="sc4">WORD</span><span class="sc24">                </span><span class="sc3">0x0</span><span class="sc24">
+</span><span class="sc0">X_MAX:</span><span class="sc24">              </span><span class="sc4">WORD</span><span class="sc24">                </span><span class="sc3">0x0028</span><span class="sc24">              </span><span class="sc2">;Верхняя граница ОДЗ (включительно)
+</span><span class="sc0">X_MIN:</span><span class="sc24">              </span><span class="sc4">WORD</span><span class="sc24">                </span><span class="sc3">0xFFD4</span><span class="sc24">              </span><span class="sc2">;Нижняя граница ОДЗ (включительно)
+</span><span class="sc24">
+                    </span><span class="sc5">ORG</span><span class="sc24">                 </span><span class="sc3">0x50</span><span class="sc24">
+</span><span class="sc0">START:</span><span class="sc24">              </span><span class="sc4">DI</span><span class="sc24">
+                    </span><span class="sc4">CLA</span><span class="sc24">
+                    </span><span class="sc4">LD</span><span class="sc24">                  </span><span class="sc3">#0xA</span><span class="sc24">                </span><span class="sc2">;Загрузка в AC MR(1000|0010 = 1010)
+</span><span class="sc24">                    </span><span class="sc4">OUT</span><span class="sc24">                 </span><span class="sc3">0x5</span><span class="sc24">                 </span><span class="sc2">;Разрешение прерываний для ВУ-2
+</span><span class="sc24">                    </span><span class="sc4">LD</span><span class="sc24">                  </span><span class="sc3">#0xB</span><span class="sc24">                </span><span class="sc2">;Загрузка в AC MR(1000|0011 = 1011)
+</span><span class="sc24">                    </span><span class="sc4">OUT</span><span class="sc24">                 </span><span class="sc3">0x7</span><span class="sc24">                 </span><span class="sc2">;Разрешение прерываний для ВУ-3
+</span><span class="sc24">                    </span><span class="sc4">EI</span><span class="sc24">
+
+</span><span class="sc0">MAIN:</span><span class="sc24">               </span><span class="sc4">DI</span><span class="sc24">                                      </span><span class="sc2">;Запрет прерываний для атомарности операции
+</span><span class="sc24">                    </span><span class="sc4">LD</span><span class="sc24">                  </span><span class="sc6">$X</span><span class="sc24">                  </span><span class="sc2">;Загружаем Х
+</span><span class="sc24">                    </span><span class="sc4">SUB</span><span class="sc24">                 </span><span class="sc3">#0x3</span><span class="sc24">                </span><span class="sc2">;Вычитаем 3
+</span><span class="sc24">                    </span><span class="sc4">CALL</span><span class="sc24">                </span><span class="sc0">CHECK_ODZ</span><span class="sc24">
+                    </span><span class="sc4">ST</span><span class="sc24">                  </span><span class="sc6">$X</span><span class="sc24">                  
+                    </span><span class="sc4">EI</span><span class="sc24">
+                    </span><span class="sc4">BR</span><span class="sc24">                  </span><span class="sc0">MAIN</span><span class="sc24">
+
+
+</span><span class="sc2">;Подпрограмма проверки ОДЗ, принимает и возвращает число в аккумуляторе
+</span><span class="sc0">CHECK_ODZ:</span><span class="sc24">          </span><span class="sc4">CMP</span><span class="sc24">                 </span><span class="sc0">X_MIN</span><span class="sc24">
+                    </span><span class="sc4">BLT</span><span class="sc24">                 </span><span class="sc0">CHECK_BAD</span><span class="sc24">           </span><span class="sc2">;Если строго меньше минимума то вне ОДЗ
+</span><span class="sc24">                    </span><span class="sc4">CMP</span><span class="sc24">                 </span><span class="sc0">X_MAX</span><span class="sc24">
+                    </span><span class="sc4">BEQ</span><span class="sc24">                 </span><span class="sc0">CHECK_OK</span><span class="sc24">            </span><span class="sc2">;Если строго больше максимума то вне ОДЗ
+</span><span class="sc24">                    </span><span class="sc4">BGE</span><span class="sc24">                 </span><span class="sc0">CHECK_BAD</span><span class="sc24">
+</span><span class="sc0">CHECK_OK:</span><span class="sc24">           </span><span class="sc4">RET</span><span class="sc24">
+</span><span class="sc0">CHECK_BAD:</span><span class="sc24">          </span><span class="sc4">LD</span><span class="sc24">                  </span><span class="sc0">X_MAX</span><span class="sc24">
+                    </span><span class="sc4">RET</span><span class="sc24">
+</span></div></body>
+</html>

@@ -1,0 +1,257 @@
+package models;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import utility.ConsoleColors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Objects;
+
+
+/**
+ * Функциональный интерфейс для вычисления расстояния от начала координат.
+ * @param <T> Тип первой координаты
+ * @param <S> Тип второй координаты
+ */
+@FunctionalInterface
+interface CoordinatesRange<T, S>{
+    float getDistanceFromCentre(T x, S y);
+}
+
+
+/**
+ * Класс учебной группы
+ * @author azat2202
+ */
+@XStreamAlias("StudyGroup")
+public class StudyGroup implements Validator, Comparable<StudyGroup>, Serializable {
+    private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private String name; //Поле не может быть null, Строка не может быть пустой
+    private Coordinates coordinates; //Поле не может быть null
+    private Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private Long studentsCount; //Значение поля должно быть больше 0, Поле не может быть null
+    private long expelledStudents; //Значение поля должно быть больше 0
+    private long averageMark; //Значение поля должно быть больше 0
+    private FormOfEducation formOfEducation; //Поле может быть null
+    private Person groupAdmin; //Поле не может быть null
+    private String userLogin;
+
+    public StudyGroup(String name, Coordinates coordinates, Date creationDate, Long studentsCount, long expelledStudents, long averageMark, FormOfEducation formOfEducation, Person groupAdmin) {
+        this.id = 0;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.studentsCount = studentsCount;
+        this.expelledStudents = expelledStudents;
+        this.averageMark = averageMark;
+        this.formOfEducation = formOfEducation;
+        this.groupAdmin = groupAdmin;
+    }
+    public StudyGroup(int id, String name, Coordinates coordinates, Date creationDate, Long studentsCount, long expelledStudents, long averageMark, FormOfEducation formOfEducation, Person groupAdmin) {
+        this.id = id;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.studentsCount = studentsCount;
+        this.expelledStudents = expelledStudents;
+        this.averageMark = averageMark;
+        this.formOfEducation = formOfEducation;
+        this.groupAdmin = groupAdmin;
+    }
+    public StudyGroup(String name, Coordinates coordinates, Date creationDate, Long studentsCount, long expelledStudents, long averageMark, FormOfEducation formOfEducation, Person groupAdmin, String userLogin) {
+        this.id = 0;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.studentsCount = studentsCount;
+        this.expelledStudents = expelledStudents;
+        this.averageMark = averageMark;
+        this.formOfEducation = formOfEducation;
+        this.groupAdmin = groupAdmin;
+        this.userLogin = userLogin;
+    }
+    public StudyGroup(int id, String name, Coordinates coordinates, Date creationDate, Long studentsCount, long expelledStudents, long averageMark, FormOfEducation formOfEducation, Person groupAdmin, String userLogin) {
+        this.id = id;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.studentsCount = studentsCount;
+        this.expelledStudents = expelledStudents;
+        this.averageMark = averageMark;
+        this.formOfEducation = formOfEducation;
+        this.groupAdmin = groupAdmin;
+        this.userLogin = userLogin;
+    }
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Long getStudentsCount() {
+        return studentsCount;
+    }
+
+    public void setStudentsCount(Long studentsCount) {
+        this.studentsCount = studentsCount;
+    }
+
+    public long getExpelledStudents() {
+        return expelledStudents;
+    }
+
+    public void setExpelledStudents(long expelledStudents) {
+        this.expelledStudents = expelledStudents;
+    }
+
+    public long getAverageMark() {
+        return averageMark;
+    }
+
+    public void setAverageMark(long averageMark) {
+        this.averageMark = averageMark;
+    }
+
+    public FormOfEducation getFormOfEducation() {
+        return formOfEducation;
+    }
+
+    public void setFormOfEducation(FormOfEducation formOfEducation) {
+        this.formOfEducation = formOfEducation;
+    }
+
+    public Person getGroupAdmin() {
+        return groupAdmin;
+    }
+
+    public void setGroupAdmin(Person groupAdmin) {
+        this.groupAdmin = groupAdmin;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
+    /**
+     * Компаратор объектов основанный на сравнении расстояния от начала координат
+     * @param o объект с которым нужно сравнить объект
+     */
+    @Override
+    public int compareTo(StudyGroup o) {
+        if (Objects.isNull(o)) return 1;
+        CoordinatesRange<Float, Double> calc = (x, y) -> (float) Math.sqrt(x * x + y * y);
+        return Float.compare(
+                calc.getDistanceFromCentre(this.getCoordinates().getX(), this.getCoordinates().getY()),
+                calc.getDistanceFromCentre(o.getCoordinates().getX(), o.getCoordinates().getY()));
+    }
+
+    /**
+     * Метод валидирующие поля по условию
+     * @return true если поля валидные, false иначе
+     */
+    @Override
+    public boolean validate() {
+        if (this.id == null || this.id < 0) return false;
+        if (this.name == null || this.name.isEmpty()) return false;
+        if (this.coordinates == null) return false;
+        if (this.creationDate == null) return false;
+        if (this.studentsCount == null || this.studentsCount <= 0) return false;
+        if (this.expelledStudents <= 0) return false;
+        if (this.averageMark <= 0) return false;
+        return this.groupAdmin != null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StudyGroup that = (StudyGroup) o;
+
+        if (expelledStudents != that.expelledStudents) return false;
+        if (averageMark != that.averageMark) return false;
+        if (!id.equals(that.id)) return false;
+        if (!name.equals(that.name)) return false;
+        if (!coordinates.equals(that.coordinates)) return false;
+        if (!creationDate.equals(that.creationDate)) return false;
+        if (!studentsCount.equals(that.studentsCount)) return false;
+        if (formOfEducation != that.formOfEducation) return false;
+        return groupAdmin.equals(that.groupAdmin);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + coordinates.hashCode();
+        result = 31 * result + creationDate.hashCode();
+        result = 31 * result + studentsCount.hashCode();
+        result = 31 * result + (int) (expelledStudents ^ (expelledStudents >>> 32));
+        result = 31 * result + (int) (averageMark ^ (averageMark >>> 32));
+        result = 31 * result + formOfEducation.hashCode();
+        result = 31 * result + groupAdmin.hashCode();
+        return result;
+    }
+
+    public static String timeFormatter(Date dateToConvert){
+        if (Objects.isNull(dateToConvert)) return "";
+        LocalDateTime localDateTime = dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        if (localDateTime == null) return null;
+        if (localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                .equals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))){
+            return localDateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        }
+        return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
+
+    @Override
+    public String toString() {
+        return "StudyGroup{" + '\n' +
+                "\t" + ConsoleColors.toColor("id = ", ConsoleColors.CYAN) + id + '\n' +
+                "\t" + ConsoleColors.toColor("name = ", ConsoleColors.CYAN) + name + '\n' +
+                "\t" + ConsoleColors.toColor("coordinates = ", ConsoleColors.CYAN) + coordinates + '\n' +
+                "\t" + ConsoleColors.toColor("creationDate = ", ConsoleColors.CYAN) + timeFormatter(creationDate) + '\n' +
+                "\t" + ConsoleColors.toColor("studentsCount = ", ConsoleColors.CYAN) + studentsCount + '\n' +
+                "\t" + ConsoleColors.toColor("expelledStudents = ", ConsoleColors.CYAN) + expelledStudents + '\n' +
+                "\t" + ConsoleColors.toColor("averageMark = ", ConsoleColors.CYAN) + averageMark + '\n' +
+                "\t" + ConsoleColors.toColor("formOfEducation = ", ConsoleColors.CYAN) + formOfEducation + '\n' +
+                "\t" + ConsoleColors.toColor("groupAdmin = ", ConsoleColors.CYAN) + groupAdmin + '\n' +
+                "\t" + ConsoleColors.toColor("userLogin = ", ConsoleColors.CYAN) + userLogin + '\n' +
+                '}';
+    }
+}

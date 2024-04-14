@@ -1,0 +1,80 @@
+mkdir lab0
+cd lab0
+mkdir larvitar8 tynamo9 vullaby6 
+touch electrike3 kakuna6 linoone7 
+cd larvitar8
+mkdir magcargo vespiquen beldum cyndaquil
+touch mightyena
+cd ../tynamo9
+mkdir whiscash fraxure murkow larvesta
+cd ../vullaby6 
+mkdir machoke seedot pidgey 
+touch mienfoo beartic
+cd ..
+echo -e "Способности Overcharge Static\nLightningrod" > electrike3
+echo -e "satk=3 sdef=3 spd=4" > kakuna6
+echo -e "Возможности\nOverland=9 Surface=8 Jump=3 Power=3 Intelligence=4 Pack Mon=0\nTracker=0" > ./larvitar8/mightyena
+echo -e "weight=71.7 height=20.0 atk=7\ndef=6" > ./linoone7
+echo -e "Развитые способности Swift Swim" > ./vullaby6/beartic
+echo -e "weight=44.1\nheight=35.0 atk=9 def=5" > ./vullaby6/mienfoo
+
+chmod 400 electrike3
+chmod 400 kakuna6
+chmod 363 ./larvitar8/
+chmod ug=wx,o=rx ./larvitar8/magcargo
+chmod 550 ./larvitar8/vespiquen
+chmod 644 ./larvitar8/mightyena
+chmod 357 ./larvitar8/beldum
+chmod 733 ./larvitar8/cyndaquil
+chmod u=rw,og= ./linoone7
+chmod 700 ./tynamo9/
+chmod 711 ./tynamo9/whiscash
+chmod 317 ./tynamo9/fraxure
+chmod a=rwx ./tynamo9/murkow
+chmod 770 ./tynamo9/larvesta
+chmod 555 ./vullaby6/
+chmod 571 ./vullaby6/machoke
+chmod 755 ./vullaby6/seedot
+chmod 307 ./vullaby6/pidgey
+chmod 444 ./vullaby6/beartic
+chmod u=rw,o=u-w ./vullaby6/mienfoo
+
+cat ./vullaby6/mienfoo ./vullaby6/mienfoo > ./kakuna6_30
+
+chmod 700 ./larvitar8
+chmod 700 ./larvitar8/beldum
+chmod 700 ./larvitar8/magcargo
+cp -R ./larvitar8/beldum ./larvitar8/cyndaquil ./larvitar8/mightyena ./larvitar8/vespiquen ./larvitar8/magcargo
+chmod 363 ./larvitar8
+chmod 357 ./larvitar8/beldum
+chmod ug=wx,o=rx ./larvitar8/magcargo
+
+ln -s ./vullaby6/ ./Copy_41
+cp ./linoone7 ./vullaby6/seedot
+ln ./linoone7 ./larvitar8/mightyenalinoone
+
+chmod u+w ./vullaby6
+cp ./kakuna6 ./vullaby6/beartickakuna 
+chmod u-w ./vullaby6
+
+ln -s ./electrike3 ./larvitar8/mightyenaelectrike
+
+cat electrike3 | wc -m 2>/tmp/errors1 > /tmp/symbols_electrike3 2>tmp/errors_eectrike3
+ls -t | grep 'la' | tail -n4 2>&1
+cat *o */*o */*/*o 2>/tmp/access_errors | sort | cat -n
+ls -ld ./*mi* */*mi*  */*/*mi* 2>>/tmp/access_errors| sort -k5
+wc -l `echo *o */*o` 2>&1 > ./tmp/lines_count
+ls ./vullaby6 | sort -r
+
+rm kakuna6
+
+chmod u+w ./vullaby6
+rm  ./vullaby6/mienfoo
+chmod u-w ./vullaby6
+
+rm Copy_*
+rm ./larvitar8/mightyenalinoo*
+
+chmod 700 ./tynamo9/*
+rm -ri ./tynamo9/
+rm -ri ./larvitar8/cyndaquil

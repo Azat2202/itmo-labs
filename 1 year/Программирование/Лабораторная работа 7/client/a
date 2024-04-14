@@ -1,0 +1,4 @@
+execute_script a
+execute_script b
+execute_script C:\Users\azat2\IdeaProjects\Prog_lab6\client\b
+execute_script C:\Users\azat2\IdeaProjects\Prog_lab6\client\a

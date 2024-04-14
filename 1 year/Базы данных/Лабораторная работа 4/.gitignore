@@ -1,0 +1,8 @@
+*.aux
+*.synctex.gz
+*.log
+*.out
+*.to
+*.toc
+.idea/*
+*.rej

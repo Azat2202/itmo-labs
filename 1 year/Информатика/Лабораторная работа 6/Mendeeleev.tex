@@ -1,0 +1,36 @@
+\documentclass[9pt]{article}
+\usepackage[a4paper, left=5mm, right=5mm, top=5mm, bottom=5mm]{geometry}
+% 1 + (4*12 mod27) = 21 ДАНИЯ
+\usepackage{musixtex}
+
+\begin{document}
+	\begin{music} 
+		\parindent10mm
+		\generalsignature{2}
+		\setsign{1}{1}
+		\setsign{1}{2}
+		\generalmeter{\meterfrac44}
+		\nobarnumbers
+		\startextract
+		\notes \csong{Der}\cu{-1} \enotes
+		\bar
+		\Notes \csong{er}\qup{3} \csong{et}\cu{3} \csong{yn - }\qu{1} \csong{digt}\qu{-1} \enotes
+		\bar
+		\notes \csong{land}\hlp{4} \sk \ds \csong{det}\cu{-1} \enotes
+		\bar
+		\NOtes \csong{star}\qlp{6} \csong{med}\cl{6} \csong{bre - }\ql{5} \csong{de}\ql{4}\enotes
+		\bar
+		\zendextract
+		\startextract
+		\notes \csong{bo - }\ql{4} \csong{ge}\qu{3} \qp \csong{naer}\qu{3} \enotes
+		\bar
+		\Notes \csong{sai - }\qup{-2} \csong{ten}\cu{-2} \csong{os - }\qu{-1} \csong{ter - }\qu{0} \enotes
+		\bar
+		\NOtes \csong{strand.}\qu{1} \csong{naer}\qu{2} \csong{sai - }\qu{3} \csong{ten}\ql{4} \enotes
+		\bar
+		\notes \csong{os - }\hup{3} \sk \csong{ter - }\hu{^2} \sk \enotes
+		\setdoubleBAR
+		\bar
+		\zendextract
+	\end{music}
+\end{document}

@@ -1,0 +1,4 @@
+execute_script a
+info
+execute_script b
+show

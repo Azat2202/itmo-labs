@@ -2,11 +2,11 @@
 __all__ = [
     "AbstractInterpolation",
     "Lagrange",
-    "Newtone",
-    "NewtoneEqual"
+    "Newton",
+    "NewtonEqual"
 ]
 
 from interpolation.abstractInterpolation import AbstractInterpolation
 from interpolation.lagrange import Lagrange
-from interpolation.newtone import Newtone
-from interpolation.newtone_equal import NewtoneEqual
+from interpolation.newton import Newton
+from interpolation.newtone_equal import NewtonEqual

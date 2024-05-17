@@ -11,8 +11,8 @@ input_variants: List[type[AbstractInput]] = [
 
 interpolation_variants: List[type[AbstractInterpolation]] = [
     Lagrange,
-    Newtone,
-    NewtoneEqual
+    Newton,
+    NewtonEqual
 ]
 
 if __name__ == '__main__':

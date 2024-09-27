@@ -1,0 +1,646 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/azat2/ontologies/2024/8/untitled-ontology-3"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/azat2/ontologies/2024/8/untitled-ontology-3">
+    <Prefix name="" IRI="http://www.semanticweb.org/azat2/ontologies/2024/8/untitled-ontology-3/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#AgeCategory"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BoardGame"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Duration"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GameType"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasDuration"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasGameType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDurationMinutes"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Achimes"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Adult"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Alias"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Board_football"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Card"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Chapaev"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Chess"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Child"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Colonizers"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Domino"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Economical"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Interactive"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Jenga"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Karkasson"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Long"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Loto"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Mafia"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Medium"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Monopoly"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Poker"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Psycological"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Riken"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Scramble"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Short"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Strategical"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Teenager"/>
+    </Declaration>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Achimes"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AgeCategory"/>
+        <NamedIndividual IRI="#Adult"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Alias"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Board_football"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#GameType"/>
+        <NamedIndividual IRI="#Card"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Chapaev"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Chess"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AgeCategory"/>
+        <NamedIndividual IRI="#Child"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Colonizers"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Domino"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#GameType"/>
+        <NamedIndividual IRI="#Economical"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#GameType"/>
+        <NamedIndividual IRI="#Interactive"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Jenga"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Karkasson"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Duration"/>
+        <NamedIndividual IRI="#Long"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Loto"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Mafia"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Duration"/>
+        <NamedIndividual IRI="#Medium"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Monopoly"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Poker"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#GameType"/>
+        <NamedIndividual IRI="#Psycological"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Riken"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BoardGame"/>
+        <NamedIndividual IRI="#Scramble"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Duration"/>
+        <NamedIndividual IRI="#Short"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#GameType"/>
+        <NamedIndividual IRI="#Strategical"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AgeCategory"/>
+        <NamedIndividual IRI="#Teenager"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Adult"/>
+        <NamedIndividual IRI="#Strategical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Alias"/>
+        <NamedIndividual IRI="#Teenager"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Alias"/>
+        <NamedIndividual IRI="#Medium"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Alias"/>
+        <NamedIndividual IRI="#Interactive"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Board_football"/>
+        <NamedIndividual IRI="#Child"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Board_football"/>
+        <NamedIndividual IRI="#Short"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Board_football"/>
+        <NamedIndividual IRI="#Interactive"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Chapaev"/>
+        <NamedIndividual IRI="#Child"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Chapaev"/>
+        <NamedIndividual IRI="#Short"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Chapaev"/>
+        <NamedIndividual IRI="#Interactive"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Chess"/>
+        <NamedIndividual IRI="#Child"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Chess"/>
+        <NamedIndividual IRI="#Medium"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Chess"/>
+        <NamedIndividual IRI="#Strategical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Child"/>
+        <NamedIndividual IRI="#Medium"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Colonizers"/>
+        <NamedIndividual IRI="#Adult"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Colonizers"/>
+        <NamedIndividual IRI="#Medium"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Colonizers"/>
+        <NamedIndividual IRI="#Strategical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Domino"/>
+        <NamedIndividual IRI="#Child"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Domino"/>
+        <NamedIndividual IRI="#Short"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Domino"/>
+        <NamedIndividual IRI="#Interactive"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Jenga"/>
+        <NamedIndividual IRI="#Child"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Jenga"/>
+        <NamedIndividual IRI="#Short"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Jenga"/>
+        <NamedIndividual IRI="#Interactive"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Karkasson"/>
+        <NamedIndividual IRI="#Adult"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Karkasson"/>
+        <NamedIndividual IRI="#Long"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Karkasson"/>
+        <NamedIndividual IRI="#Strategical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Loto"/>
+        <NamedIndividual IRI="#Child"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Loto"/>
+        <NamedIndividual IRI="#Short"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Loto"/>
+        <NamedIndividual IRI="#Interactive"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Mafia"/>
+        <NamedIndividual IRI="#Teenager"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Mafia"/>
+        <NamedIndividual IRI="#Medium"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Mafia"/>
+        <NamedIndividual IRI="#Psycological"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Monopoly"/>
+        <NamedIndividual IRI="#Child"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Monopoly"/>
+        <NamedIndividual IRI="#Medium"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Monopoly"/>
+        <NamedIndividual IRI="#Economical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Poker"/>
+        <NamedIndividual IRI="#Adult"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Poker"/>
+        <NamedIndividual IRI="#Medium"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Poker"/>
+        <NamedIndividual IRI="#Psycological"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Riken"/>
+        <NamedIndividual IRI="#Adult"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Riken"/>
+        <NamedIndividual IRI="#Medium"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Riken"/>
+        <NamedIndividual IRI="#Strategical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <NamedIndividual IRI="#Scramble"/>
+        <NamedIndividual IRI="#Teenager"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasDuration"/>
+        <NamedIndividual IRI="#Scramble"/>
+        <NamedIndividual IRI="#Medium"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasGameType"/>
+        <NamedIndividual IRI="#Scramble"/>
+        <NamedIndividual IRI="#Interactive"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Achimes"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">45</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Achimes"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">3</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Alias"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Alias"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Board_football"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Board_football"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Chapaev"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Chapaev"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Chess"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">45</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Chess"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Colonizers"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">60</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Colonizers"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Domino"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Domino"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">3</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Jenga"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Jenga"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Karkasson"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">45</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Karkasson"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Loto"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Loto"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">3</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Mafia"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Mafia"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">6</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Monopoly"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">45</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Monopoly"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Poker"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">15</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Poker"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Riken"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">20</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Riken"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <NamedIndividual IRI="#Scramble"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">15</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <NamedIndividual IRI="#Scramble"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2</Literal>
+    </DataPropertyAssertion>
+    <SymmetricObjectProperty>
+        <ObjectProperty IRI="#hasGameType"/>
+    </SymmetricObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <Class IRI="#BoardGame"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasDuration"/>
+        <Class IRI="#BoardGame"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasGameType"/>
+        <Class IRI="#BoardGame"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasAgeCategory"/>
+        <Class IRI="#AgeCategory"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasDuration"/>
+        <Class IRI="#Duration"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+        <Class IRI="#GameType"/>
+    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <Class IRI="#BoardGame"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <Class IRI="#BoardGame"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasDurationMinutes"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasMinimumPlayers"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

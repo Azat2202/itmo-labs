@@ -49,4 +49,3 @@ class Newton(AbstractInterpolation):
             for k in range(1, self.n)
         ])
 
-        return lambda x: forward(x) if (self.table[-1].x - self.table[0].x) / 2 < x else backward(x)

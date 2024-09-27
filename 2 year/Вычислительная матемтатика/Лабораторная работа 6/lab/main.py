@@ -1,4 +1,5 @@
 import math
+import sys
 
 import numpy as np
 
@@ -13,7 +14,6 @@ import matplotlib.pyplot as plt
 
 equation_list: list[Equation] = [
     Equation(lambda x, y: y + (1 + x) * y ** 2, lambda x: - 1 / x, "y` = y + (1 + x) * y ** 2"),
-    Equation(lambda x, y: 2 * x * y, lambda x: np.exp(x ** 2), "y` = 2 * x * y"),
     Equation(lambda x, y: 2 * x - y + x ** 2, lambda x: x ** 2, "y` = 2 * x - y + x ** 2"),
     Equation(lambda x, y: (x - y) ** 2 + 1, lambda x: x, "y` = (x - y) ** 2 + 1"),
 ]
@@ -34,7 +34,10 @@ def main():
     e = ask_float("Введите точность e ")
     print()
     for solver_class in solvers:
-        solver = solver_class(x0, y0, xn, h, e, equation.equation, equation.solved)
+        try:
+            solver = solver_class(x0, y0, xn, h, e, equation.equation, equation.solved)
+        except Exception:
+            print("Точность достигнуть не удалось!", file=sys.stderr)
         x_list, y_list = solver.solve()
         plt.plot(x_list, y_list, label=solver.name)
     x_list = np.linspace(x0, xn, 1000)

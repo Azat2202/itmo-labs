@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "ak_lab3"
+version = "0.1.0"
+description = ""
+authors = ["Azat222 <azat222@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+setuptools = "^70.0.0"
+pytest = "^8.2.2"
+black = "^24.4.2"
+pylint = "^3.2.3"
+mypy = "^1.10.0"
+pytest-golden = "^0.2.2"
+
+[tool.poe.tasks]
+_pylint = "pylint ak_lab3 tests"
+_mypy = "mypy ak_lab3 tests"
+lint = ["_pylint", "_mypy"]
+format = "black ak_lab3 tests"
+test = "pytest tests"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

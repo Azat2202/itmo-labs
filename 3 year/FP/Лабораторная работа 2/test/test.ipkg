@@ -1,0 +1,49 @@
+package FP_lab2_test
+version = 0.1.0
+authors = "Azat222"
+-- maintainers =
+-- license =
+-- brief =
+-- readme =
+-- homepage =
+-- sourceloc =
+-- bugtracker =
+
+-- the Idris2 version required (e.g. langversion >= 0.5.1)
+-- langversion
+
+-- packages to add to search path
+depends = FP_lab2 
+        , hedgehog
+
+-- modules to install
+modules = Main
+        , Utils.Unit
+
+-- main file (i.e. file to load at REPL)
+main = Main
+
+-- name of executable
+executable = "FP_lab2-test"
+-- opts =
+sourcedir = "src"
+-- builddir =
+-- outputdir =
+
+-- script to run before building
+-- prebuild =
+
+-- script to run after building
+-- postbuild =
+
+-- script to run after building, before installing
+-- preinstall =
+
+-- script to run after installing
+-- postinstall =
+
+-- script to run before cleaning
+-- preclean =
+
+-- script to run after cleaning
+-- postclean =

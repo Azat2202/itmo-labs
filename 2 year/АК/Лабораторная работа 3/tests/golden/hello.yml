@@ -1,0 +1,833 @@
+in_source: |-
+  _start:
+              PUSH    0x65       ; [0x65]
+              PUSH    welcome     ; [0x65; welcome]
+  print_invitation:
+              OVER                ; [0x65; welcome; 0x65]
+              OVER                ; [0x65; welcome; 0x65; welcome]
+              LOAD                ; [0x65; welcome; 0x65; "W"]
+              TEST                ; [0x65; welcome; 0x65; "W"]
+              PUSH    save_null   ; [0x65; welcome; 0x65; "W"; save_null]
+              JZ                  ; [0x65; welcome; 0x65; "W"]
+              SWAP                ; [0x65; welcome; "W"; 0x65]
+              SAVE                ; [0x65; welcome]
+              INC                 ; [0x65; welcome++]
+              PUSH   print_invitation  ; [[0x65; welcome; print_invitation]
+              JUMP                ; [0x65; welcome]
+
+  save_null:                      ; [0x65; welcome; 0x65; "\0"]
+              SWAP                ; [0x65; welcome; "\0"; 0x65]
+              SAVE                ; [0x65; welcome]
+              POP                 ; [0x65]
+              PUSH    data        ; [0x65; data]
+  read_input:
+              OVER                ; [0x65; data; 0x65]
+              LOAD                ; [0x65; data; "A"]
+              TEST                ; [0x65; data; "A"]
+              PUSH   print_greeting  ; [0x65; data; "A"; print_greeting]
+              JZ                  ; [0x65; data; "A"]
+              OVER                ; [0x65; data; "A"; data]
+              SAVE                ; [0x65; data]
+              INC                 ; [0x65; data++]
+              PUSH    read_input  ; [0x65; data; read_input]
+              JUMP                ; [0x65; data]
+
+  print_greeting:                 ; [0x65; data; "\0"]
+              POP                 ; [0x65; data]
+              POP                 ; [0x65]
+              PUSH    greeting    ; [0x65; greeting]
+  print_data:
+              OVER                ; [0x65; greeting; 0x65]
+              OVER                ; [0x65; greeting; 0x65; greeting]
+              LOAD                ; [0x65; greeting; 0x65; "H"]
+              TEST                ; [0x65; greeting; 0x65; "H"]
+              PUSH    print_name  ; [0x65; greeting; 0x65; "H"; print_name]
+              JZ                  ; [0x65; greeting; 0x65; "H"]
+              SWAP                ; [0x65; greeting; "A"; 0x65]
+              SAVE                ; [0x65; greeting]
+              INC                 ; [0x65; greeting++]
+              PUSH   print_data   ; [0x65; greeting; print_data]
+              JUMP
+
+  print_name:                     ; [0x65; greeting; 0x65; "\0"]
+              POP                 ; [0x65; greeting; 0x65]
+              POP                 ; [0x65; greeting]
+              POP                 ; [0x65]
+              PUSH    data        ; [0x65; data]
+  print_name_data:
+              OVER                ; [0x65; data; 0x65]
+              OVER                ; [0x65; data; 0x65; data]
+              LOAD                ; [0x65; data; 0x65; "A"]
+              TEST                ; [0x65; data; 0x65; "A"]
+              PUSH    exit        ; [0x65; data; 0x65; "A"; exit]
+              JZ                  ; [0x65; data; 0x65; "A"]
+              SWAP                ; [0x65; data; "A"; 0x65]
+              SAVE                ; [0x65; data]
+              INC                 ; [0x65; data++]
+              PUSH    print_name_data
+              JUMP
+  exit:
+              HALT
+  welcome:
+              WORD    "What`s your name?"
+  greeting:
+              WORD    "Hello, "
+  data:
+              WORD    0x0
+in_stdin: |-
+  Azat222
+io_type: str
+out_log: |
+  DEBUG    root:machine.py:352 TICK:    0 PC:    0 AR:    0 Z_FLAG: 0  	{'opcode': 'push', 'arg': 101}   	DATA_STACK: [] 
+  DEBUG    root:machine.py:357 TICK:    4 PC:    1 AR:    0 Z_FLAG: 0  	{'opcode': 'push', 'arg': 57}    	DATA_STACK: [101] 
+  DEBUG    root:machine.py:357 TICK:    8 PC:    2 AR:    1 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 57] 
+  DEBUG    root:machine.py:357 TICK:   12 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 57, 101] 
+  DEBUG    root:machine.py:357 TICK:   16 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 57, 101, 57] 
+  DEBUG    root:machine.py:357 TICK:   21 PC:    5 AR:   57 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 57, 101, 87] 
+  DEBUG    root:machine.py:357 TICK:   25 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 57, 101, 87] 
+  DEBUG    root:machine.py:357 TICK:   29 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 57, 101, 87, 13] 
+  DEBUG    root:machine.py:357 TICK:   33 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 57, 101, 87] 
+  DEBUG    root:machine.py:357 TICK:   39 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 57, 87, 101] 
+  DEBUG    root:machine.py:357 TICK:   46 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 57] 
+  DEBUG    root:machine.py:357 TICK:   50 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 58] 
+  DEBUG    root:machine.py:357 TICK:   54 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 58, 2] 
+  DEBUG    root:machine.py:357 TICK:   59 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 58] 
+  DEBUG    root:machine.py:357 TICK:   63 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 58, 101] 
+  DEBUG    root:machine.py:357 TICK:   67 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 58, 101, 58] 
+  DEBUG    root:machine.py:357 TICK:   72 PC:    5 AR:   58 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 58, 101, 104] 
+  DEBUG    root:machine.py:357 TICK:   76 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 58, 101, 104] 
+  DEBUG    root:machine.py:357 TICK:   80 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 58, 101, 104, 13] 
+  DEBUG    root:machine.py:357 TICK:   84 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 58, 101, 104] 
+  DEBUG    root:machine.py:357 TICK:   90 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 58, 104, 101] 
+  DEBUG    root:machine.py:357 TICK:   97 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 58] 
+  DEBUG    root:machine.py:357 TICK:  101 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 59] 
+  DEBUG    root:machine.py:357 TICK:  105 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 59, 2] 
+  DEBUG    root:machine.py:357 TICK:  110 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 59] 
+  DEBUG    root:machine.py:357 TICK:  114 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 59, 101] 
+  DEBUG    root:machine.py:357 TICK:  118 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 59, 101, 59] 
+  DEBUG    root:machine.py:357 TICK:  123 PC:    5 AR:   59 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 59, 101, 97] 
+  DEBUG    root:machine.py:357 TICK:  127 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 59, 101, 97] 
+  DEBUG    root:machine.py:357 TICK:  131 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 59, 101, 97, 13] 
+  DEBUG    root:machine.py:357 TICK:  135 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 59, 101, 97] 
+  DEBUG    root:machine.py:357 TICK:  141 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 59, 97, 101] 
+  DEBUG    root:machine.py:357 TICK:  148 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 59] 
+  DEBUG    root:machine.py:357 TICK:  152 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 60] 
+  DEBUG    root:machine.py:357 TICK:  156 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 60, 2] 
+  DEBUG    root:machine.py:357 TICK:  161 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 60] 
+  DEBUG    root:machine.py:357 TICK:  165 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 60, 101] 
+  DEBUG    root:machine.py:357 TICK:  169 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 60, 101, 60] 
+  DEBUG    root:machine.py:357 TICK:  174 PC:    5 AR:   60 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 60, 101, 116] 
+  DEBUG    root:machine.py:357 TICK:  178 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 60, 101, 116] 
+  DEBUG    root:machine.py:357 TICK:  182 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 60, 101, 116, 13] 
+  DEBUG    root:machine.py:357 TICK:  186 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 60, 101, 116] 
+  DEBUG    root:machine.py:357 TICK:  192 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 60, 116, 101] 
+  DEBUG    root:machine.py:357 TICK:  199 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 60] 
+  DEBUG    root:machine.py:357 TICK:  203 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 61] 
+  DEBUG    root:machine.py:357 TICK:  207 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 61, 2] 
+  DEBUG    root:machine.py:357 TICK:  212 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 61] 
+  DEBUG    root:machine.py:357 TICK:  216 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 61, 101] 
+  DEBUG    root:machine.py:357 TICK:  220 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 61, 101, 61] 
+  DEBUG    root:machine.py:357 TICK:  225 PC:    5 AR:   61 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 61, 101, 96] 
+  DEBUG    root:machine.py:357 TICK:  229 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 61, 101, 96] 
+  DEBUG    root:machine.py:357 TICK:  233 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 61, 101, 96, 13] 
+  DEBUG    root:machine.py:357 TICK:  237 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 61, 101, 96] 
+  DEBUG    root:machine.py:357 TICK:  243 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 61, 96, 101] 
+  DEBUG    root:machine.py:357 TICK:  250 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 61] 
+  DEBUG    root:machine.py:357 TICK:  254 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 62] 
+  DEBUG    root:machine.py:357 TICK:  258 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 62, 2] 
+  DEBUG    root:machine.py:357 TICK:  263 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 62] 
+  DEBUG    root:machine.py:357 TICK:  267 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 62, 101] 
+  DEBUG    root:machine.py:357 TICK:  271 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 62, 101, 62] 
+  DEBUG    root:machine.py:357 TICK:  276 PC:    5 AR:   62 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 62, 101, 115] 
+  DEBUG    root:machine.py:357 TICK:  280 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 62, 101, 115] 
+  DEBUG    root:machine.py:357 TICK:  284 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 62, 101, 115, 13] 
+  DEBUG    root:machine.py:357 TICK:  288 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 62, 101, 115] 
+  DEBUG    root:machine.py:357 TICK:  294 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 62, 115, 101] 
+  DEBUG    root:machine.py:357 TICK:  301 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 62] 
+  DEBUG    root:machine.py:357 TICK:  305 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 63] 
+  DEBUG    root:machine.py:357 TICK:  309 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 63, 2] 
+  DEBUG    root:machine.py:357 TICK:  314 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 63] 
+  DEBUG    root:machine.py:357 TICK:  318 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 63, 101] 
+  DEBUG    root:machine.py:357 TICK:  322 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 63, 101, 63] 
+  DEBUG    root:machine.py:357 TICK:  327 PC:    5 AR:   63 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 63, 101, 32] 
+  DEBUG    root:machine.py:357 TICK:  331 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 63, 101, 32] 
+  DEBUG    root:machine.py:357 TICK:  335 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 63, 101, 32, 13] 
+  DEBUG    root:machine.py:357 TICK:  339 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 63, 101, 32] 
+  DEBUG    root:machine.py:357 TICK:  345 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 63, 32, 101] 
+  DEBUG    root:machine.py:357 TICK:  352 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 63] 
+  DEBUG    root:machine.py:357 TICK:  356 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 64] 
+  DEBUG    root:machine.py:357 TICK:  360 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 64, 2] 
+  DEBUG    root:machine.py:357 TICK:  365 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 64] 
+  DEBUG    root:machine.py:357 TICK:  369 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 64, 101] 
+  DEBUG    root:machine.py:357 TICK:  373 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 64, 101, 64] 
+  DEBUG    root:machine.py:357 TICK:  378 PC:    5 AR:   64 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 64, 101, 121] 
+  DEBUG    root:machine.py:357 TICK:  382 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 64, 101, 121] 
+  DEBUG    root:machine.py:357 TICK:  386 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 64, 101, 121, 13] 
+  DEBUG    root:machine.py:357 TICK:  390 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 64, 101, 121] 
+  DEBUG    root:machine.py:357 TICK:  396 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 64, 121, 101] 
+  DEBUG    root:machine.py:357 TICK:  403 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 64] 
+  DEBUG    root:machine.py:357 TICK:  407 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 65] 
+  DEBUG    root:machine.py:357 TICK:  411 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 65, 2] 
+  DEBUG    root:machine.py:357 TICK:  416 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 65] 
+  DEBUG    root:machine.py:357 TICK:  420 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 65, 101] 
+  DEBUG    root:machine.py:357 TICK:  424 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 65, 101, 65] 
+  DEBUG    root:machine.py:357 TICK:  429 PC:    5 AR:   65 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 65, 101, 111] 
+  DEBUG    root:machine.py:357 TICK:  433 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 65, 101, 111] 
+  DEBUG    root:machine.py:357 TICK:  437 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 65, 101, 111, 13] 
+  DEBUG    root:machine.py:357 TICK:  441 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 65, 101, 111] 
+  DEBUG    root:machine.py:357 TICK:  447 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 65, 111, 101] 
+  DEBUG    root:machine.py:357 TICK:  454 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 65] 
+  DEBUG    root:machine.py:357 TICK:  458 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 66] 
+  DEBUG    root:machine.py:357 TICK:  462 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 66, 2] 
+  DEBUG    root:machine.py:357 TICK:  467 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 66] 
+  DEBUG    root:machine.py:357 TICK:  471 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 66, 101] 
+  DEBUG    root:machine.py:357 TICK:  475 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 66, 101, 66] 
+  DEBUG    root:machine.py:357 TICK:  480 PC:    5 AR:   66 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 66, 101, 117] 
+  DEBUG    root:machine.py:357 TICK:  484 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 66, 101, 117] 
+  DEBUG    root:machine.py:357 TICK:  488 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 66, 101, 117, 13] 
+  DEBUG    root:machine.py:357 TICK:  492 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 66, 101, 117] 
+  DEBUG    root:machine.py:357 TICK:  498 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 66, 117, 101] 
+  DEBUG    root:machine.py:357 TICK:  505 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 66] 
+  DEBUG    root:machine.py:357 TICK:  509 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 67] 
+  DEBUG    root:machine.py:357 TICK:  513 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 67, 2] 
+  DEBUG    root:machine.py:357 TICK:  518 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 67] 
+  DEBUG    root:machine.py:357 TICK:  522 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 67, 101] 
+  DEBUG    root:machine.py:357 TICK:  526 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 67, 101, 67] 
+  DEBUG    root:machine.py:357 TICK:  531 PC:    5 AR:   67 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 67, 101, 114] 
+  DEBUG    root:machine.py:357 TICK:  535 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 67, 101, 114] 
+  DEBUG    root:machine.py:357 TICK:  539 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 67, 101, 114, 13] 
+  DEBUG    root:machine.py:357 TICK:  543 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 67, 101, 114] 
+  DEBUG    root:machine.py:357 TICK:  549 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 67, 114, 101] 
+  DEBUG    root:machine.py:357 TICK:  556 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 67] 
+  DEBUG    root:machine.py:357 TICK:  560 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 68] 
+  DEBUG    root:machine.py:357 TICK:  564 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 68, 2] 
+  DEBUG    root:machine.py:357 TICK:  569 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 68] 
+  DEBUG    root:machine.py:357 TICK:  573 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 68, 101] 
+  DEBUG    root:machine.py:357 TICK:  577 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 68, 101, 68] 
+  DEBUG    root:machine.py:357 TICK:  582 PC:    5 AR:   68 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 68, 101, 32] 
+  DEBUG    root:machine.py:357 TICK:  586 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 68, 101, 32] 
+  DEBUG    root:machine.py:357 TICK:  590 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 68, 101, 32, 13] 
+  DEBUG    root:machine.py:357 TICK:  594 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 68, 101, 32] 
+  DEBUG    root:machine.py:357 TICK:  600 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 68, 32, 101] 
+  DEBUG    root:machine.py:357 TICK:  607 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 68] 
+  DEBUG    root:machine.py:357 TICK:  611 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 69] 
+  DEBUG    root:machine.py:357 TICK:  615 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 69, 2] 
+  DEBUG    root:machine.py:357 TICK:  620 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 69] 
+  DEBUG    root:machine.py:357 TICK:  624 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 69, 101] 
+  DEBUG    root:machine.py:357 TICK:  628 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 69, 101, 69] 
+  DEBUG    root:machine.py:357 TICK:  633 PC:    5 AR:   69 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 69, 101, 110] 
+  DEBUG    root:machine.py:357 TICK:  637 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 69, 101, 110] 
+  DEBUG    root:machine.py:357 TICK:  641 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 69, 101, 110, 13] 
+  DEBUG    root:machine.py:357 TICK:  645 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 69, 101, 110] 
+  DEBUG    root:machine.py:357 TICK:  651 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 69, 110, 101] 
+  DEBUG    root:machine.py:357 TICK:  658 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 69] 
+  DEBUG    root:machine.py:357 TICK:  662 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 70] 
+  DEBUG    root:machine.py:357 TICK:  666 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 70, 2] 
+  DEBUG    root:machine.py:357 TICK:  671 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 70] 
+  DEBUG    root:machine.py:357 TICK:  675 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 70, 101] 
+  DEBUG    root:machine.py:357 TICK:  679 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 70, 101, 70] 
+  DEBUG    root:machine.py:357 TICK:  684 PC:    5 AR:   70 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 70, 101, 97] 
+  DEBUG    root:machine.py:357 TICK:  688 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 70, 101, 97] 
+  DEBUG    root:machine.py:357 TICK:  692 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 70, 101, 97, 13] 
+  DEBUG    root:machine.py:357 TICK:  696 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 70, 101, 97] 
+  DEBUG    root:machine.py:357 TICK:  702 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 70, 97, 101] 
+  DEBUG    root:machine.py:357 TICK:  709 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 70] 
+  DEBUG    root:machine.py:357 TICK:  713 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 71] 
+  DEBUG    root:machine.py:357 TICK:  717 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 71, 2] 
+  DEBUG    root:machine.py:357 TICK:  722 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 71] 
+  DEBUG    root:machine.py:357 TICK:  726 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 71, 101] 
+  DEBUG    root:machine.py:357 TICK:  730 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 71, 101, 71] 
+  DEBUG    root:machine.py:357 TICK:  735 PC:    5 AR:   71 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 71, 101, 109] 
+  DEBUG    root:machine.py:357 TICK:  739 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 71, 101, 109] 
+  DEBUG    root:machine.py:357 TICK:  743 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 71, 101, 109, 13] 
+  DEBUG    root:machine.py:357 TICK:  747 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 71, 101, 109] 
+  DEBUG    root:machine.py:357 TICK:  753 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 71, 109, 101] 
+  DEBUG    root:machine.py:357 TICK:  760 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 71] 
+  DEBUG    root:machine.py:357 TICK:  764 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 72] 
+  DEBUG    root:machine.py:357 TICK:  768 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 72, 2] 
+  DEBUG    root:machine.py:357 TICK:  773 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 72] 
+  DEBUG    root:machine.py:357 TICK:  777 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 72, 101] 
+  DEBUG    root:machine.py:357 TICK:  781 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 72, 101, 72] 
+  DEBUG    root:machine.py:357 TICK:  786 PC:    5 AR:   72 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 72, 101, 101] 
+  DEBUG    root:machine.py:357 TICK:  790 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 72, 101, 101] 
+  DEBUG    root:machine.py:357 TICK:  794 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 72, 101, 101, 13] 
+  DEBUG    root:machine.py:357 TICK:  798 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 72, 101, 101] 
+  DEBUG    root:machine.py:357 TICK:  804 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 72, 101, 101] 
+  DEBUG    root:machine.py:357 TICK:  811 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 72] 
+  DEBUG    root:machine.py:357 TICK:  815 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 73] 
+  DEBUG    root:machine.py:357 TICK:  819 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 73, 2] 
+  DEBUG    root:machine.py:357 TICK:  824 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 73] 
+  DEBUG    root:machine.py:357 TICK:  828 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 73, 101] 
+  DEBUG    root:machine.py:357 TICK:  832 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 73, 101, 73] 
+  DEBUG    root:machine.py:357 TICK:  837 PC:    5 AR:   73 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 73, 101, 63] 
+  DEBUG    root:machine.py:357 TICK:  841 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 73, 101, 63] 
+  DEBUG    root:machine.py:357 TICK:  845 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 73, 101, 63, 13] 
+  DEBUG    root:machine.py:357 TICK:  849 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 73, 101, 63] 
+  DEBUG    root:machine.py:357 TICK:  855 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 73, 63, 101] 
+  DEBUG    root:machine.py:357 TICK:  862 PC:   10 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 73] 
+  DEBUG    root:machine.py:357 TICK:  866 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [101, 74] 
+  DEBUG    root:machine.py:357 TICK:  870 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 74, 2] 
+  DEBUG    root:machine.py:357 TICK:  875 PC:    2 AR:   12 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 74] 
+  DEBUG    root:machine.py:357 TICK:  879 PC:    3 AR:    2 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 74, 101] 
+  DEBUG    root:machine.py:357 TICK:  883 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 74, 101, 74] 
+  DEBUG    root:machine.py:357 TICK:  888 PC:    5 AR:   74 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 74, 101, 0] 
+  DEBUG    root:machine.py:357 TICK:  892 PC:    6 AR:    5 Z_FLAG: 1  	{'opcode': 'push', 'arg': 13}    	DATA_STACK: [101, 74, 101, 0] 
+  DEBUG    root:machine.py:357 TICK:  896 PC:    7 AR:    6 Z_FLAG: 1  	{'opcode': 'jz'}                 	DATA_STACK: [101, 74, 101, 0, 13] 
+  DEBUG    root:machine.py:357 TICK:  901 PC:   13 AR:    7 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 74, 101, 0] 
+  DEBUG    root:machine.py:357 TICK:  907 PC:   14 AR:   13 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 74, 0, 101] 
+  DEBUG    root:machine.py:357 TICK:  914 PC:   15 AR:  101 Z_FLAG: 1  	{'opcode': 'pop'}                	DATA_STACK: [101, 74] 
+  DEBUG    root:machine.py:357 TICK:  918 PC:   16 AR:   15 Z_FLAG: 1  	{'opcode': 'push', 'arg': 83}    	DATA_STACK: [101] 
+  DEBUG    root:machine.py:357 TICK:  922 PC:   17 AR:   16 Z_FLAG: 1  	{'opcode': 'over'}               	DATA_STACK: [101, 83] 
+  DEBUG    root:machine.py:357 TICK:  926 PC:   18 AR:   17 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 83, 101] 
+  DEBUG    root:machine.py:357 TICK:  931 PC:   19 AR:  101 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 83, 65] 
+  DEBUG    root:machine.py:357 TICK:  935 PC:   20 AR:   19 Z_FLAG: 0  	{'opcode': 'push', 'arg': 27}    	DATA_STACK: [101, 83, 65] 
+  DEBUG    root:machine.py:357 TICK:  939 PC:   21 AR:   20 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 83, 65, 27] 
+  DEBUG    root:machine.py:357 TICK:  943 PC:   22 AR:   21 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 83, 65] 
+  DEBUG    root:machine.py:357 TICK:  947 PC:   23 AR:   22 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 83, 65, 83] 
+  DEBUG    root:machine.py:357 TICK:  954 PC:   24 AR:   83 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 83] 
+  DEBUG    root:machine.py:357 TICK:  958 PC:   25 AR:   24 Z_FLAG: 0  	{'opcode': 'push', 'arg': 17}    	DATA_STACK: [101, 84] 
+  DEBUG    root:machine.py:357 TICK:  962 PC:   26 AR:   25 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 84, 17] 
+  DEBUG    root:machine.py:357 TICK:  967 PC:   17 AR:   26 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 84] 
+  DEBUG    root:machine.py:357 TICK:  971 PC:   18 AR:   17 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 84, 101] 
+  DEBUG    root:machine.py:357 TICK:  976 PC:   19 AR:  101 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 84, 122] 
+  DEBUG    root:machine.py:357 TICK:  980 PC:   20 AR:   19 Z_FLAG: 0  	{'opcode': 'push', 'arg': 27}    	DATA_STACK: [101, 84, 122] 
+  DEBUG    root:machine.py:357 TICK:  984 PC:   21 AR:   20 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 84, 122, 27] 
+  DEBUG    root:machine.py:357 TICK:  988 PC:   22 AR:   21 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 84, 122] 
+  DEBUG    root:machine.py:357 TICK:  992 PC:   23 AR:   22 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 84, 122, 84] 
+  DEBUG    root:machine.py:357 TICK:  999 PC:   24 AR:   84 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 84] 
+  DEBUG    root:machine.py:357 TICK: 1003 PC:   25 AR:   24 Z_FLAG: 0  	{'opcode': 'push', 'arg': 17}    	DATA_STACK: [101, 85] 
+  DEBUG    root:machine.py:357 TICK: 1007 PC:   26 AR:   25 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 85, 17] 
+  DEBUG    root:machine.py:357 TICK: 1012 PC:   17 AR:   26 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 85] 
+  DEBUG    root:machine.py:357 TICK: 1016 PC:   18 AR:   17 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 85, 101] 
+  DEBUG    root:machine.py:357 TICK: 1021 PC:   19 AR:  101 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 85, 97] 
+  DEBUG    root:machine.py:357 TICK: 1025 PC:   20 AR:   19 Z_FLAG: 0  	{'opcode': 'push', 'arg': 27}    	DATA_STACK: [101, 85, 97] 
+  DEBUG    root:machine.py:357 TICK: 1029 PC:   21 AR:   20 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 85, 97, 27] 
+  DEBUG    root:machine.py:357 TICK: 1033 PC:   22 AR:   21 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 85, 97] 
+  DEBUG    root:machine.py:357 TICK: 1037 PC:   23 AR:   22 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 85, 97, 85] 
+  DEBUG    root:machine.py:357 TICK: 1044 PC:   24 AR:   85 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 85] 
+  DEBUG    root:machine.py:357 TICK: 1048 PC:   25 AR:   24 Z_FLAG: 0  	{'opcode': 'push', 'arg': 17}    	DATA_STACK: [101, 86] 
+  DEBUG    root:machine.py:357 TICK: 1052 PC:   26 AR:   25 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 86, 17] 
+  DEBUG    root:machine.py:357 TICK: 1057 PC:   17 AR:   26 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 86] 
+  DEBUG    root:machine.py:357 TICK: 1061 PC:   18 AR:   17 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 86, 101] 
+  DEBUG    root:machine.py:357 TICK: 1066 PC:   19 AR:  101 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 86, 116] 
+  DEBUG    root:machine.py:357 TICK: 1070 PC:   20 AR:   19 Z_FLAG: 0  	{'opcode': 'push', 'arg': 27}    	DATA_STACK: [101, 86, 116] 
+  DEBUG    root:machine.py:357 TICK: 1074 PC:   21 AR:   20 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 86, 116, 27] 
+  DEBUG    root:machine.py:357 TICK: 1078 PC:   22 AR:   21 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 86, 116] 
+  DEBUG    root:machine.py:357 TICK: 1082 PC:   23 AR:   22 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 86, 116, 86] 
+  DEBUG    root:machine.py:357 TICK: 1089 PC:   24 AR:   86 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 86] 
+  DEBUG    root:machine.py:357 TICK: 1093 PC:   25 AR:   24 Z_FLAG: 0  	{'opcode': 'push', 'arg': 17}    	DATA_STACK: [101, 87] 
+  DEBUG    root:machine.py:357 TICK: 1097 PC:   26 AR:   25 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 87, 17] 
+  DEBUG    root:machine.py:357 TICK: 1102 PC:   17 AR:   26 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 87] 
+  DEBUG    root:machine.py:357 TICK: 1106 PC:   18 AR:   17 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 87, 101] 
+  DEBUG    root:machine.py:357 TICK: 1111 PC:   19 AR:  101 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 87, 50] 
+  DEBUG    root:machine.py:357 TICK: 1115 PC:   20 AR:   19 Z_FLAG: 0  	{'opcode': 'push', 'arg': 27}    	DATA_STACK: [101, 87, 50] 
+  DEBUG    root:machine.py:357 TICK: 1119 PC:   21 AR:   20 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 87, 50, 27] 
+  DEBUG    root:machine.py:357 TICK: 1123 PC:   22 AR:   21 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 87, 50] 
+  DEBUG    root:machine.py:357 TICK: 1127 PC:   23 AR:   22 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 87, 50, 87] 
+  DEBUG    root:machine.py:357 TICK: 1134 PC:   24 AR:   87 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 87] 
+  DEBUG    root:machine.py:357 TICK: 1138 PC:   25 AR:   24 Z_FLAG: 0  	{'opcode': 'push', 'arg': 17}    	DATA_STACK: [101, 88] 
+  DEBUG    root:machine.py:357 TICK: 1142 PC:   26 AR:   25 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 88, 17] 
+  DEBUG    root:machine.py:357 TICK: 1147 PC:   17 AR:   26 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 88] 
+  DEBUG    root:machine.py:357 TICK: 1151 PC:   18 AR:   17 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 88, 101] 
+  DEBUG    root:machine.py:357 TICK: 1156 PC:   19 AR:  101 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 88, 50] 
+  DEBUG    root:machine.py:357 TICK: 1160 PC:   20 AR:   19 Z_FLAG: 0  	{'opcode': 'push', 'arg': 27}    	DATA_STACK: [101, 88, 50] 
+  DEBUG    root:machine.py:357 TICK: 1164 PC:   21 AR:   20 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 88, 50, 27] 
+  DEBUG    root:machine.py:357 TICK: 1168 PC:   22 AR:   21 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 88, 50] 
+  DEBUG    root:machine.py:357 TICK: 1172 PC:   23 AR:   22 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 88, 50, 88] 
+  DEBUG    root:machine.py:357 TICK: 1179 PC:   24 AR:   88 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 88] 
+  DEBUG    root:machine.py:357 TICK: 1183 PC:   25 AR:   24 Z_FLAG: 0  	{'opcode': 'push', 'arg': 17}    	DATA_STACK: [101, 89] 
+  DEBUG    root:machine.py:357 TICK: 1187 PC:   26 AR:   25 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 89, 17] 
+  DEBUG    root:machine.py:357 TICK: 1192 PC:   17 AR:   26 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 89] 
+  DEBUG    root:machine.py:357 TICK: 1196 PC:   18 AR:   17 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 89, 101] 
+  DEBUG    root:machine.py:357 TICK: 1201 PC:   19 AR:  101 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 89, 50] 
+  DEBUG    root:machine.py:357 TICK: 1205 PC:   20 AR:   19 Z_FLAG: 0  	{'opcode': 'push', 'arg': 27}    	DATA_STACK: [101, 89, 50] 
+  DEBUG    root:machine.py:357 TICK: 1209 PC:   21 AR:   20 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 89, 50, 27] 
+  DEBUG    root:machine.py:357 TICK: 1213 PC:   22 AR:   21 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 89, 50] 
+  DEBUG    root:machine.py:357 TICK: 1217 PC:   23 AR:   22 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 89, 50, 89] 
+  DEBUG    root:machine.py:357 TICK: 1224 PC:   24 AR:   89 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 89] 
+  DEBUG    root:machine.py:357 TICK: 1228 PC:   25 AR:   24 Z_FLAG: 0  	{'opcode': 'push', 'arg': 17}    	DATA_STACK: [101, 90] 
+  DEBUG    root:machine.py:357 TICK: 1232 PC:   26 AR:   25 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 90, 17] 
+  DEBUG    root:machine.py:357 TICK: 1237 PC:   17 AR:   26 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 90] 
+  DEBUG    root:machine.py:357 TICK: 1241 PC:   18 AR:   17 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 90, 101] 
+  DEBUG    root:machine.py:357 TICK: 1246 PC:   19 AR:  101 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 90, 0] 
+  DEBUG    root:machine.py:357 TICK: 1250 PC:   20 AR:   19 Z_FLAG: 1  	{'opcode': 'push', 'arg': 27}    	DATA_STACK: [101, 90, 0] 
+  DEBUG    root:machine.py:357 TICK: 1254 PC:   21 AR:   20 Z_FLAG: 1  	{'opcode': 'jz'}                 	DATA_STACK: [101, 90, 0, 27] 
+  DEBUG    root:machine.py:357 TICK: 1259 PC:   27 AR:   21 Z_FLAG: 0  	{'opcode': 'pop'}                	DATA_STACK: [101, 90, 0] 
+  DEBUG    root:machine.py:357 TICK: 1263 PC:   28 AR:   27 Z_FLAG: 0  	{'opcode': 'pop'}                	DATA_STACK: [101, 90] 
+  DEBUG    root:machine.py:357 TICK: 1267 PC:   29 AR:   28 Z_FLAG: 0  	{'opcode': 'push', 'arg': 75}    	DATA_STACK: [101] 
+  DEBUG    root:machine.py:357 TICK: 1271 PC:   30 AR:   29 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 75] 
+  DEBUG    root:machine.py:357 TICK: 1275 PC:   31 AR:   30 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 75, 101] 
+  DEBUG    root:machine.py:357 TICK: 1279 PC:   32 AR:   31 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 75, 101, 75] 
+  DEBUG    root:machine.py:357 TICK: 1284 PC:   33 AR:   75 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 75, 101, 72] 
+  DEBUG    root:machine.py:357 TICK: 1288 PC:   34 AR:   33 Z_FLAG: 0  	{'opcode': 'push', 'arg': 41}    	DATA_STACK: [101, 75, 101, 72] 
+  DEBUG    root:machine.py:357 TICK: 1292 PC:   35 AR:   34 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 75, 101, 72, 41] 
+  DEBUG    root:machine.py:357 TICK: 1296 PC:   36 AR:   35 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 75, 101, 72] 
+  DEBUG    root:machine.py:357 TICK: 1302 PC:   37 AR:   36 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 75, 72, 101] 
+  DEBUG    root:machine.py:357 TICK: 1309 PC:   38 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 75] 
+  DEBUG    root:machine.py:357 TICK: 1313 PC:   39 AR:   38 Z_FLAG: 0  	{'opcode': 'push', 'arg': 30}    	DATA_STACK: [101, 76] 
+  DEBUG    root:machine.py:357 TICK: 1317 PC:   40 AR:   39 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 76, 30] 
+  DEBUG    root:machine.py:357 TICK: 1322 PC:   30 AR:   40 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 76] 
+  DEBUG    root:machine.py:357 TICK: 1326 PC:   31 AR:   30 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 76, 101] 
+  DEBUG    root:machine.py:357 TICK: 1330 PC:   32 AR:   31 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 76, 101, 76] 
+  DEBUG    root:machine.py:357 TICK: 1335 PC:   33 AR:   76 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 76, 101, 101] 
+  DEBUG    root:machine.py:357 TICK: 1339 PC:   34 AR:   33 Z_FLAG: 0  	{'opcode': 'push', 'arg': 41}    	DATA_STACK: [101, 76, 101, 101] 
+  DEBUG    root:machine.py:357 TICK: 1343 PC:   35 AR:   34 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 76, 101, 101, 41] 
+  DEBUG    root:machine.py:357 TICK: 1347 PC:   36 AR:   35 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 76, 101, 101] 
+  DEBUG    root:machine.py:357 TICK: 1353 PC:   37 AR:   36 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 76, 101, 101] 
+  DEBUG    root:machine.py:357 TICK: 1360 PC:   38 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 76] 
+  DEBUG    root:machine.py:357 TICK: 1364 PC:   39 AR:   38 Z_FLAG: 0  	{'opcode': 'push', 'arg': 30}    	DATA_STACK: [101, 77] 
+  DEBUG    root:machine.py:357 TICK: 1368 PC:   40 AR:   39 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 77, 30] 
+  DEBUG    root:machine.py:357 TICK: 1373 PC:   30 AR:   40 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 77] 
+  DEBUG    root:machine.py:357 TICK: 1377 PC:   31 AR:   30 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 77, 101] 
+  DEBUG    root:machine.py:357 TICK: 1381 PC:   32 AR:   31 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 77, 101, 77] 
+  DEBUG    root:machine.py:357 TICK: 1386 PC:   33 AR:   77 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 77, 101, 108] 
+  DEBUG    root:machine.py:357 TICK: 1390 PC:   34 AR:   33 Z_FLAG: 0  	{'opcode': 'push', 'arg': 41}    	DATA_STACK: [101, 77, 101, 108] 
+  DEBUG    root:machine.py:357 TICK: 1394 PC:   35 AR:   34 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 77, 101, 108, 41] 
+  DEBUG    root:machine.py:357 TICK: 1398 PC:   36 AR:   35 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 77, 101, 108] 
+  DEBUG    root:machine.py:357 TICK: 1404 PC:   37 AR:   36 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 77, 108, 101] 
+  DEBUG    root:machine.py:357 TICK: 1411 PC:   38 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 77] 
+  DEBUG    root:machine.py:357 TICK: 1415 PC:   39 AR:   38 Z_FLAG: 0  	{'opcode': 'push', 'arg': 30}    	DATA_STACK: [101, 78] 
+  DEBUG    root:machine.py:357 TICK: 1419 PC:   40 AR:   39 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 78, 30] 
+  DEBUG    root:machine.py:357 TICK: 1424 PC:   30 AR:   40 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 78] 
+  DEBUG    root:machine.py:357 TICK: 1428 PC:   31 AR:   30 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 78, 101] 
+  DEBUG    root:machine.py:357 TICK: 1432 PC:   32 AR:   31 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 78, 101, 78] 
+  DEBUG    root:machine.py:357 TICK: 1437 PC:   33 AR:   78 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 78, 101, 108] 
+  DEBUG    root:machine.py:357 TICK: 1441 PC:   34 AR:   33 Z_FLAG: 0  	{'opcode': 'push', 'arg': 41}    	DATA_STACK: [101, 78, 101, 108] 
+  DEBUG    root:machine.py:357 TICK: 1445 PC:   35 AR:   34 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 78, 101, 108, 41] 
+  DEBUG    root:machine.py:357 TICK: 1449 PC:   36 AR:   35 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 78, 101, 108] 
+  DEBUG    root:machine.py:357 TICK: 1455 PC:   37 AR:   36 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 78, 108, 101] 
+  DEBUG    root:machine.py:357 TICK: 1462 PC:   38 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 78] 
+  DEBUG    root:machine.py:357 TICK: 1466 PC:   39 AR:   38 Z_FLAG: 0  	{'opcode': 'push', 'arg': 30}    	DATA_STACK: [101, 79] 
+  DEBUG    root:machine.py:357 TICK: 1470 PC:   40 AR:   39 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 79, 30] 
+  DEBUG    root:machine.py:357 TICK: 1475 PC:   30 AR:   40 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 79] 
+  DEBUG    root:machine.py:357 TICK: 1479 PC:   31 AR:   30 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 79, 101] 
+  DEBUG    root:machine.py:357 TICK: 1483 PC:   32 AR:   31 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 79, 101, 79] 
+  DEBUG    root:machine.py:357 TICK: 1488 PC:   33 AR:   79 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 79, 101, 111] 
+  DEBUG    root:machine.py:357 TICK: 1492 PC:   34 AR:   33 Z_FLAG: 0  	{'opcode': 'push', 'arg': 41}    	DATA_STACK: [101, 79, 101, 111] 
+  DEBUG    root:machine.py:357 TICK: 1496 PC:   35 AR:   34 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 79, 101, 111, 41] 
+  DEBUG    root:machine.py:357 TICK: 1500 PC:   36 AR:   35 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 79, 101, 111] 
+  DEBUG    root:machine.py:357 TICK: 1506 PC:   37 AR:   36 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 79, 111, 101] 
+  DEBUG    root:machine.py:357 TICK: 1513 PC:   38 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 79] 
+  DEBUG    root:machine.py:357 TICK: 1517 PC:   39 AR:   38 Z_FLAG: 0  	{'opcode': 'push', 'arg': 30}    	DATA_STACK: [101, 80] 
+  DEBUG    root:machine.py:357 TICK: 1521 PC:   40 AR:   39 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 80, 30] 
+  DEBUG    root:machine.py:357 TICK: 1526 PC:   30 AR:   40 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 80] 
+  DEBUG    root:machine.py:357 TICK: 1530 PC:   31 AR:   30 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 80, 101] 
+  DEBUG    root:machine.py:357 TICK: 1534 PC:   32 AR:   31 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 80, 101, 80] 
+  DEBUG    root:machine.py:357 TICK: 1539 PC:   33 AR:   80 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 80, 101, 44] 
+  DEBUG    root:machine.py:357 TICK: 1543 PC:   34 AR:   33 Z_FLAG: 0  	{'opcode': 'push', 'arg': 41}    	DATA_STACK: [101, 80, 101, 44] 
+  DEBUG    root:machine.py:357 TICK: 1547 PC:   35 AR:   34 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 80, 101, 44, 41] 
+  DEBUG    root:machine.py:357 TICK: 1551 PC:   36 AR:   35 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 80, 101, 44] 
+  DEBUG    root:machine.py:357 TICK: 1557 PC:   37 AR:   36 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 80, 44, 101] 
+  DEBUG    root:machine.py:357 TICK: 1564 PC:   38 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 80] 
+  DEBUG    root:machine.py:357 TICK: 1568 PC:   39 AR:   38 Z_FLAG: 0  	{'opcode': 'push', 'arg': 30}    	DATA_STACK: [101, 81] 
+  DEBUG    root:machine.py:357 TICK: 1572 PC:   40 AR:   39 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 81, 30] 
+  DEBUG    root:machine.py:357 TICK: 1577 PC:   30 AR:   40 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 81] 
+  DEBUG    root:machine.py:357 TICK: 1581 PC:   31 AR:   30 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 81, 101] 
+  DEBUG    root:machine.py:357 TICK: 1585 PC:   32 AR:   31 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 81, 101, 81] 
+  DEBUG    root:machine.py:357 TICK: 1590 PC:   33 AR:   81 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 81, 101, 32] 
+  DEBUG    root:machine.py:357 TICK: 1594 PC:   34 AR:   33 Z_FLAG: 0  	{'opcode': 'push', 'arg': 41}    	DATA_STACK: [101, 81, 101, 32] 
+  DEBUG    root:machine.py:357 TICK: 1598 PC:   35 AR:   34 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 81, 101, 32, 41] 
+  DEBUG    root:machine.py:357 TICK: 1602 PC:   36 AR:   35 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 81, 101, 32] 
+  DEBUG    root:machine.py:357 TICK: 1608 PC:   37 AR:   36 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 81, 32, 101] 
+  DEBUG    root:machine.py:357 TICK: 1615 PC:   38 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 81] 
+  DEBUG    root:machine.py:357 TICK: 1619 PC:   39 AR:   38 Z_FLAG: 0  	{'opcode': 'push', 'arg': 30}    	DATA_STACK: [101, 82] 
+  DEBUG    root:machine.py:357 TICK: 1623 PC:   40 AR:   39 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 82, 30] 
+  DEBUG    root:machine.py:357 TICK: 1628 PC:   30 AR:   40 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 82] 
+  DEBUG    root:machine.py:357 TICK: 1632 PC:   31 AR:   30 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 82, 101] 
+  DEBUG    root:machine.py:357 TICK: 1636 PC:   32 AR:   31 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 82, 101, 82] 
+  DEBUG    root:machine.py:357 TICK: 1641 PC:   33 AR:   82 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 82, 101, 0] 
+  DEBUG    root:machine.py:357 TICK: 1645 PC:   34 AR:   33 Z_FLAG: 1  	{'opcode': 'push', 'arg': 41}    	DATA_STACK: [101, 82, 101, 0] 
+  DEBUG    root:machine.py:357 TICK: 1649 PC:   35 AR:   34 Z_FLAG: 1  	{'opcode': 'jz'}                 	DATA_STACK: [101, 82, 101, 0, 41] 
+  DEBUG    root:machine.py:357 TICK: 1654 PC:   41 AR:   35 Z_FLAG: 0  	{'opcode': 'pop'}                	DATA_STACK: [101, 82, 101, 0] 
+  DEBUG    root:machine.py:357 TICK: 1658 PC:   42 AR:   41 Z_FLAG: 0  	{'opcode': 'pop'}                	DATA_STACK: [101, 82, 101] 
+  DEBUG    root:machine.py:357 TICK: 1662 PC:   43 AR:   42 Z_FLAG: 0  	{'opcode': 'pop'}                	DATA_STACK: [101, 82] 
+  DEBUG    root:machine.py:357 TICK: 1666 PC:   44 AR:   43 Z_FLAG: 0  	{'opcode': 'push', 'arg': 83}    	DATA_STACK: [101] 
+  DEBUG    root:machine.py:357 TICK: 1670 PC:   45 AR:   44 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 83] 
+  DEBUG    root:machine.py:357 TICK: 1674 PC:   46 AR:   45 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 83, 101] 
+  DEBUG    root:machine.py:357 TICK: 1678 PC:   47 AR:   46 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 83, 101, 83] 
+  DEBUG    root:machine.py:357 TICK: 1683 PC:   48 AR:   83 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 83, 101, 65] 
+  DEBUG    root:machine.py:357 TICK: 1687 PC:   49 AR:   48 Z_FLAG: 0  	{'opcode': 'push', 'arg': 56}    	DATA_STACK: [101, 83, 101, 65] 
+  DEBUG    root:machine.py:357 TICK: 1691 PC:   50 AR:   49 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 83, 101, 65, 56] 
+  DEBUG    root:machine.py:357 TICK: 1695 PC:   51 AR:   50 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 83, 101, 65] 
+  DEBUG    root:machine.py:357 TICK: 1701 PC:   52 AR:   51 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 83, 65, 101] 
+  DEBUG    root:machine.py:357 TICK: 1708 PC:   53 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 83] 
+  DEBUG    root:machine.py:357 TICK: 1712 PC:   54 AR:   53 Z_FLAG: 0  	{'opcode': 'push', 'arg': 45}    	DATA_STACK: [101, 84] 
+  DEBUG    root:machine.py:357 TICK: 1716 PC:   55 AR:   54 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 84, 45] 
+  DEBUG    root:machine.py:357 TICK: 1721 PC:   45 AR:   55 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 84] 
+  DEBUG    root:machine.py:357 TICK: 1725 PC:   46 AR:   45 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 84, 101] 
+  DEBUG    root:machine.py:357 TICK: 1729 PC:   47 AR:   46 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 84, 101, 84] 
+  DEBUG    root:machine.py:357 TICK: 1734 PC:   48 AR:   84 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 84, 101, 122] 
+  DEBUG    root:machine.py:357 TICK: 1738 PC:   49 AR:   48 Z_FLAG: 0  	{'opcode': 'push', 'arg': 56}    	DATA_STACK: [101, 84, 101, 122] 
+  DEBUG    root:machine.py:357 TICK: 1742 PC:   50 AR:   49 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 84, 101, 122, 56] 
+  DEBUG    root:machine.py:357 TICK: 1746 PC:   51 AR:   50 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 84, 101, 122] 
+  DEBUG    root:machine.py:357 TICK: 1752 PC:   52 AR:   51 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 84, 122, 101] 
+  DEBUG    root:machine.py:357 TICK: 1759 PC:   53 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 84] 
+  DEBUG    root:machine.py:357 TICK: 1763 PC:   54 AR:   53 Z_FLAG: 0  	{'opcode': 'push', 'arg': 45}    	DATA_STACK: [101, 85] 
+  DEBUG    root:machine.py:357 TICK: 1767 PC:   55 AR:   54 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 85, 45] 
+  DEBUG    root:machine.py:357 TICK: 1772 PC:   45 AR:   55 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 85] 
+  DEBUG    root:machine.py:357 TICK: 1776 PC:   46 AR:   45 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 85, 101] 
+  DEBUG    root:machine.py:357 TICK: 1780 PC:   47 AR:   46 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 85, 101, 85] 
+  DEBUG    root:machine.py:357 TICK: 1785 PC:   48 AR:   85 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 85, 101, 97] 
+  DEBUG    root:machine.py:357 TICK: 1789 PC:   49 AR:   48 Z_FLAG: 0  	{'opcode': 'push', 'arg': 56}    	DATA_STACK: [101, 85, 101, 97] 
+  DEBUG    root:machine.py:357 TICK: 1793 PC:   50 AR:   49 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 85, 101, 97, 56] 
+  DEBUG    root:machine.py:357 TICK: 1797 PC:   51 AR:   50 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 85, 101, 97] 
+  DEBUG    root:machine.py:357 TICK: 1803 PC:   52 AR:   51 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 85, 97, 101] 
+  DEBUG    root:machine.py:357 TICK: 1810 PC:   53 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 85] 
+  DEBUG    root:machine.py:357 TICK: 1814 PC:   54 AR:   53 Z_FLAG: 0  	{'opcode': 'push', 'arg': 45}    	DATA_STACK: [101, 86] 
+  DEBUG    root:machine.py:357 TICK: 1818 PC:   55 AR:   54 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 86, 45] 
+  DEBUG    root:machine.py:357 TICK: 1823 PC:   45 AR:   55 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 86] 
+  DEBUG    root:machine.py:357 TICK: 1827 PC:   46 AR:   45 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 86, 101] 
+  DEBUG    root:machine.py:357 TICK: 1831 PC:   47 AR:   46 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 86, 101, 86] 
+  DEBUG    root:machine.py:357 TICK: 1836 PC:   48 AR:   86 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 86, 101, 116] 
+  DEBUG    root:machine.py:357 TICK: 1840 PC:   49 AR:   48 Z_FLAG: 0  	{'opcode': 'push', 'arg': 56}    	DATA_STACK: [101, 86, 101, 116] 
+  DEBUG    root:machine.py:357 TICK: 1844 PC:   50 AR:   49 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 86, 101, 116, 56] 
+  DEBUG    root:machine.py:357 TICK: 1848 PC:   51 AR:   50 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 86, 101, 116] 
+  DEBUG    root:machine.py:357 TICK: 1854 PC:   52 AR:   51 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 86, 116, 101] 
+  DEBUG    root:machine.py:357 TICK: 1861 PC:   53 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 86] 
+  DEBUG    root:machine.py:357 TICK: 1865 PC:   54 AR:   53 Z_FLAG: 0  	{'opcode': 'push', 'arg': 45}    	DATA_STACK: [101, 87] 
+  DEBUG    root:machine.py:357 TICK: 1869 PC:   55 AR:   54 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 87, 45] 
+  DEBUG    root:machine.py:357 TICK: 1874 PC:   45 AR:   55 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 87] 
+  DEBUG    root:machine.py:357 TICK: 1878 PC:   46 AR:   45 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 87, 101] 
+  DEBUG    root:machine.py:357 TICK: 1882 PC:   47 AR:   46 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 87, 101, 87] 
+  DEBUG    root:machine.py:357 TICK: 1887 PC:   48 AR:   87 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 87, 101, 50] 
+  DEBUG    root:machine.py:357 TICK: 1891 PC:   49 AR:   48 Z_FLAG: 0  	{'opcode': 'push', 'arg': 56}    	DATA_STACK: [101, 87, 101, 50] 
+  DEBUG    root:machine.py:357 TICK: 1895 PC:   50 AR:   49 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 87, 101, 50, 56] 
+  DEBUG    root:machine.py:357 TICK: 1899 PC:   51 AR:   50 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 87, 101, 50] 
+  DEBUG    root:machine.py:357 TICK: 1905 PC:   52 AR:   51 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 87, 50, 101] 
+  DEBUG    root:machine.py:357 TICK: 1912 PC:   53 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 87] 
+  DEBUG    root:machine.py:357 TICK: 1916 PC:   54 AR:   53 Z_FLAG: 0  	{'opcode': 'push', 'arg': 45}    	DATA_STACK: [101, 88] 
+  DEBUG    root:machine.py:357 TICK: 1920 PC:   55 AR:   54 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 88, 45] 
+  DEBUG    root:machine.py:357 TICK: 1925 PC:   45 AR:   55 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 88] 
+  DEBUG    root:machine.py:357 TICK: 1929 PC:   46 AR:   45 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 88, 101] 
+  DEBUG    root:machine.py:357 TICK: 1933 PC:   47 AR:   46 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 88, 101, 88] 
+  DEBUG    root:machine.py:357 TICK: 1938 PC:   48 AR:   88 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 88, 101, 50] 
+  DEBUG    root:machine.py:357 TICK: 1942 PC:   49 AR:   48 Z_FLAG: 0  	{'opcode': 'push', 'arg': 56}    	DATA_STACK: [101, 88, 101, 50] 
+  DEBUG    root:machine.py:357 TICK: 1946 PC:   50 AR:   49 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 88, 101, 50, 56] 
+  DEBUG    root:machine.py:357 TICK: 1950 PC:   51 AR:   50 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 88, 101, 50] 
+  DEBUG    root:machine.py:357 TICK: 1956 PC:   52 AR:   51 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 88, 50, 101] 
+  DEBUG    root:machine.py:357 TICK: 1963 PC:   53 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 88] 
+  DEBUG    root:machine.py:357 TICK: 1967 PC:   54 AR:   53 Z_FLAG: 0  	{'opcode': 'push', 'arg': 45}    	DATA_STACK: [101, 89] 
+  DEBUG    root:machine.py:357 TICK: 1971 PC:   55 AR:   54 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 89, 45] 
+  DEBUG    root:machine.py:357 TICK: 1976 PC:   45 AR:   55 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 89] 
+  DEBUG    root:machine.py:357 TICK: 1980 PC:   46 AR:   45 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 89, 101] 
+  DEBUG    root:machine.py:357 TICK: 1984 PC:   47 AR:   46 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 89, 101, 89] 
+  DEBUG    root:machine.py:357 TICK: 1989 PC:   48 AR:   89 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 89, 101, 50] 
+  DEBUG    root:machine.py:357 TICK: 1993 PC:   49 AR:   48 Z_FLAG: 0  	{'opcode': 'push', 'arg': 56}    	DATA_STACK: [101, 89, 101, 50] 
+  DEBUG    root:machine.py:357 TICK: 1997 PC:   50 AR:   49 Z_FLAG: 0  	{'opcode': 'jz'}                 	DATA_STACK: [101, 89, 101, 50, 56] 
+  DEBUG    root:machine.py:357 TICK: 2001 PC:   51 AR:   50 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [101, 89, 101, 50] 
+  DEBUG    root:machine.py:357 TICK: 2007 PC:   52 AR:   51 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [101, 89, 50, 101] 
+  DEBUG    root:machine.py:357 TICK: 2014 PC:   53 AR:  101 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [101, 89] 
+  DEBUG    root:machine.py:357 TICK: 2018 PC:   54 AR:   53 Z_FLAG: 0  	{'opcode': 'push', 'arg': 45}    	DATA_STACK: [101, 90] 
+  DEBUG    root:machine.py:357 TICK: 2022 PC:   55 AR:   54 Z_FLAG: 0  	{'opcode': 'jump'}               	DATA_STACK: [101, 90, 45] 
+  DEBUG    root:machine.py:357 TICK: 2027 PC:   45 AR:   55 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 90] 
+  DEBUG    root:machine.py:357 TICK: 2031 PC:   46 AR:   45 Z_FLAG: 0  	{'opcode': 'over'}               	DATA_STACK: [101, 90, 101] 
+  DEBUG    root:machine.py:357 TICK: 2035 PC:   47 AR:   46 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [101, 90, 101, 90] 
+  DEBUG    root:machine.py:357 TICK: 2040 PC:   48 AR:   90 Z_FLAG: 0  	{'opcode': 'test'}               	DATA_STACK: [101, 90, 101, 0] 
+  DEBUG    root:machine.py:357 TICK: 2044 PC:   49 AR:   48 Z_FLAG: 1  	{'opcode': 'push', 'arg': 56}    	DATA_STACK: [101, 90, 101, 0] 
+  DEBUG    root:machine.py:357 TICK: 2048 PC:   50 AR:   49 Z_FLAG: 1  	{'opcode': 'jz'}                 	DATA_STACK: [101, 90, 101, 0, 56] 
+  DEBUG    root:machine.py:357 TICK: 2053 PC:   56 AR:   50 Z_FLAG: 0  	{'opcode': 'halt'}               	DATA_STACK: [101, 90, 101, 0] 
+  INFO     root:machine.py:365 output buffer: What`s your name?
+  Hello, Azat222
+out_stdout: |
+  ============================================================
+  output: What`s your name?
+  Hello, Azat222
+  instr_counter:  447 ticks:  2056
+out_code: |-
+  {
+    "start": 0,
+    "code": [
+      {
+        "opcode": "push",
+        "arg": 101
+      },
+      {
+        "opcode": "push",
+        "arg": 57
+      },
+      {
+        "opcode": "over"
+      },
+      {
+        "opcode": "over"
+      },
+      {
+        "opcode": "load"
+      },
+      {
+        "opcode": "test"
+      },
+      {
+        "opcode": "push",
+        "arg": 13
+      },
+      {
+        "opcode": "jz"
+      },
+      {
+        "opcode": "swap"
+      },
+      {
+        "opcode": "save"
+      },
+      {
+        "opcode": "inc"
+      },
+      {
+        "opcode": "push",
+        "arg": 2
+      },
+      {
+        "opcode": "jump"
+      },
+      {
+        "opcode": "swap"
+      },
+      {
+        "opcode": "save"
+      },
+      {
+        "opcode": "pop"
+      },
+      {
+        "opcode": "push",
+        "arg": 83
+      },
+      {
+        "opcode": "over"
+      },
+      {
+        "opcode": "load"
+      },
+      {
+        "opcode": "test"
+      },
+      {
+        "opcode": "push",
+        "arg": 27
+      },
+      {
+        "opcode": "jz"
+      },
+      {
+        "opcode": "over"
+      },
+      {
+        "opcode": "save"
+      },
+      {
+        "opcode": "inc"
+      },
+      {
+        "opcode": "push",
+        "arg": 17
+      },
+      {
+        "opcode": "jump"
+      },
+      {
+        "opcode": "pop"
+      },
+      {
+        "opcode": "pop"
+      },
+      {
+        "opcode": "push",
+        "arg": 75
+      },
+      {
+        "opcode": "over"
+      },
+      {
+        "opcode": "over"
+      },
+      {
+        "opcode": "load"
+      },
+      {
+        "opcode": "test"
+      },
+      {
+        "opcode": "push",
+        "arg": 41
+      },
+      {
+        "opcode": "jz"
+      },
+      {
+        "opcode": "swap"
+      },
+      {
+        "opcode": "save"
+      },
+      {
+        "opcode": "inc"
+      },
+      {
+        "opcode": "push",
+        "arg": 30
+      },
+      {
+        "opcode": "jump"
+      },
+      {
+        "opcode": "pop"
+      },
+      {
+        "opcode": "pop"
+      },
+      {
+        "opcode": "pop"
+      },
+      {
+        "opcode": "push",
+        "arg": 83
+      },
+      {
+        "opcode": "over"
+      },
+      {
+        "opcode": "over"
+      },
+      {
+        "opcode": "load"
+      },
+      {
+        "opcode": "test"
+      },
+      {
+        "opcode": "push",
+        "arg": 56
+      },
+      {
+        "opcode": "jz"
+      },
+      {
+        "opcode": "swap"
+      },
+      {
+        "opcode": "save"
+      },
+      {
+        "opcode": "inc"
+      },
+      {
+        "opcode": "push",
+        "arg": 45
+      },
+      {
+        "opcode": "jump"
+      },
+      {
+        "opcode": "halt"
+      },
+      {
+        "opcode": "word",
+        "arg": 87
+      },
+      {
+        "opcode": "word",
+        "arg": 104
+      },
+      {
+        "opcode": "word",
+        "arg": 97
+      },
+      {
+        "opcode": "word",
+        "arg": 116
+      },
+      {
+        "opcode": "word",
+        "arg": 96
+      },
+      {
+        "opcode": "word",
+        "arg": 115
+      },
+      {
+        "opcode": "word",
+        "arg": 32
+      },
+      {
+        "opcode": "word",
+        "arg": 121
+      },
+      {
+        "opcode": "word",
+        "arg": 111
+      },
+      {
+        "opcode": "word",
+        "arg": 117
+      },
+      {
+        "opcode": "word",
+        "arg": 114
+      },
+      {
+        "opcode": "word",
+        "arg": 32
+      },
+      {
+        "opcode": "word",
+        "arg": 110
+      },
+      {
+        "opcode": "word",
+        "arg": 97
+      },
+      {
+        "opcode": "word",
+        "arg": 109
+      },
+      {
+        "opcode": "word",
+        "arg": 101
+      },
+      {
+        "opcode": "word",
+        "arg": 63
+      },
+      {
+        "opcode": "word",
+        "arg": 0
+      },
+      {
+        "opcode": "word",
+        "arg": 72
+      },
+      {
+        "opcode": "word",
+        "arg": 101
+      },
+      {
+        "opcode": "word",
+        "arg": 108
+      },
+      {
+        "opcode": "word",
+        "arg": 108
+      },
+      {
+        "opcode": "word",
+        "arg": 111
+      },
+      {
+        "opcode": "word",
+        "arg": 44
+      },
+      {
+        "opcode": "word",
+        "arg": 32
+      },
+      {
+        "opcode": "word",
+        "arg": 0
+      },
+      {
+        "opcode": "word",
+        "arg": 0
+      }
+    ]
+  }

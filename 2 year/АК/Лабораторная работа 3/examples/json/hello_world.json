@@ -1,0 +1,101 @@
+{
+  "start": 14,
+  "code": [
+    {
+      "opcode": "word",
+      "arg": 72
+    },
+    {
+      "opcode": "word",
+      "arg": 101
+    },
+    {
+      "opcode": "word",
+      "arg": 108
+    },
+    {
+      "opcode": "word",
+      "arg": 108
+    },
+    {
+      "opcode": "word",
+      "arg": 111
+    },
+    {
+      "opcode": "word",
+      "arg": 44
+    },
+    {
+      "opcode": "word",
+      "arg": 32
+    },
+    {
+      "opcode": "word",
+      "arg": 119
+    },
+    {
+      "opcode": "word",
+      "arg": 111
+    },
+    {
+      "opcode": "word",
+      "arg": 114
+    },
+    {
+      "opcode": "word",
+      "arg": 108
+    },
+    {
+      "opcode": "word",
+      "arg": 100
+    },
+    {
+      "opcode": "word",
+      "arg": 33
+    },
+    {
+      "opcode": "word",
+      "arg": 0
+    },
+    {
+      "opcode": "push",
+      "arg": 0
+    },
+    {
+      "opcode": "dup"
+    },
+    {
+      "opcode": "load"
+    },
+    {
+      "opcode": "test"
+    },
+    {
+      "opcode": "push",
+      "arg": 25
+    },
+    {
+      "opcode": "jz"
+    },
+    {
+      "opcode": "push",
+      "arg": 101
+    },
+    {
+      "opcode": "save"
+    },
+    {
+      "opcode": "inc"
+    },
+    {
+      "opcode": "push",
+      "arg": 15
+    },
+    {
+      "opcode": "jump"
+    },
+    {
+      "opcode": "halt"
+    }
+  ]
+}

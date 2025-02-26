@@ -1,0 +1,84 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet id="1727822741826-1" author="Azat222">
+        <createTable tableName="coordinates">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="x" type="float"/>
+            <column name="y" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="location">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="x" type="float"/>
+            <column name="y" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="z" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+        <createTable tableName="person">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="eye_color" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hair_color" type="varchar(50)"/>
+            <column name="location_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_person_location" references="location(id)"/>
+            </column>
+            <column name="weight" type="double">
+                <constraints nullable="false" checkConstraint="weight > 0"/>
+            </column>
+            <column name="nationality" type="varchar(50)"/>
+        </createTable>
+        <createTable tableName="study_group">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="coordinates_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_study_group_coordinates" references="coordinates(id)"/>
+            </column>
+            <column name="creation_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="students_count" type="int">
+                <constraints nullable="false" checkConstraint="students_count > 0"/>
+            </column>
+            <column name="expelled_students" type="int">
+                <constraints nullable="false" checkConstraint="expelled_students > 0"/>
+            </column>
+            <column name="transferred_students" type="int">
+                <constraints nullable="false" checkConstraint="transferred_students > 0"/>
+            </column>
+            <column name="form_of_education" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="should_be_expelled" type="int"/>
+            <column name="semester" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="group_admin_id" type="int">
+                <constraints nullable="true" foreignKeyName="fk_study_group_person" references="person(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

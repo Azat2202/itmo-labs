@@ -1,0 +1,41 @@
+{
+  "start": 0,
+  "code": [
+    {
+      "opcode": "push",
+      "arg": 101
+    },
+    {
+      "opcode": "dup"
+    },
+    {
+      "opcode": "load"
+    },
+    {
+      "opcode": "test"
+    },
+    {
+      "opcode": "push",
+      "arg": 10
+    },
+    {
+      "opcode": "jz"
+    },
+    {
+      "opcode": "over"
+    },
+    {
+      "opcode": "save"
+    },
+    {
+      "opcode": "push",
+      "arg": 1
+    },
+    {
+      "opcode": "jump"
+    },
+    {
+      "opcode": "halt"
+    }
+  ]
+}

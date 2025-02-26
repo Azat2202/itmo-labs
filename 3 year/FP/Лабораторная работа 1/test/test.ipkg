@@ -1,0 +1,35 @@
+package FP_lab1_test
+version = 0.1.0
+authors = "Azat222"
+
+-- packages to add to search path
+depends = FP_lab1
+          , hedgehog
+
+-- main file (i.e. file to load at REPL)
+main = Main
+
+-- name of executable
+executable = "Main"
+-- opts =
+sourcedir = "src"
+-- builddir =
+-- outputdir =
+
+-- script to run before building
+-- prebuild =
+
+-- script to run after building
+-- postbuild =
+
+-- script to run after building, before installing
+-- preinstall =
+
+-- script to run after installing
+-- postinstall =
+
+-- script to run before cleaning
+-- preclean =
+
+-- script to run after cleaning
+-- postclean =

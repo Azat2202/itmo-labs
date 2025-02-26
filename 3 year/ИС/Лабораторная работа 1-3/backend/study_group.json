@@ -1,0 +1,31 @@
+{
+  "groups": [
+    {
+      "name": "file37",
+      "coordinates": {
+        "x": 0.1,
+        "y": 0.5
+      },
+      "studentsCount": 5,
+      "expelledStudents": 5,
+      "transferredStudents": 2,
+      "formOfEducation": "EVENING_CLASSES",
+      "shouldBeExpelled": 1,
+      "semester": "FIRST",
+      "groupAdmin": {
+        "name": "daryaFromFile",
+        "eyeColor": "RED",
+        "hairColor": "RED",
+        "location": {
+          "x": 0.1,
+          "y": 0.5,
+          "z": 0.5,
+          "name": "fileStorage"
+        },
+        "weight": 1,
+        "nationality": "FRANCE"
+      },
+      "isEditable": true
+    }
+  ]
+}

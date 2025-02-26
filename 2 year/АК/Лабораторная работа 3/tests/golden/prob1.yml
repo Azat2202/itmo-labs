@@ -1,0 +1,247 @@
+in_source: |-
+  number:
+          WORD    0x3E7   ; 999
+  _start:
+          PUSH    number  ; [number]
+          LOAD            ; [999]
+
+  count_3:
+          DUP             ; [999; 999]
+          PUSH    0x3     ; [999; 999; 0x3]
+          DIV             ; [999; 333]
+          DUP             ; [999; 333; 333]
+          INC             ; [999; 333; 334]
+          MUL             ; [999; 111222]
+          PUSH    0x2     ; [999; 111222; 2]
+          DIV             ; [999; 55611]
+          PUSH    0x3     ; [999; 55611; 0x3]
+          MUL             ; [999; 166833]
+          SWAP            ; [166833; 999]
+
+  count_5:
+          DUP             ; [166833; 999; 999]
+          PUSH    0x5     ; [166833; 999; 999; 0x5]
+          DIV             ; [166833; 999; 199]
+          DUP             ; [166833; 999; 199; 199]
+          INC             ; [166833; 999; 199; 200]
+          MUL             ; [166833; 999; 39800]
+          PUSH    0x2     ; [166833; 999; 39800; 2]
+          DIV             ; [166833; 999; 19900]
+          PUSH    0x5     ; [166833; 999; 19900; 0x5]
+          MUL             ; [166833; 999; 99500]
+          SWAP            ; [166833; 99500; 999]
+
+  count_15:
+          DUP             ; [166833; 99500; 999; 999]
+          PUSH    0xF     ; [166833; 99500; 999; 999; 0xF]
+          DIV             ; [166833; 99500; 999; 66]
+          DUP             ; [166833; 99500; 999; 66; 66]
+          INC             ; [166833; 99500; 999; 66; 67]
+          MUL             ; [166833; 99500; 999; 4422]
+          PUSH    0x2     ; [166833; 99500; 999; 4422; 2]
+          DIV             ; [166833; 99500; 999; 2211]
+          PUSH    0xF     ; [166833; 99500; 999; 2211; 0xF]
+          MUL             ; [166833; 99500; 999; 33165]
+          SWAP            ; [166833; 99500; 33165; 999]
+
+  compute_ans:
+          POP             ; [166833; 99500; 33165]
+          SUB             ; [166833; 66335]
+          ADD             ; [233168]
+          PUSH    0x65    ; [233168; 0x65]
+          SAVE
+          HALT
+in_stdin: |-
+  foo
+io_type: int
+out_log: |
+  DEBUG    root:machine.py:352 TICK:    0 PC:    1 AR:    0 Z_FLAG: 0  	{'opcode': 'push', 'arg': 0}     	DATA_STACK: [] 
+  DEBUG    root:machine.py:357 TICK:    4 PC:    2 AR:    1 Z_FLAG: 0  	{'opcode': 'load'}               	DATA_STACK: [0] 
+  DEBUG    root:machine.py:357 TICK:    9 PC:    3 AR:    0 Z_FLAG: 1  	{'opcode': 'dup'}                	DATA_STACK: [999] 
+  DEBUG    root:machine.py:357 TICK:   13 PC:    4 AR:    3 Z_FLAG: 0  	{'opcode': 'push', 'arg': 3}     	DATA_STACK: [999, 999] 
+  DEBUG    root:machine.py:357 TICK:   17 PC:    5 AR:    4 Z_FLAG: 0  	{'opcode': 'div'}                	DATA_STACK: [999, 999, 3] 
+  DEBUG    root:machine.py:357 TICK:   22 PC:    6 AR:    5 Z_FLAG: 0  	{'opcode': 'dup'}                	DATA_STACK: [999, 333] 
+  DEBUG    root:machine.py:357 TICK:   26 PC:    7 AR:    6 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [999, 333, 333] 
+  DEBUG    root:machine.py:357 TICK:   30 PC:    8 AR:    7 Z_FLAG: 0  	{'opcode': 'mul'}                	DATA_STACK: [999, 333, 334] 
+  DEBUG    root:machine.py:357 TICK:   35 PC:    9 AR:    8 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [999, 111222] 
+  DEBUG    root:machine.py:357 TICK:   39 PC:   10 AR:    9 Z_FLAG: 0  	{'opcode': 'div'}                	DATA_STACK: [999, 111222, 2] 
+  DEBUG    root:machine.py:357 TICK:   44 PC:   11 AR:   10 Z_FLAG: 0  	{'opcode': 'push', 'arg': 3}     	DATA_STACK: [999, 55611] 
+  DEBUG    root:machine.py:357 TICK:   48 PC:   12 AR:   11 Z_FLAG: 0  	{'opcode': 'mul'}                	DATA_STACK: [999, 55611, 3] 
+  DEBUG    root:machine.py:357 TICK:   53 PC:   13 AR:   12 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [999, 166833] 
+  DEBUG    root:machine.py:357 TICK:   59 PC:   14 AR:   13 Z_FLAG: 0  	{'opcode': 'dup'}                	DATA_STACK: [166833, 999] 
+  DEBUG    root:machine.py:357 TICK:   63 PC:   15 AR:   14 Z_FLAG: 0  	{'opcode': 'push', 'arg': 5}     	DATA_STACK: [166833, 999, 999] 
+  DEBUG    root:machine.py:357 TICK:   67 PC:   16 AR:   15 Z_FLAG: 0  	{'opcode': 'div'}                	DATA_STACK: [166833, 999, 999, 5] 
+  DEBUG    root:machine.py:357 TICK:   72 PC:   17 AR:   16 Z_FLAG: 0  	{'opcode': 'dup'}                	DATA_STACK: [166833, 999, 199] 
+  DEBUG    root:machine.py:357 TICK:   76 PC:   18 AR:   17 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [166833, 999, 199, 199] 
+  DEBUG    root:machine.py:357 TICK:   80 PC:   19 AR:   18 Z_FLAG: 0  	{'opcode': 'mul'}                	DATA_STACK: [166833, 999, 199, 200] 
+  DEBUG    root:machine.py:357 TICK:   85 PC:   20 AR:   19 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [166833, 999, 39800] 
+  DEBUG    root:machine.py:357 TICK:   89 PC:   21 AR:   20 Z_FLAG: 0  	{'opcode': 'div'}                	DATA_STACK: [166833, 999, 39800, 2] 
+  DEBUG    root:machine.py:357 TICK:   94 PC:   22 AR:   21 Z_FLAG: 0  	{'opcode': 'push', 'arg': 5}     	DATA_STACK: [166833, 999, 19900] 
+  DEBUG    root:machine.py:357 TICK:   98 PC:   23 AR:   22 Z_FLAG: 0  	{'opcode': 'mul'}                	DATA_STACK: [166833, 999, 19900, 5] 
+  DEBUG    root:machine.py:357 TICK:  103 PC:   24 AR:   23 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [166833, 999, 99500] 
+  DEBUG    root:machine.py:357 TICK:  109 PC:   25 AR:   24 Z_FLAG: 0  	{'opcode': 'dup'}                	DATA_STACK: [166833, 99500, 999] 
+  DEBUG    root:machine.py:357 TICK:  113 PC:   26 AR:   25 Z_FLAG: 0  	{'opcode': 'push', 'arg': 15}    	DATA_STACK: [166833, 99500, 999, 999] 
+  DEBUG    root:machine.py:357 TICK:  117 PC:   27 AR:   26 Z_FLAG: 0  	{'opcode': 'div'}                	DATA_STACK: [166833, 99500, 999, 999, 15] 
+  DEBUG    root:machine.py:357 TICK:  122 PC:   28 AR:   27 Z_FLAG: 0  	{'opcode': 'dup'}                	DATA_STACK: [166833, 99500, 999, 66] 
+  DEBUG    root:machine.py:357 TICK:  126 PC:   29 AR:   28 Z_FLAG: 0  	{'opcode': 'inc'}                	DATA_STACK: [166833, 99500, 999, 66, 66] 
+  DEBUG    root:machine.py:357 TICK:  130 PC:   30 AR:   29 Z_FLAG: 0  	{'opcode': 'mul'}                	DATA_STACK: [166833, 99500, 999, 66, 67] 
+  DEBUG    root:machine.py:357 TICK:  135 PC:   31 AR:   30 Z_FLAG: 0  	{'opcode': 'push', 'arg': 2}     	DATA_STACK: [166833, 99500, 999, 4422] 
+  DEBUG    root:machine.py:357 TICK:  139 PC:   32 AR:   31 Z_FLAG: 0  	{'opcode': 'div'}                	DATA_STACK: [166833, 99500, 999, 4422, 2] 
+  DEBUG    root:machine.py:357 TICK:  144 PC:   33 AR:   32 Z_FLAG: 0  	{'opcode': 'push', 'arg': 15}    	DATA_STACK: [166833, 99500, 999, 2211] 
+  DEBUG    root:machine.py:357 TICK:  148 PC:   34 AR:   33 Z_FLAG: 0  	{'opcode': 'mul'}                	DATA_STACK: [166833, 99500, 999, 2211, 15] 
+  DEBUG    root:machine.py:357 TICK:  153 PC:   35 AR:   34 Z_FLAG: 0  	{'opcode': 'swap'}               	DATA_STACK: [166833, 99500, 999, 33165] 
+  DEBUG    root:machine.py:357 TICK:  159 PC:   36 AR:   35 Z_FLAG: 0  	{'opcode': 'pop'}                	DATA_STACK: [166833, 99500, 33165, 999] 
+  DEBUG    root:machine.py:357 TICK:  163 PC:   37 AR:   36 Z_FLAG: 0  	{'opcode': 'sub'}                	DATA_STACK: [166833, 99500, 33165] 
+  DEBUG    root:machine.py:357 TICK:  168 PC:   38 AR:   37 Z_FLAG: 0  	{'opcode': 'add'}                	DATA_STACK: [166833, 66335] 
+  DEBUG    root:machine.py:357 TICK:  173 PC:   39 AR:   38 Z_FLAG: 0  	{'opcode': 'push', 'arg': 101}   	DATA_STACK: [233168] 
+  DEBUG    root:machine.py:357 TICK:  177 PC:   40 AR:   39 Z_FLAG: 0  	{'opcode': 'save'}               	DATA_STACK: [233168, 101] 
+  DEBUG    root:machine.py:357 TICK:  184 PC:   41 AR:  101 Z_FLAG: 0  	{'opcode': 'halt'}               	DATA_STACK: [] 
+  INFO     root:machine.py:365 output buffer: 233168
+out_stdout: |
+  ============================================================
+  output: 233168
+  instr_counter:  40 ticks:  187
+out_code: |-
+  {
+    "start": 1,
+    "code": [
+      {
+        "opcode": "word",
+        "arg": 999
+      },
+      {
+        "opcode": "push",
+        "arg": 0
+      },
+      {
+        "opcode": "load"
+      },
+      {
+        "opcode": "dup"
+      },
+      {
+        "opcode": "push",
+        "arg": 3
+      },
+      {
+        "opcode": "div"
+      },
+      {
+        "opcode": "dup"
+      },
+      {
+        "opcode": "inc"
+      },
+      {
+        "opcode": "mul"
+      },
+      {
+        "opcode": "push",
+        "arg": 2
+      },
+      {
+        "opcode": "div"
+      },
+      {
+        "opcode": "push",
+        "arg": 3
+      },
+      {
+        "opcode": "mul"
+      },
+      {
+        "opcode": "swap"
+      },
+      {
+        "opcode": "dup"
+      },
+      {
+        "opcode": "push",
+        "arg": 5
+      },
+      {
+        "opcode": "div"
+      },
+      {
+        "opcode": "dup"
+      },
+      {
+        "opcode": "inc"
+      },
+      {
+        "opcode": "mul"
+      },
+      {
+        "opcode": "push",
+        "arg": 2
+      },
+      {
+        "opcode": "div"
+      },
+      {
+        "opcode": "push",
+        "arg": 5
+      },
+      {
+        "opcode": "mul"
+      },
+      {
+        "opcode": "swap"
+      },
+      {
+        "opcode": "dup"
+      },
+      {
+        "opcode": "push",
+        "arg": 15
+      },
+      {
+        "opcode": "div"
+      },
+      {
+        "opcode": "dup"
+      },
+      {
+        "opcode": "inc"
+      },
+      {
+        "opcode": "mul"
+      },
+      {
+        "opcode": "push",
+        "arg": 2
+      },
+      {
+        "opcode": "div"
+      },
+      {
+        "opcode": "push",
+        "arg": 15
+      },
+      {
+        "opcode": "mul"
+      },
+      {
+        "opcode": "swap"
+      },
+      {
+        "opcode": "pop"
+      },
+      {
+        "opcode": "sub"
+      },
+      {
+        "opcode": "add"
+      },
+      {
+        "opcode": "push",
+        "arg": 101
+      },
+      {
+        "opcode": "save"
+      },
+      {
+        "opcode": "halt"
+      }
+    ]
+  }

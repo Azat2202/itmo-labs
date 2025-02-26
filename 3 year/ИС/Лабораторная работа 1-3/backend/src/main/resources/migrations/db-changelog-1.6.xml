@@ -1,0 +1,27 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="5" author="azat222">
+        <createTable tableName="feeds">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="creation_date" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="feed_url" type="varchar(255)"/>
+            <column name="batch_size" type="int"/>
+            <column name="is_successful" type="bool"/>
+            <column name="user_id" type="int">
+                <constraints nullable="true" foreignKeyName="fk_object_feeds_user" references="users(id)"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="feeds"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

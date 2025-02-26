@@ -1,0 +1,297 @@
+{
+  "start": 0,
+  "code": [
+    {
+      "opcode": "push",
+      "arg": 101
+    },
+    {
+      "opcode": "push",
+      "arg": 57
+    },
+    {
+      "opcode": "over"
+    },
+    {
+      "opcode": "over"
+    },
+    {
+      "opcode": "load"
+    },
+    {
+      "opcode": "test"
+    },
+    {
+      "opcode": "push",
+      "arg": 13
+    },
+    {
+      "opcode": "jz"
+    },
+    {
+      "opcode": "swap"
+    },
+    {
+      "opcode": "save"
+    },
+    {
+      "opcode": "inc"
+    },
+    {
+      "opcode": "push",
+      "arg": 2
+    },
+    {
+      "opcode": "jump"
+    },
+    {
+      "opcode": "swap"
+    },
+    {
+      "opcode": "save"
+    },
+    {
+      "opcode": "pop"
+    },
+    {
+      "opcode": "push",
+      "arg": 83
+    },
+    {
+      "opcode": "over"
+    },
+    {
+      "opcode": "load"
+    },
+    {
+      "opcode": "test"
+    },
+    {
+      "opcode": "push",
+      "arg": 27
+    },
+    {
+      "opcode": "jz"
+    },
+    {
+      "opcode": "over"
+    },
+    {
+      "opcode": "save"
+    },
+    {
+      "opcode": "inc"
+    },
+    {
+      "opcode": "push",
+      "arg": 17
+    },
+    {
+      "opcode": "jump"
+    },
+    {
+      "opcode": "pop"
+    },
+    {
+      "opcode": "pop"
+    },
+    {
+      "opcode": "push",
+      "arg": 75
+    },
+    {
+      "opcode": "over"
+    },
+    {
+      "opcode": "over"
+    },
+    {
+      "opcode": "load"
+    },
+    {
+      "opcode": "test"
+    },
+    {
+      "opcode": "push",
+      "arg": 41
+    },
+    {
+      "opcode": "jz"
+    },
+    {
+      "opcode": "swap"
+    },
+    {
+      "opcode": "save"
+    },
+    {
+      "opcode": "inc"
+    },
+    {
+      "opcode": "push",
+      "arg": 30
+    },
+    {
+      "opcode": "jump"
+    },
+    {
+      "opcode": "pop"
+    },
+    {
+      "opcode": "pop"
+    },
+    {
+      "opcode": "pop"
+    },
+    {
+      "opcode": "push",
+      "arg": 83
+    },
+    {
+      "opcode": "over"
+    },
+    {
+      "opcode": "over"
+    },
+    {
+      "opcode": "load"
+    },
+    {
+      "opcode": "test"
+    },
+    {
+      "opcode": "push",
+      "arg": 56
+    },
+    {
+      "opcode": "jz"
+    },
+    {
+      "opcode": "swap"
+    },
+    {
+      "opcode": "save"
+    },
+    {
+      "opcode": "inc"
+    },
+    {
+      "opcode": "push",
+      "arg": 45
+    },
+    {
+      "opcode": "jump"
+    },
+    {
+      "opcode": "halt"
+    },
+    {
+      "opcode": "word",
+      "arg": 87
+    },
+    {
+      "opcode": "word",
+      "arg": 104
+    },
+    {
+      "opcode": "word",
+      "arg": 97
+    },
+    {
+      "opcode": "word",
+      "arg": 116
+    },
+    {
+      "opcode": "word",
+      "arg": 96
+    },
+    {
+      "opcode": "word",
+      "arg": 115
+    },
+    {
+      "opcode": "word",
+      "arg": 32
+    },
+    {
+      "opcode": "word",
+      "arg": 121
+    },
+    {
+      "opcode": "word",
+      "arg": 111
+    },
+    {
+      "opcode": "word",
+      "arg": 117
+    },
+    {
+      "opcode": "word",
+      "arg": 114
+    },
+    {
+      "opcode": "word",
+      "arg": 32
+    },
+    {
+      "opcode": "word",
+      "arg": 110
+    },
+    {
+      "opcode": "word",
+      "arg": 97
+    },
+    {
+      "opcode": "word",
+      "arg": 109
+    },
+    {
+      "opcode": "word",
+      "arg": 101
+    },
+    {
+      "opcode": "word",
+      "arg": 63
+    },
+    {
+      "opcode": "word",
+      "arg": 0
+    },
+    {
+      "opcode": "word",
+      "arg": 72
+    },
+    {
+      "opcode": "word",
+      "arg": 101
+    },
+    {
+      "opcode": "word",
+      "arg": 108
+    },
+    {
+      "opcode": "word",
+      "arg": 108
+    },
+    {
+      "opcode": "word",
+      "arg": 111
+    },
+    {
+      "opcode": "word",
+      "arg": 44
+    },
+    {
+      "opcode": "word",
+      "arg": 32
+    },
+    {
+      "opcode": "word",
+      "arg": 0
+    },
+    {
+      "opcode": "word",
+      "arg": "0"
+    }
+  ]
+}

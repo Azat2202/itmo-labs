@@ -1,0 +1,34 @@
+package FP_lab2
+version = 0.1.0
+authors = "Azat222"
+modules = HashMap
+        , Utils.Hashable
+        , DictElem
+
+--main file (i.e. file to load at REPL)
+main = HashMap
+
+-- name of executable
+-- executable =
+-- opts =
+sourcedir = "src"
+-- builddir =
+-- outputdir =
+
+-- script to run before building
+-- prebuild =
+
+-- script to run after building
+-- postbuild =
+
+-- script to run after building, before installing
+-- preinstall =
+
+-- script to run after installing
+-- postinstall =
+
+-- script to run before cleaning
+-- preclean =
+
+-- script to run after cleaning
+-- postclean =

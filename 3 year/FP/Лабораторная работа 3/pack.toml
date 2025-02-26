@@ -1,0 +1,10 @@
+[custom.all.FP_lab3]
+type = "local"
+path = "."
+ipkg = "FP_lab3.ipkg"
+test = "test/test.ipkg"
+
+[custom.all.FP_lab3-test]
+type = "local"
+path = "test"
+ipkg = "test.ipkg"

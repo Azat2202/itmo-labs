@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9ae1853d-bdc7-47a9-9e02-b0b035ae7008" name="Changes" comment="created all commands">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.github/workflows/test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/IsLab1Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/IsLab1Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/configurations/JwtConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/configurations/JwtConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/configurations/Mappers.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/configurations/Mappers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/configurations/OpenApiConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/configurations/OpenApiConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/controllers/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/controllers/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/controllers/CommandsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/controllers/CommandsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/controllers/CoordinatesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/controllers/CoordinatesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/controllers/LocationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/controllers/LocationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/controllers/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/controllers/PersonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/controllers/StudyGroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/controllers/StudyGroupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/controllers/exceptionHandlers/DefaultUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/controllers/exceptionHandlers/DefaultUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/controllers/exceptionHandlers/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/controllers/exceptionHandlers/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/dto/authentication/JwtDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/dto/authentication/JwtDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/dto/authentication/RegisterUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/dto/authentication/RegisterUserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/dto/collection/CoordinatesRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/dto/collection/CoordinatesRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/dto/collection/LocationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/dto/collection/LocationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/dto/collection/PersonRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/dto/collection/PersonRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/dto/collection/StudyGroupRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/dto/collection/StudyGroupRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/dto/collection/UpdateStudyGroupRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/dto/collection/UpdateStudyGroupRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/exceptions/CoordinatesNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/exceptions/CoordinatesNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/exceptions/LocationNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/exceptions/LocationNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/exceptions/ObjectDontBelongToUserException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/exceptions/ObjectDontBelongToUserException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/exceptions/ObjectIsNotEditable.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/exceptions/ObjectIsNotEditable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/exceptions/PersonNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/exceptions/PersonNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/exceptions/ProposalAlreadyCreated.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/exceptions/ProposalAlreadyCreated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/exceptions/StudyGroupNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/exceptions/StudyGroupNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/exceptions/StudyGroupRuntimeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/exceptions/StudyGroupRuntimeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/exceptions/UserNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/exceptions/UserNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/messages/adminPanel/AdminProposalResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/messages/adminPanel/AdminProposalResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/messages/authentication/JwtResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/messages/authentication/JwtResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/messages/authentication/UserResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/messages/authentication/UserResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/messages/collection/CoordinatesResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/messages/collection/CoordinatesResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/messages/collection/LocationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/messages/collection/LocationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/messages/collection/PersonResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/messages/collection/PersonResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/messages/collection/StudyGroupResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/messages/collection/StudyGroupResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/models/AdminProposal.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/models/AdminProposal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/models/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/models/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/models/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/models/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/models/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/models/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/models/StudyGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/models/StudyGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/models/enums/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/models/enums/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/models/enums/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/models/enums/Country.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/models/enums/FormOfEducation.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/models/enums/FormOfEducation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/models/enums/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/models/enums/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/models/enums/Semester.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/models/enums/Semester.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/repositories/AdminProposalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/repositories/AdminProposalRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/repositories/CoordinatesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/repositories/CoordinatesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/repositories/LocationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/repositories/LocationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/repositories/PersonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/repositories/PersonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/repositories/StudyGroupRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/repositories/StudyGroupRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/security/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/security/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/security/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/services/AdminProposalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/services/AdminProposalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/services/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/services/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/services/CommandsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/services/CommandsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/services/CoordinatesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/services/CoordinatesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/services/JwtUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/services/JwtUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/services/LocationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/services/LocationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/services/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/services/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/services/StudyGroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/services/StudyGroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/ifmo/is_lab1/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/se/ifmo/is_lab1/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/migrations/db-changelog-1.0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/migrations/db-changelog-1.0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/migrations/db-changelog-1.1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/migrations/db-changelog-1.1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/migrations/db-changelog-1.2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/migrations/db-changelog-1.2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/migrations/db-changelog-1.3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/migrations/db-changelog-1.3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/migrations/db-changelog-1.4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/migrations/db-changelog-1.4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/migrations/db-changelog-master.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/migrations/db-changelog-master.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/se/ifmo/is_lab1/ApplicationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/se/ifmo/is_lab1/ApplicationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/se/ifmo/is_lab1/OpenApiGenerateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/se/ifmo/is_lab1/OpenApiGenerateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="package-info" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Azat2202-ci-1" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Azat2202&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Azat2202/IS_lab1.git&quot;,
+    &quot;accountId&quot;: &quot;9f9ed502-2180-48b1-9ae7-b44dec91c1e3&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2mqwV6OoCUtWlNO1EcLaRFbAqap" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.db-keycloak: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.keycloak: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #5.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.server.jar.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ApplicationTest.contextLoads.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ApplicationTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.OpenApiGenerateTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.OpenApiGenerateTest.saveApiDocs.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.OpenApiGenerateTest.saveOpenApiSpecToFile.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.IS_lab1 [org.springdoc:springdoc-openapi-maven-plugin:1.4:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.IS_lab1 [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.IS_lab1 [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.IS_lab1 [verify].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.IsLab1Application.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/azat2/IdeaProjects/IS_lab1/src/main/resources/migrations&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\azat2\IdeaProjects\IS_lab1\src\main\resources\migrations" />
+      <recent name="C:\Users\azat2\IdeaProjects\IS_lab1\src\test\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\azat2\IdeaProjects\IS_lab1\src\main\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="se.ifmo.is_lab1" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Docker.Dockerfile">
+    <configuration name="ApplicationTest.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IS_lab1" />
+      <option name="PACKAGE_NAME" value="se.ifmo.is_lab1" />
+      <option name="MAIN_CLASS_NAME" value="se.ifmo.is_lab1.ApplicationTest" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OpenApiGenerateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IS_lab1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="se.ifmo.is_lab1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="se.ifmo.is_lab1" />
+      <option name="MAIN_CLASS_NAME" value="se.ifmo.is_lab1.OpenApiGenerateTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OpenApiGenerateTest.saveApiDocs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IS_lab1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="se.ifmo.is_lab1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="se.ifmo.is_lab1" />
+      <option name="MAIN_CLASS_NAME" value="se.ifmo.is_lab1.OpenApiGenerateTest" />
+      <option name="METHOD_NAME" value="saveApiDocs" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OpenApiGenerateTest.saveOpenApiSpecToFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IS_lab1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="se.ifmo.is_lab1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="se.ifmo.is_lab1" />
+      <option name="MAIN_CLASS_NAME" value="se.ifmo.is_lab1.OpenApiGenerateTest" />
+      <option name="METHOD_NAME" value="saveOpenApiSpecToFile" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IsLab1Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DATABASE_HOST" value="localhost" />
+        <env name="DATABASE_PORT" value="5433" />
+      </envs>
+      <module name="IS_lab1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="se.ifmo.is_lab1.IsLab1Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Docker.Dockerfile" />
+      <item itemvalue="JUnit.ApplicationTest.contextLoads" />
+      <item itemvalue="JUnit.OpenApiGenerateTest" />
+      <item itemvalue="JUnit.OpenApiGenerateTest.saveApiDocs" />
+      <item itemvalue="JUnit.OpenApiGenerateTest.saveOpenApiSpecToFile" />
+      <item itemvalue="Spring Boot.IsLab1Application" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.Dockerfile" />
+        <item itemvalue="JUnit.OpenApiGenerateTest.saveOpenApiSpecToFile" />
+        <item itemvalue="JUnit.OpenApiGenerateTest.saveApiDocs" />
+        <item itemvalue="JUnit.OpenApiGenerateTest" />
+        <item itemvalue="JUnit.ApplicationTest.contextLoads" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9ae1853d-bdc7-47a9-9e02-b0b035ae7008" name="Changes" comment="" />
+      <created>1727817437178</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727817437178</updated>
+      <workItem from="1727817438192" duration="7780000" />
+      <workItem from="1727873983667" duration="35026000" />
+      <workItem from="1727963268080" duration="4846000" />
+      <workItem from="1727968418162" duration="7908000" />
+      <workItem from="1727977056575" duration="20140000" />
+      <workItem from="1728064107846" duration="2441000" />
+      <workItem from="1728073346357" duration="985000" />
+      <workItem from="1728074740390" duration="119000" />
+      <workItem from="1728074868923" duration="6000" />
+    </task>
+    <task id="LOCAL-00001" summary="add models and migrations">
+      <option name="closed" value="true" />
+      <created>1727824318836</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1727824318836</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add authentication">
+      <option name="closed" value="true" />
+      <created>1727897933863</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1727897933863</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add studygroup api">
+      <option name="closed" value="true" />
+      <created>1727909417514</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1727909417514</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add studygroup api">
+      <option name="closed" value="true" />
+      <created>1727909482970</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1727909482970</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add Person, Coordinates, Location api">
+      <option name="closed" value="true" />
+      <created>1727950615018</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1727950615018</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix UpdateStudyGroupRequest">
+      <option name="closed" value="true" />
+      <created>1727966547263</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1727966547263</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add pagination">
+      <option name="closed" value="true" />
+      <created>1727971755980</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1727971755980</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add filtration and fix userresponse">
+      <option name="closed" value="true" />
+      <created>1727977604677</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1727977604677</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add filtration and fix userresponse">
+      <option name="closed" value="true" />
+      <created>1727977620784</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1727977620784</updated>
+    </task>
+    <task id="LOCAL-00010" summary="add cascade deletion">
+      <option name="closed" value="true" />
+      <created>1727979912405</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1727979912405</updated>
+    </task>
+    <task id="LOCAL-00011" summary="admin proposals for default users">
+      <option name="closed" value="true" />
+      <created>1727995236749</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1727995236749</updated>
+    </task>
+    <task id="LOCAL-00012" summary="admin proposals for default users">
+      <option name="closed" value="true" />
+      <created>1727995767330</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1727995767330</updated>
+    </task>
+    <task id="LOCAL-00013" summary="safe deletion">
+      <option name="closed" value="true" />
+      <created>1727998272664</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1727998272664</updated>
+    </task>
+    <task id="LOCAL-00014" summary="edit restrictions">
+      <option name="closed" value="true" />
+      <created>1727998672050</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1727998672050</updated>
+    </task>
+    <task id="LOCAL-00015" summary="swagger documentation">
+      <option name="closed" value="true" />
+      <created>1728000029514</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1728000029514</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add generating doc during test">
+      <option name="closed" value="true" />
+      <created>1728045343391</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1728045343391</updated>
+    </task>
+    <task id="LOCAL-00017" summary="created all commands">
+      <option name="closed" value="true" />
+      <created>1728066013722</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1728066013722</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add models and migrations" />
+    <MESSAGE value="add authentication" />
+    <MESSAGE value="add studygroup api" />
+    <MESSAGE value="add Person, Coordinates, Location api" />
+    <MESSAGE value="fix UpdateStudyGroupRequest" />
+    <MESSAGE value="add pagination" />
+    <MESSAGE value="add filtration and fix userresponse" />
+    <MESSAGE value="add cascade deletion" />
+    <MESSAGE value="admin proposals for default users" />
+    <MESSAGE value="safe deletion" />
+    <MESSAGE value="edit restrictions" />
+    <MESSAGE value="swagger documentation" />
+    <MESSAGE value="add generating doc during test" />
+    <MESSAGE value="created all commands" />
+    <option name="LAST_COMMIT_MESSAGE" value="created all commands" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

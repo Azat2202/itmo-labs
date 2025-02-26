@@ -1,0 +1,8 @@
+{
+  "schemaFile": "../backend/open-api.json",
+  "apiFile": "./src/store/baseApi.ts",
+  "apiImport": "api",
+  "outputFile": "./src/store/types.generated.ts",
+  "exportName": "studyGroupApi",
+  "hooks": true
+}

@@ -1,0 +1,28 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet author="azat222" id="5">
+        <dropNotNullConstraint tableName="characters" columnName="body_type_id"/>
+        <dropNotNullConstraint tableName="characters" columnName="health_id"/>
+        <dropNotNullConstraint tableName="characters" columnName="trait_id"/>
+        <dropNotNullConstraint tableName="characters" columnName="hobby_id"/>
+        <dropNotNullConstraint tableName="characters" columnName="profession_id"/>
+        <dropNotNullConstraint tableName="characters" columnName="phobia_id"/>
+        <dropNotNullConstraint tableName="characters" columnName="equipment_id"/>
+        <dropNotNullConstraint tableName="characters" columnName="bag_id"/>
+        <addColumn tableName="room">
+            <column name="admin" type="int">
+                <constraints nullable="false" foreignKeyName="fk_room_user" references="users(id)"/>
+            </column>
+            <column name="is_started" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_closed" type="bool">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,33 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet author="azat222" id="6">
+        <createTable tableName="polls">
+            <column name="id" type="serial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="room_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_polls_room" references="room(id)"/>
+            </column>
+            <column name="round_number" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_open" type="bool">
+                <constraints nullable="false"/>
+            </column>
+            <column name="target_to_kick" type="int">
+                <constraints foreignKeyName="fk_polls_characters" references="characters(id)"/>
+            </column>
+        </createTable>
+        <renameColumn tableName="votes" oldColumnName="round_number" newColumnName="poll_id"/>
+        <addForeignKeyConstraint baseTableName="votes" baseColumnNames="poll_id" constraintName="fk_votes_polls"
+                                 referencedTableName="polls"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

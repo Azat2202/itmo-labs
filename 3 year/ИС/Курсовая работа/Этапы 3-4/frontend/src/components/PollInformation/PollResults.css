@@ -1,0 +1,23 @@
+.results-enter {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: 1000ms ease-out;
+}
+
+.results-enter-active {
+    max-height: 500px; /* Adjust as needed */
+    opacity: 1;
+}
+
+.results-exit {
+    max-height: 500px; /* Adjust as needed */
+    opacity: 1;
+    overflow: hidden;
+    transition: max-height 1000ms ease-in;
+}
+
+.results-exit-active {
+    max-height: 0;
+    opacity: 0;
+}

@@ -1,0 +1,65 @@
+services:
+  db-coursework:
+    image: postgres:15
+    container_name: db-coursework
+    environment:
+      - POSTGRES_DB=study
+      - POSTGRES_USER=study
+      - POSTGRES_PASSWORD=study
+    ports:
+      - 5433:5432
+    volumes:
+      - db-coursework-data:/var/lib/postgresql/data
+    networks:
+      - backend
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U study -d study" ]
+      interval: 5s
+      timeout: 1s
+      retries: 10
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    depends_on:
+      db-coursework:
+        condition: service_healthy
+    environment:
+      - DATABASE_HOST=db-coursework
+      - DATABASE_PORT=5432
+    ports:
+      - 8080:8080
+      - 9090:9090
+    networks:
+      - backend
+  
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.1
+    container_name: keycloak
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: db-coursework
+      DB_DATABASE: study
+      DB_USER: study
+      DB_PASSWORD: study
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command:
+      - start-dev
+      - --import-realm
+    ports:
+      - "8484:8080"
+    depends_on:
+      - db-coursework
+    networks:
+      - backend
+    volumes:
+    - keycloak:/opt/keycloak/data/import/
+
+networks:
+  backend:
+
+volumes:
+  db-coursework-data:
+  keycloak:

@@ -1,6 +1,6 @@
-Тесты 2023:
-
 [Тесты 2021-2022](https://github.com/RedGry/ITMO/tree/master/Computer%20architecture)
+
+Тесты 2023:
 
 <details><summary>Лекция 1</summary>
 Что бы пройти курс вам необходимо (минимально):

@@ -86,22 +86,25 @@ int main(int argc, char *argv[])
     return result;
 }
 
-void setup_pipes(ProcessContext *ctx)
-{
-    for (int i = 0; i < ctx->num_processes; i++)
-    {
-        for (int j = 0; j < ctx->num_processes; j++)
-        {
-            if (i != j)
-            {
-                if (pipe(ctx->pipes[i][j]) == -1)
-                {
+void setup_pipes(ProcessContext* ctx) {
+    FILE* pipes_log_f = fopen(pipes_log, "w");
+    if (!pipes_log_f) {
+        perror("fopen pipes.log");
+        exit(1);
+    }
+
+    for (int i = 0; i < ctx->num_processes; i++) {
+        for (int j = 0; j < ctx->num_processes; j++) {
+            if (i != j) {
+                if (pipe(ctx->pipes[i][j]) == -1) {
                     perror("pipe");
                     exit(1);
                 }
+                fprintf(pipes_log_f, "Pipe from %d to %d: read_fd=%d, write_fd=%d\n", i, j, ctx->pipes[i][j][0], ctx->pipes[i][j][1]);
             }
         }
     }
+    fclose(pipes_log_f);
 }
 
 void close_unused_pipes(ProcessContext *ctx)

@@ -1,0 +1,49 @@
+version: "3.9"
+
+networks:
+  factory-net:
+    driver: bridge
+
+services:
+  mqtt-broker:
+    image: eclipse-mosquitto:2.0
+    container_name: mqtt-broker
+    networks:
+      - factory-net
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - fog_volume:/data
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    restart: unless-stopped
+
+  fog-node:
+    image: nodered/node-red:3.1.2
+    container_name: fog-node
+    networks:
+      - factory-net
+    ports:
+      - "1880:1880"
+    restart: unless-stopped
+
+  temp-sensor:
+    build:
+      context: .
+      dockerfile: temp-sensor.Dockerfile
+    container_name: temp-sensor
+    networks:
+      - factory-net
+    restart: unless-stopped
+
+  cloud-alert:
+    build:
+      context: .
+      dockerfile: alert.Dockerfile
+    container_name: cloud-alert
+    networks:
+      - factory-net
+    restart: unless-stopped
+
+volumes:
+  fog_volume:

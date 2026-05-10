@@ -1,0 +1,95 @@
+temporal-docs:
+  type: web
+  title: "Durable Execution Solutions | Temporal Documentation"
+  url:
+    value: https://docs.temporal.io/
+    date: 2026-05-10
+  publisher: Temporal Technologies
+
+temporal-java-sdk:
+  type: web
+  title: "Java SDK Developer Guide | Temporal Platform Documentation"
+  url:
+    value: https://docs.temporal.io/develop/java
+    date: 2026-05-10
+  publisher: Temporal Technologies
+
+temporal-architecture:
+  type: web
+  title: "Temporal Service | Temporal Platform Documentation"
+  url:
+    value: https://docs.temporal.io/temporal-service
+    date: 2026-05-10
+  publisher: Temporal Technologies
+
+temporal-determinism:
+  type: web
+  title: "Workflow Execution | Temporal Platform Documentation"
+  url:
+    value: https://docs.temporal.io/workflows
+    date: 2026-05-10
+  publisher: Temporal Technologies
+
+temporal-payload-limits:
+  type: web
+  title: "Defaults, limits, and configurable settings | Temporal Cloud"
+  url:
+    value: https://docs.temporal.io/cloud/limits
+    date: 2026-05-10
+  publisher: Temporal Technologies
+
+yandex-temporal:
+  type: web
+  title: "Temporal в Яндексе | Внутренняя документация"
+  url:
+    value: https://docs.yandex-team.ru/temporal
+    date: 2026-05-10
+  publisher: Яндекс
+
+cadence:
+  type: web
+  title: "Cadence Workflow"
+  url:
+    value: https://cadenceworkflow.io/
+    date: 2026-05-10
+  publisher: Uber Technologies
+
+airflow:
+  type: web
+  title: "Apache Airflow"
+  url:
+    value: https://airflow.apache.org/
+    date: 2026-05-10
+  publisher: The Apache Software Foundation
+
+conductor:
+  type: web
+  title: "Netflix Conductor: A microservices orchestrator"
+  url:
+    value: https://conductor.netflix.com/
+    date: 2026-05-10
+  publisher: Netflix
+
+camunda:
+  type: web
+  title: "Camunda Platform 8 | The Universal Process Orchestrator"
+  url:
+    value: https://camunda.com/
+    date: 2026-05-10
+  publisher: Camunda Services GmbH
+
+aws-step-functions:
+  type: web
+  title: "AWS Step Functions | Serverless Workflow Orchestration"
+  url:
+    value: https://aws.amazon.com/step-functions/
+    date: 2026-05-10
+  publisher: Amazon Web Services
+
+akka-streams:
+  type: web
+  title: "Akka Streams Documentation"
+  url:
+    value: https://doc.akka.io/docs/akka/current/stream/
+    date: 2026-05-10
+  publisher: Lightbend Inc.

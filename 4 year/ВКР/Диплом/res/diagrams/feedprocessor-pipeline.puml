@@ -1,0 +1,36 @@
+@startuml feedprocessor-pipeline
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 12
+skinparam ActivityFontSize 12
+skinparam nodesep 6
+skinparam ranksep 10
+skinparam padding 2
+skinparam shadowing false
+skinparam ActivityBackgroundColor #FFFFFF
+skinparam ActivityBorderColor #000000
+skinparam ActivityDiamondBackgroundColor #FFFFFF
+skinparam ActivityDiamondBorderColor #000000
+skinparam ArrowColor #000000
+
+start
+:tasks;
+:loader;
+:parser;
+:mapperFlow;
+fork
+  :Изображения;
+fork again
+  :Геокодер;
+fork again
+  :Унификатор;
+fork again
+  :Комплектации;
+end fork
+:converter;
+:counterAggregator;
+:sendingGroups;
+:sender;
+:Kafka;
+:VOS;
+stop
+@enduml

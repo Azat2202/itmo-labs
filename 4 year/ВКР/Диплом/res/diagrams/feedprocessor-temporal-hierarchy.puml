@@ -1,0 +1,68 @@
+@startuml feedprocessor-temporal-hierarchy
+
+<style>
+root {
+  FontName "Times New Roman"
+  FontSize 12
+}
+activityDiagram {
+  activity {
+    BackgroundColor white
+    LineColor black
+    LineThickness 1
+    RoundCorner 6
+  }
+  diamond {
+    BackgroundColor white
+    LineColor black
+    LineThickness 1
+  }
+  arrow {
+    LineColor black
+    LineThickness 1
+  }
+  barrier {
+    LineColor black
+    LineThickness 0.5
+    BackgroundColor black
+  }
+  note {
+    BackgroundColor white
+    LineColor black
+  }
+  partition {
+    LineColor black
+    LineThickness 1
+  }
+}
+</style>
+
+partition "FeedWorkflow (feed-queue)" {
+  start
+  :loadFeed;
+  :parseFeed;
+  fork
+    partition "OfferWorkflow #1 (offer-queue)" {
+      :downloadImages;
+      :geocodeAddress;
+      :unifyCarModel;
+      :prepareEquipment;
+      :convertToApiModel;
+    }
+  fork again
+    :...;
+  fork again
+    partition "OfferWorkflow #N (offer-queue)" {
+      :downloadImages;
+      :geocodeAddress;
+      :unifyCarModel;
+      :prepareEquipment;
+      :convertToApiModel;
+    }
+  end fork
+  :aggregateCounters;
+  :sendToKafka;
+  stop
+}
+
+@enduml

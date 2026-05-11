@@ -93,3 +93,27 @@ akka-streams:
     value: https://doc.akka.io/docs/akka/current/stream/
     date: 2026-05-10
   publisher: Lightbend Inc.
+
+ydb:
+  type: web
+  title: "YDB Documentation"
+  url:
+    value: https://ydb.tech/docs/
+    date: 2026-05-11
+  publisher: YDB
+
+prometheus:
+  type: web
+  title: "Prometheus: Monitoring system & time series database"
+  url:
+    value: https://prometheus.io/docs/
+    date: 2026-05-11
+  publisher: The Linux Foundation
+
+grafana:
+  type: web
+  title: "Grafana Documentation"
+  url:
+    value: https://grafana.com/docs/grafana/latest/
+    date: 2026-05-11
+  publisher: Grafana Labs

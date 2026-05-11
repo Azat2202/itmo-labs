@@ -21,6 +21,9 @@ watch:
 clean:
 	rm -f main.pdf $(DIAGRAM_OUT)
 
+format:
+	typstyle -i main.typ
+
 help:
 	@echo "Targets:"
 	@echo "  make           — пересобрать диаграммы и PDF"
@@ -28,3 +31,4 @@ help:
 	@echo "  make diagrams  — пересобрать все PlantUML-диаграммы в SVG"
 	@echo "  make watch     — typst watch с автопересборкой PDF"
 	@echo "  make clean     — удалить PDF и сгенерированные SVG"
+	@echo "  make format    - отформатировать документ"

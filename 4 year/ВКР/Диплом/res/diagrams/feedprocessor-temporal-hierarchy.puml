@@ -60,7 +60,6 @@ partition "FeedWorkflow (feed-queue)" {
       :convertToApiModel;
     }
   end fork
-  :aggregateCounters;
   :sendToKafka;
   stop
 }

@@ -345,7 +345,7 @@ workflow и начать новое с переданными аргумента
 промежуточных данных, поэтапной миграции с существующего сервиса и обеспечения
 наблюдаемости.
 
-== Требования к системе
+== Требования к системе <sec:requirements>
 
 Требования к проектируемому сервису разделены на функциональные, направленные
 на сохранение совместимости и пропускной способности существующего решения, и
@@ -604,10 +604,386 @@ Kafka-топик и используют согласованные ключи �
 ]
 
 = Реализация решения
+
+Настоящая глава описывает воплощение архитектурных решений главы 2 в исходном
+коде нового сервиса на стеке Temporal Java SDK @temporal-java-sdk и языке Scala.
+Текст построен вокруг четырёх ключевых механизмов реализации --- декомпозиции на
+workflow и activity, пакетной обработки с переходом через `continueAsNew`,
+политик повторных попыток и многоуровневого тестирования.
+
 == Реализация бизнес-процессов и активностей
-== Механизм пакетной обработки
+
+Модель программирования Temporal Java SDK предписывает описывать workflow и
+activity через типизированные интерфейсы с аннотациями `@WorkflowInterface` и
+`@ActivityInterface` соответственно @temporal-java-sdk. Конкретные реализации
+выделяются в отдельные классы с суффиксом `Impl`, что упрощает подмену реализаций
+в тестах и явно отделяет публичный контракт workflow от его внутренней логики.
+В реализуемом сервисе выделено два workflow и два набора activity, отражающих
+иерархию, описанную в разделе 2.2.
+
+Корневой workflow `FeedWorkflow` принимает на вход алгебраический тип `Either`
+из двух вариантов: пакет идентификаторов объявлений `BatchArgs` для типового
+режима продолжения обработки и единичную задачу `Task` для первичного запуска
+по событию из очереди задач. Такая сигнатура позволяет одной и той же реализации
+обслуживать как первое попадание задачи на обработку, так и последующие переходы
+через `continueAsNew`. Интерфейс корневого workflow и сопутствующий тип
+аргументов приведены на листинге @lst:feedworkflow-iface.
+
+#figure(
+  ```scala
+  case class BatchArgs(
+      uuids: Seq[UuidWithPosition],
+      task: Task,
+      client: Client,
+      offersCount: OffersCount,
+      workflowConfiguration: FeedWorkflowConfiguration)
+
+  @WorkflowInterface
+  trait FeedWorkflow {
+    @WorkflowMethod
+    def run(batchOrTask: Either[BatchArgs, Task]): Unit
+  }
+  ```,
+  caption: [Интерфейс корневого workflow `FeedWorkflow`],
+) <lst:feedworkflow-iface>
+
+Тело `FeedWorkflowImpl` последовательно вызывает подготовительные activity
+загрузки и парсинга фида --- объединённую activity `processFeedInputStream`,
+которая скачивает XML-документ по URL дилера, разбирает его и складывает в YDB
+сериализованные представления отдельных объявлений, возвращая в workflow только
+короткий список идентификаторов `Seq[UuidWithPosition]`. Такая компоновка
+позволяет соблюсти ограничение Temporal на размер аргументов и результатов
+activity @temporal-payload-limits, не вынося промежуточные данные через границу
+workflow.
+
+После подготовки данных корневой workflow порождает дочерние процессы. Каждому
+идентификатору объявления соответствует отдельный дочерний workflow
+`OfferWorkflow`, запускаемый методом `Workflow.newChildWorkflowStub` с
+указанием выделенной задачной очереди `offer-queue`. Асинхронный вызов через
+`Async.function` возвращает объект `Promise[OfferResult]`; агрегатор
+`Promise.allOf` ожидает завершения всех дочерних процессов, после чего
+управление возвращается в корневой workflow. Соответствующий фрагмент приведён
+на листинге @lst:child-spawning.
+
+#figure(
+  ```scala
+  val promises = processNow.map { case UuidWithPosition(uuid, idx) =>
+    val offerWorkflow = Workflow.newChildWorkflowStub(
+      classOf[OfferWorkflow],
+      offerWorkflowOptions(batchArgs.task, idx))
+    Async.function(offerWorkflow.process,
+      idx, batchArgs.task, batchArgs.client, uuid,
+      workflowConfiguration.useExternalOfferCache)
+  }
+  Promise.allOf(promises: _*)
+  val entityResults = promises.map(_.get())
+  ```,
+  caption: [Запуск дочерних `OfferWorkflow` с ожиданием через `Promise.allOf`],
+) <lst:child-spawning>
+
+Интерфейс дочернего workflow `OfferWorkflow` лаконичен: единственный метод
+`process` принимает короткие идентификаторы (`idx`, `task`, `client`,
+`externalOfferUuid` и флаг использования кеша), а полезная нагрузка считывается
+activity самостоятельно из YDB по uuid. Такой контракт согласуется со
+стратегией хранения промежуточных данных, описанной в разделе 2.3, и приведён
+на листинге @lst:offerworkflow-iface.
+
+#figure(
+  ```scala
+  @WorkflowInterface
+  trait OfferWorkflow {
+    @WorkflowMethod
+    def process(
+        idx: Int,
+        task: Task,
+        client: Client,
+        externalOfferUuid: UUID,
+        useExternalOfferCache: Boolean): OfferResult
+  }
+  ```,
+  caption: [Интерфейс дочернего workflow `OfferWorkflow`],
+) <lst:offerworkflow-iface>
+
+Тело `OfferWorkflowImpl` строит результирующее объявление, запуская несколько
+независимых activity обогащения параллельно через `Async.function`: геокодирование
+адреса, разбор опций, обработку панорам, загрузку изображений и унификацию
+модели. Получившиеся `Promise`-объекты затем сводятся в единый объект
+`Offer` функцией `buildOffer` после ожидания `Promise.allOf`. Каждая activity
+обогащения --- короткая обёртка над прикладным конвертером с регистрацией
+результата в счётчиках метрик. В качестве примера на листинге @lst:activity-geocoding
+приведена реализация activity геокодирования.
+
+#figure(
+  ```scala
+  override def geocoding(context: Context): Result[Offer] =
+    unsafeRunRetryableIO(
+      registerConverterResult("geocoding") {
+        geocoderConverter.convert(context)
+      },
+      workerMDC = WorkerMDC.fromContext(context)
+    )
+  ```,
+  caption: [Реализация activity `geocoding`],
+) <lst:activity-geocoding>
+
+Таким образом, workflow содержат детерминированную логику оркестрации ---
+последовательность вызовов, ветвления, обработку результатов, --- а activity
+инкапсулируют любое недетерминированное взаимодействие с внешним миром:
+обращения к YDB, http-вызовы к сервисам геокодера, унификатора и каталога,
+запись в Kafka. Это разделение является фундаментальным требованием Temporal
+для возможности replay workflow @temporal-determinism и рассматривается
+подробнее в разделе про тестирование.
+
+== Механизм пакетной обработки <sec:batching>
+
+Кластер Temporal накладывает ограничение на длину истории событий workflow:
+рекомендуемый предел составляет порядка десятков тысяч записей, после
+которого начинаются предупреждения и снижение производительности
+@temporal-payload-limits. При плановой нагрузке около 40 тысяч задач на
+обработку фидов в сутки одиночный долгоживущий workflow без переключения
+насытил бы историю в течение нескольких часов. Решение --- обрабатывать задачи
+пакетами ограниченного размера и по завершении пакета переключаться на новый
+экземпляр workflow с пустой историей через механизм `continueAsNew`.
+
+Алгоритм реализован в методе `processBatch` корневого workflow. Аргумент
+`BatchArgs` содержит упорядоченный список идентификаторов
+`Seq[UuidWithPosition]`; вызов разбивает его на `processNow` --- первые
+`batchSize` элементов (по конфигурации сервиса --- сто задач) --- и
+`processLater` --- оставшиеся. Пакет `processNow` параллельно обрабатывается
+через дочерние `OfferWorkflow` и отправляется в Kafka; если хвост `processLater`
+не пуст, workflow создаёт стаб `Workflow.newContinueAsNewStub` и вызывает на нём
+`run` с уменьшенным аргументом, передавая управление новому экземпляру.
+Соответствующий фрагмент приведён на листинге @lst:batch-continueasnew.
+
+#figure(
+  ```scala
+  def processBatch(batchArgs: BatchArgs): Unit = {
+    val batchSize = batchArgs.workflowConfiguration.batchSize
+    val (processNow, processLater) =
+      batchArgs.uuids.sortBy(_.position).splitAt(batchSize.toInt)
+    // ... обработка processNow через дочерние OfferWorkflow ...
+    if (processLater.nonEmpty) {
+      val continueAsNewStub = Workflow.newContinueAsNewStub(
+        classOf[FeedWorkflow],
+        ContinueAsNewOptions.newBuilder()
+          .setTypedSearchAttributes(
+            feedWorkflowSearchAttribute(batchArgs.task))
+          .build())
+      continueAsNewStub.run(
+        Left(batchArgs.copy(uuids = processLater, offersCount = offersCount)))
+    }
+  }
+  ```,
+  caption: [Цикл пакетной обработки с переходом через `continueAsNew`],
+) <lst:batch-continueasnew>
+
+Эффект от описанного механизма двойной. Во-первых, история событий каждого
+экземпляра `FeedWorkflow` ограничена событиями ста задач --- запуски activity,
+порождения дочерних workflow, их завершения --- и остаётся в пределах нескольких
+тысяч записей независимо от продолжительности работы сервиса. Во-вторых,
+восстановление после сбоя экземпляра воркера сводится к replay одной короткой
+истории, что укладывается в требование к времени восстановления, сформулированное
+в разделе 2.1.
+
 == Механизм политик повторных попыток
+
+Temporal Java SDK предоставляет встроенный механизм повторных попыток activity
+через конфигурационный объект `RetryOptions`, описывающий начальный интервал,
+коэффициент экспоненциального роста, максимальный интервал и максимальное число
+попыток @temporal-java-sdk. По умолчанию каждая activity, завершившаяся
+исключением, ретраится платформой автоматически. Реализуемая стратегия
+надстраивается над этим механизмом и разделяет два качественно различных типа
+сбоев. К *лёгким* относятся временные сетевые ошибки и таймауты внешних
+сервисов, которые типично проходят сами в течение секунд; к *тяжёлым* ---
+устойчивые сбои инфраструктуры или некорректные ответы смежных сервисов,
+которые требуют внимания дежурного оператора.
+
+Различие реализовано во вспомогательном объекте `RetryConfiguration` через две
+функции-обёртки над `ApplicationFailure`, отличающиеся типом ошибки и режимом
+задержки. Функция `fastRetryFailure` помечает ошибку типом `network_failure` и
+полагается на штатную политику ретраев activity --- следующая попытка
+выполняется через 10 секунд, далее интервал экспоненциально растёт до 10 минут.
+Функция `postponeRetryFailure` помечает ошибку типом `worker_failure` и
+устанавливает явную задержку до следующего ретрая, зависящую от номера попытки:
+3, 6, 9, 12, 15 минут с потолком в 15 минут. Длинная задержка между попытками
+даёт дежурному время отреагировать на алерт прежде, чем activity снова обратится
+к внешнему сервису. Реализация обеих функций приведена на листинге @lst:retry-config.
+
+#figure(
+  ```scala
+  object RetryConfiguration {
+    private val NETWORK_FAILURE_TYPE = "network_failure"
+    private val WORKER_FAILURE_TYPE = "worker_failure"
+
+    def fastRetryFailure(message: String, cause: Throwable) =
+      ApplicationFailure.newFailureWithCause(
+        message, NETWORK_FAILURE_TYPE, cause)
+
+    def postponeRetryFailure(message: String, cause: Throwable, attempt: Int) = {
+      val maxDelay = Duration.ofMinutes(15)
+      val delay = Duration.ofMinutes(3).multipliedBy(attempt)
+      val methodDelay = if (delay.compareTo(maxDelay) <= 0) delay else maxDelay
+      ApplicationFailure.newFailureWithCauseAndDelay(
+        message, WORKER_FAILURE_TYPE, cause, methodDelay)
+    }
+  }
+  ```,
+  caption: [Функции-обёртки `fastRetryFailure` и `postponeRetryFailure`],
+) <lst:retry-config>
+
+Для базовой политики ретраев каждый workflow определяет общий объект
+`ActivityOptions`, передаваемый при создании activity-стабов через
+`Workflow.newActivityStub`. На листинге @lst:activity-options приведена
+конфигурация, используемая в `OfferWorkflowImpl`: начальный интервал 10 секунд,
+коэффициент удвоения, максимальный интервал 10 минут, отсутствие явного
+ограничения числа попыток (отсечение происходит по `startToCloseTimeout` всего
+workflow).
+
+#figure(
+  ```scala
+  private val activityOptions: ActivityOptions = ActivityOptions
+    .newBuilder()
+    .setStartToCloseTimeout(Duration.ofMinutes(1))
+    .setCancellationType(ActivityCancellationType.WAIT_CANCELLATION_COMPLETED)
+    .setRetryOptions(
+      RetryOptions.newBuilder()
+        .setInitialInterval(Duration.ofSeconds(10))
+        .setBackoffCoefficient(2d)
+        .setMaximumInterval(Duration.ofMinutes(10))
+        .build())
+    .build()
+  ```,
+  caption: [Конфигурация `ActivityOptions` с `RetryOptions` в `OfferWorkflow`],
+) <lst:activity-options>
+
+Выбор между быстрой и отложенной политикой делается в реализациях activity
+индивидуально, в зависимости от смысла операции. Так, в `FeedActivitiesImpl`
+метод `getFirstTasks` оборачивает ошибку в `fastRetryFailure` --- получение
+очереди задач не критично, и плотные ретраи допустимы, --- тогда как метод
+`getTask` оборачивает ошибку в `postponeRetryFailure`: одна конкретная задача
+существенна, и её устойчивый сбой должен попадать в алерт. Activity обогащения
+в `OfferActivitiesImpl` --- `geocoding`, `parseOptions`, `uploadImages`,
+`unify` --- полагаются на штатную политику ретраев `ActivityOptions` и не
+требуют явного оборачивания. Такое разделение позволяет реагировать на
+устойчивые сбои не воркерами, а человеком, не нагружая внешние сервисы плотной
+серией повторных запросов; одновременно идемпотентность activity, обеспеченная
+схемой хранения раздела 2.3, гарантирует безопасность повторов в обеих
+политиках.
+
 == Тестирование
+
+Тестирование Temporal-приложений организовано в три уровня, дополняющих
+друг друга:
+
++ модульные тесты конвертеров и менеджеров, инкапсулирующих бизнес-логику
+  отдельных стадий обогащения; не отличаются от модульных тестов любого
+  другого Scala-сервиса и реализованы в каталоге `logic/converters/test`
++ интеграционные тесты workflow в локальном in-memory кластере
+  `TestWorkflowEnvironment`, предоставляемом Temporal Java SDK
+  @temporal-java-sdk
++ replay-тесты исторических workflow на сохранение детерминизма
+  @temporal-determinism
+
+Модульные тесты решают задачу проверки преобразований данных. Интеграционные
+тесты проверяют корректность оркестрации --- порядок вызовов activity, ветвления
+по результатам, работу таймеров и кенселляции --- без обращения к реальному
+кластеру Temporal. Третий уровень тестирования --- replay-тесты ---
+заслуживает отдельного описания, поскольку именно он закрывает риск ошибки,
+специфичной для платформы Temporal.
+
+Детерминизм workflow означает, что при повторном выполнении кода workflow на
+зафиксированной истории событий путь исполнения должен в точности совпасть с
+исходным @temporal-determinism. Это условие обеспечивает корректное
+восстановление выполнения после сбоев и переноса с одного экземпляра воркера на
+другой. Однако даже семантически безопасное изменение кода workflow --- например,
+перестановка двух независимых вызовов activity --- может нарушить детерминизм
+для уже существующих в проде долгоживущих workflow и привести к их зависанию
+с исключением `NonDeterministicException`. Replay-тест обнаруживает такие
+изменения до раскатки.
+
+Тест устроен следующим образом: класс `WorkflowReplayerTest` подтягивает из
+продакшен-кластера истории нескольких реальных workflow по идентификаторам
+`(workflowId, runId)`, после чего на локальном `TestWorkflowEnvironment` с
+зарегистрированными актуальными реализациями workflow вызывает метод
+`replayWorkflowExecution`. Любое отклонение пути исполнения от записанного в
+истории приводит к исключению, что фиксируется как падение теста. Ключевые
+фрагменты приведены на листинге @lst:replay-test.
+
+#figure(
+  ```scala
+  private def makeWorker: Worker = {
+    val testEnv = TestWorkflowEnvironment.newInstance(/* ... */)
+    val worker = testEnv.newWorker(OFFERS_TASK_QUEUE)
+    worker.registerWorkflowImplementationTypes(
+      classOf[ScheduleWorkflowImpl],
+      classOf[FeedWorkflowImpl],
+      classOf[OfferWorkflowImpl])
+    worker
+  }
+
+  private def replayTest(data: WorkflowData) =
+    test(s"${data.workflowId}:${data.runId}") {
+      for {
+        client <- ZIO.service[WorkflowClient]
+        worker <- ZIO.service[Worker]
+        history <- ZIO.attemptBlocking {
+          client.fetchHistory(data.workflowId, data.runId)
+        }
+        replay = Try(worker.replayWorkflowExecution(history))
+      } yield assert(replay)(isSuccess.assertion)
+    }
+  ```,
+  caption: [Регистрация workflow в `TestWorkflowEnvironment` и replay-тест
+            на детерминизм],
+) <lst:replay-test>
+
+Набор историй для replay подбирается так, чтобы покрыть оба типа workflow и
+основные ветви исполнения: десять выполнений `FeedWorkflow`, десять выполнений
+`OfferWorkflow` и два выполнения вспомогательного `ScheduleWorkflow`,
+обслуживающего поступление задач из очереди. Перед раскаткой изменений CI
+прогоняет полный набор; падение replay-теста блокирует выкатку. Соотношение
+описанных слоёв реализации между собой и со слоем хранения, описанным в
+разделе 2.3, приведено на рисунке @fig:impl-layers.
+
+#figure(
+  oxdraw(```
+  graph TB
+    subgraph workflows[Слой workflow]
+      FW[FeedWorkflowImpl]
+      OW[OfferWorkflowImpl]
+    end
+    subgraph activities[Слой activity]
+      FA[FeedActivitiesImpl]
+      OA[OfferActivitiesImpl]
+    end
+    subgraph ydb[Таблицы YDB]
+      T1[(raw-feeds)]
+      T2[(parsed-offers)]
+      T3[(geocoder-cache)]
+      T4[(unificator-cache)]
+    end
+    FW --> FA
+    FW --> OW
+    OW --> OA
+    FA --> T1
+    FA --> T2
+    OA --> T2
+    OA --> T3
+    OA --> T4
+  ```),
+  caption: [Слои реализации сервиса и их связь с таблицами YDB],
+) <fig:impl-layers>
+
+Трёхуровневая стратегия покрывает все типичные ошибки реализации Temporal-сервиса:
+ошибка в бизнес-логике обнаруживается модульным тестом, ошибка оркестрации ---
+интеграционным тестом на `TestWorkflowEnvironment`, ошибка детерминизма ---
+replay-тестом исторических workflow.
+
+#noindent[
+  Описанная реализация воплощает все требования, сформулированные в разделе
+  @sec:requirements, и оставляет открытым вопрос количественной оценки
+  результатов миграции --- ему посвящена следующая глава.
+]
 
 = Оценка результатов
 == Сравнение функциональности с существующим решением

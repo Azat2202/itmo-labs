@@ -48,6 +48,7 @@
   }
 
   /* Листинги */
+  show figure.where(kind: raw): set figure(supplement: "Листинг")
   show figure.where(kind: raw): it => {
     block[
       #[

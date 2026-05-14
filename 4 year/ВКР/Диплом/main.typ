@@ -325,27 +325,7 @@ History отвечает за хранение и обновление журн�
 рисунке @fig:temporal-cluster.
 
 #figure(
-  oxdraw(```
-  graph LR
-    subgraph workers[Прикладные воркеры]
-      WorkerA[Worker A]
-      WorkerB[Worker B]
-      WorkerC[Worker C]
-    end
-    subgraph cluster[Кластер Temporal]
-      Frontend[Frontend Service]
-      Matching[Matching Service]
-      History[History Service]
-      DB[(Persistence Layer)]
-      Frontend --> Matching
-      Frontend --> History
-      Matching --> DB
-      History --> DB
-    end
-    WorkerA --> Frontend
-    WorkerB --> Frontend
-    WorkerC --> Frontend
-  ```),
+  image("res/img/temporal-architecture.svg", width: 85%),
   caption: [Архитектура кластера Temporal и взаимодействие с воркерами],
 ) <fig:temporal-cluster>
 
@@ -611,25 +591,7 @@ Kafka-топик и используют согласованные ключи �
 на этапах миграции приведена на рисунке @fig:migration-stages.
 
 #figure(
-  oxdraw(```
-  graph TB
-    subgraph S1[Этап 1: теневой запуск]
-      D1[Дилеры] --> O1[Существующий]
-      D1 -.-> N1[Новый]
-      O1 --> K1[Kafka VOS]
-      N1 -.-> C1[Сравнение]
-    end
-    subgraph S2[Этап 2: канареечный]
-      D2[Дилеры] --> O2[Существующий 90-99%]
-      D2 --> N2[Новый 1-10%]
-      O2 --> K2[Kafka VOS]
-      N2 --> K2
-    end
-    subgraph S3[Этап 3: полный перевод]
-      D3[Дилеры] --> N3[Новый 100%]
-      N3 --> K3[Kafka VOS]
-    end
-  ```),
+  image("res/img/migration-stages.svg", width: 80%),
   caption: [Распределение трафика дилеров на этапах миграции],
 ) <fig:migration-stages>
 
@@ -1016,38 +978,7 @@ workflow).
 основные ветви исполнения: десять выполнений `FeedWorkflow`, десять выполнений
 `OfferWorkflow` и два выполнения вспомогательного `ScheduleWorkflow`,
 обслуживающего поступление задач из очереди. Перед раскаткой изменений CI
-прогоняет полный набор; падение replay-теста блокирует выкатку. Соотношение
-описанных слоёв реализации между собой и со слоем хранения, описанным в
-разделе 2.3, приведено на рисунке @fig:impl-layers.
-
-#figure(
-  oxdraw(```
-  graph TB
-    subgraph workflows[Слой workflow]
-      FW[FeedWorkflowImpl]
-      OW[OfferWorkflowImpl]
-    end
-    subgraph activities[Слой activity]
-      FA[FeedActivitiesImpl]
-      OA[OfferActivitiesImpl]
-    end
-    subgraph ydb[Таблицы YDB]
-      T1[(raw-feeds)]
-      T2[(parsed-offers)]
-      T3[(geocoder-cache)]
-      T4[(unificator-cache)]
-    end
-    FW --> FA
-    FW --> OW
-    OW --> OA
-    FA --> T1
-    FA --> T2
-    OA --> T2
-    OA --> T3
-    OA --> T4
-  ```),
-  caption: [Слои реализации сервиса и их связь с таблицами YDB],
-) <fig:impl-layers>
+прогоняет полный набор; падение replay-теста блокирует выкатку. 
 
 Трёхуровневая стратегия покрывает все типичные ошибки реализации Temporal-сервиса:
 ошибка в бизнес-логике обнаруживается модульным тестом, ошибка оркестрации ---
@@ -1217,35 +1148,8 @@ workflow на оставшиеся воркеры за счёт автомати
 @fig:uptime-timeline.
 
 #figure(
-  kind: image,
-  supplement: "Рисунок",
-  table(
-    columns: 7,
-    align: (left + horizon, center + horizon, center + horizon, center + horizon,
-            center + horizon, center + horizon, center + horizon),
-    rows: (auto, 2.5em, 2.5em),
-    table.header(
-      [*Сервис \\ Месяц с начала наблюдения*],
-      [1], [2], [3], [4], [5], [6],
-    ),
-    [Существующий],
-      table.cell(fill: rgb("#EEEEEE"))[],
-      table.cell(fill: rgb("#404040"))[#text(fill: white, weight: "bold")[OOM]],
-      table.cell(fill: rgb("#EEEEEE"))[],
-      table.cell(fill: rgb("#404040"))[#text(fill: white, weight: "bold")[OOM]],
-      table.cell(fill: rgb("#EEEEEE"))[],
-      table.cell(fill: rgb("#404040"))[#text(fill: white, weight: "bold")[OOM]],
-    [Новый],
-      table.cell(fill: rgb("#EEEEEE"))[],
-      table.cell(fill: rgb("#EEEEEE"))[],
-      table.cell(fill: rgb("#EEEEEE"))[],
-      table.cell(fill: rgb("#EEEEEE"))[],
-      table.cell(fill: rgb("#EEEEEE"))[],
-      table.cell(fill: rgb("#EEEEEE"))[],
-  ),
-  caption: [Динамика uptime по месяцам: пустые ячейки --- работает без
-            принудительного рестарта, помеченные «OOM» --- аварийное
-            завершение из-за исчерпания памяти],
+  image("res/img/restarts.png", width: 100%),
+  caption: [Количество рестартов старого фидпроцессора (зеленый) и нового (желтый)],
 ) <fig:uptime-timeline>
 
 *MTTR при сбое экземпляра.* Для существующего сервиса восстановление после

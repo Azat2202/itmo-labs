@@ -1,5 +1,8 @@
-DIAGRAM_SRC := $(wildcard res/diagrams/*.puml)
-DIAGRAM_OUT := $(patsubst res/diagrams/%.puml,res/img/%.svg,$(DIAGRAM_SRC))
+PUML_SRC := $(wildcard res/diagrams/*.puml)
+MMD_SRC  := $(wildcard res/diagrams/*.mmd)
+PUML_OUT := $(patsubst res/diagrams/%.puml,res/img/%.svg,$(PUML_SRC))
+MMD_OUT  := $(patsubst res/diagrams/%.mmd,res/img/%.svg,$(MMD_SRC))
+DIAGRAM_OUT := $(PUML_OUT) $(MMD_OUT)
 
 .PHONY: all pdf diagrams watch clean help
 
@@ -14,6 +17,9 @@ diagrams: $(DIAGRAM_OUT)
 
 res/img/%.svg: res/diagrams/%.puml
 	plantuml -tsvg -o '../img' $<
+
+res/img/%.svg: res/diagrams/%.mmd
+	mmdc -i $< -o $@ -t neutral -b transparent
 
 watch:
 	typst watch main.typ

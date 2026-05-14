@@ -37,12 +37,12 @@ activityDiagram {
 }
 </style>
 
-partition "FeedWorkflow (feed-queue)" {
+partition "FeedWorkflow" {
   start
   :loadFeed;
   :parseFeed;
   fork
-    partition "OfferWorkflow #1 (offer-queue)" {
+    partition "OfferWorkflow #1" {
       :downloadImages;
       :geocodeAddress;
       :unifyCarModel;
@@ -52,7 +52,7 @@ partition "FeedWorkflow (feed-queue)" {
   fork again
     :...;
   fork again
-    partition "OfferWorkflow #N (offer-queue)" {
+    partition "OfferWorkflow #N" {
       :downloadImages;
       :geocodeAddress;
       :unifyCarModel;

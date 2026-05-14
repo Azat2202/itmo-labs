@@ -1,0 +1,19 @@
+graph LR
+    subgraph workers[Прикладные воркеры]
+      WorkerA[Worker A]
+      WorkerB[Worker B]
+      WorkerC[Worker C]
+    end
+    subgraph cluster[Кластер Temporal]
+      Frontend[Frontend Service]
+      Matching[Matching Service]
+      History[History Service]
+      DB[(Persistence Layer)]
+      Frontend --> Matching
+      Frontend --> History
+      Matching --> DB
+      History --> DB
+    end
+    WorkerA --> Frontend
+    WorkerB --> Frontend
+    WorkerC --> Frontend

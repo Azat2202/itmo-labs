@@ -38,14 +38,6 @@ temporal-payload-limits:
     date: 2026-05-10
   publisher: Temporal Technologies
 
-cadence:
-  type: web
-  title: "Cadence Workflow"
-  url:
-    value: https://cadenceworkflow.io/
-    date: 2026-05-10
-  publisher: Uber Technologies
-
 airflow:
   type: web
   title: "Apache Airflow"
@@ -54,14 +46,6 @@ airflow:
     date: 2026-05-10
   publisher: The Apache Software Foundation
 
-conductor:
-  type: web
-  title: "Netflix Conductor: A microservices orchestrator"
-  url:
-    value: https://conductor.netflix.com/
-    date: 2026-05-10
-  publisher: Netflix
-
 camunda:
   type: web
   title: "Camunda Platform 8 | The Universal Process Orchestrator"
@@ -69,14 +53,6 @@ camunda:
     value: https://camunda.com/
     date: 2026-05-10
   publisher: Camunda Services GmbH
-
-aws-step-functions:
-  type: web
-  title: "AWS Step Functions | Serverless Workflow Orchestration"
-  url:
-    value: https://aws.amazon.com/step-functions/
-    date: 2026-05-10
-  publisher: Amazon Web Services
 
 akka-streams:
   type: web
@@ -181,3 +157,35 @@ cyberleninka-stdlib-analysis-testing:
   url:
     value: https://i-us.ru/index.php/ius/article/view/16314/15369
     date: 2026-05-13
+
+kafka:
+  type: web
+  title: "Apache Kafka Documentation"
+  url:
+    value: https://kafka.apache.org/documentation/
+    date: 2026-05-15
+  publisher: The Apache Software Foundation
+
+zookeeper:
+  type: web
+  title: "Apache ZooKeeper Documentation"
+  url:
+    value: https://zookeeper.apache.org/doc/current/
+    date: 2026-05-15
+  publisher: The Apache Software Foundation
+
+zio:
+  type: web
+  title: "ZIO Documentation"
+  url:
+    value: https://zio.dev/
+    date: 2026-05-15
+  publisher: ZIO Maintainers
+
+opentelemetry:
+  type: web
+  title: "OpenTelemetry Documentation"
+  url:
+    value: https://opentelemetry.io/docs/
+    date: 2026-05-15
+  publisher: Cloud Native Computing Foundation

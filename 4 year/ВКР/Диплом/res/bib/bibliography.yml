@@ -38,14 +38,6 @@ temporal-payload-limits:
     date: 2026-05-10
   publisher: Temporal Technologies
 
-yandex-temporal:
-  type: web
-  title: "Temporal в Яндексе | Внутренняя документация"
-  url:
-    value: https://docs.yandex-team.ru/temporal
-    date: 2026-05-10
-  publisher: Яндекс
-
 cadence:
   type: web
   title: "Cadence Workflow"

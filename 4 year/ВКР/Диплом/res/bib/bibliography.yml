@@ -109,3 +109,75 @@ grafana:
     value: https://grafana.com/docs/grafana/latest/
     date: 2026-05-11
   publisher: Grafana Labs
+
+karabekov-workflow-modeling:
+  type: article
+  title: "Концептуальное моделирование потоков работ для бизнес-процессов"
+  author: ["Карабеков, Б. С.", "Плесневич, Г. С.", "Уралев, Г. В."]
+  date: 2005
+  page-range: "41-45"
+  parent:
+    type: periodical
+    title: "Прикладная информатика. Экономика, Статистика и Информатика"
+    issue: 4
+
+cyberleninka-virtual-cluster-reliability:
+  type: article
+  title: "Задержки и надежность обслуживания запросов в виртуальном компьютерном кластере"
+  author: ["Фунг, В. К.", "Богатырев, В. А."]
+  date: 2024
+  doi: 10.17223/19988605/68/5
+  page-range: "48-58"
+  parent:
+    type: periodical
+    title: "Вестник Томского государственного университета. Управление, вычислительная техника и информатика"
+    issue: 68
+  url:
+    value: https://vital.lib.tsu.ru/vital/access/services/Download/koha:001147076/SOURCE1?view=true
+    date: 2026-05-02
+
+cyberleninka-cyberimmune-microservices:
+  type: article
+  title: "Кибериммунный подход к разработке. Иллюстрация применения на базе микросервисной архитектуры"
+  author: ["Соболев, С. П."]
+  date: 2024
+  doi: 10.21638/11701/spbu10.2024.105
+  page-range: "52-61"
+  parent:
+    type: periodical
+    title: "Вестник Санкт-Петербургского университета. Прикладная математика. Информатика. Процессы управления"
+    volume: 20
+    issue: 1
+  url:
+    value: https://applmathjournal.spbu.ru/article/view/15538
+    date: 2026-05-07
+
+cyberleninka-microservices-transactions-model:
+  type: article
+  title: "Оценка характеристик модели распределенных транзакционных приложений с микросервисной архитектурой и параллельными узлами"
+  author: ["Горбунова, А. В."]
+  date: 2025
+  doi: 10.31799/1684-8853-2025-6-42-50
+  page-range: "42-50"
+  parent:
+    type: periodical
+    title: "Информационно-управляющие системы"
+    issue: 6
+  url:
+    value: https://www.i-us.ru/index.php/ius/article/view/16444
+    date: 2026-05-11
+
+cyberleninka-stdlib-analysis-testing:
+  type: article
+  title: "Моделирование поведения функций стандартной библиотеки в задачах анализа программ"
+  author: ["Ицыксон, В. М.", "Онищук, М. П.", "Кечин, В. В.", "Алексеев, Я. А."]
+  date: 2024
+  doi: 10.31799/1684-8853-2024-4-24-39
+  page-range: "24-39"
+  parent:
+    type: periodical
+    title: "Информационно-управляющие системы"
+    issue: 4
+  url:
+    value: https://i-us.ru/index.php/ius/article/view/16314/15369
+    date: 2026-05-13

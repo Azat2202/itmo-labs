@@ -3,20 +3,9 @@
 #import "@preview/oxdraw:0.1.0": *
 
 #let title = "Диплом"
-#let author = "Тюрин Иван Николаевич"
+#let author = "Сиразетдинов Азат Ниязович"
 
-#show: thesis_format.with(title, author, title_page: {
-  // pagebreak()
-  // pagebreak()
-  // pagebreak()
-  // pagebreak()
-  // pagebreak()
-  // no pagebreak as struct alements do so
-  // #title_page(
-  //   author: author,
-  //   title: title
-  // )
-})
+#show: thesis_format.with(title, author)
 
 // #struct(outlined: false)[СОДЕРЖАНИЕ]
 #outline(title: [

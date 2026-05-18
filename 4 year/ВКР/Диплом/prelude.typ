@@ -85,6 +85,9 @@
   doc
 }
 
+// Костыль чтобы починить пустую страницу в начале
+#let first-heading = state("first-heading", true)
+
 #let set_label_format(doc) = {
   set ref(supplement: none)
   doc
@@ -130,7 +133,11 @@
     block(inset: (left: 1.25cm), it)
   }
   show heading.where(depth: 1): it => {
-    pagebreak()
+    if first-heading.get() {
+      first-heading.update(false)
+    } else {
+      pagebreak()
+    }
     align(center)[
       #it
     ]

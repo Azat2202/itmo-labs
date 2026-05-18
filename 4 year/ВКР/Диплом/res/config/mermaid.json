@@ -1,0 +1,7 @@
+{
+  "flowchart": {
+    "htmlLabels": false,
+    "useMaxWidth": false
+  },
+  "themeCSS": ".nodeLabel, .edgeLabel, .cluster-label { font-family: 'Times New Roman', serif; }"
+}

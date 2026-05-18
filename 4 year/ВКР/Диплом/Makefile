@@ -18,8 +18,9 @@ diagrams: $(DIAGRAM_OUT)
 res/img/%.svg: res/diagrams/%.puml
 	plantuml -tsvg -o '../img' $<
 
-res/img/%.svg: res/diagrams/%.mmd
-	mmdc -i $< -o $@ -t neutral -b transparent
+res/img/%.svg: res/diagrams/%.mmd res/config/mermaid.json scripts/fix-mermaid-svg.py
+	mmdc -i $< -o $@ -t neutral -b transparent -c res/config/mermaid.json
+	python3 scripts/fix-mermaid-svg.py $@
 
 watch:
 	typst watch main.typ

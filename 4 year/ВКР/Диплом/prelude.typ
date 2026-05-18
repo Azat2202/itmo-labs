@@ -2,12 +2,18 @@
  Следует ГОСТ 7.32-2017
  */
 
+#let strong-as-italic(it) = emph(it.body)
+
 #let set_terms_format(doc) = {
   set terms(
     separator: [ -- ],
     indent: 0em,
     hanging-indent: 0em,
-  ) 
+  )
+  show terms: it => {
+    show strong: strong => strong.body
+    it
+  }
   doc
 }
 
@@ -99,6 +105,12 @@
     justify: true, // выравнивание по ширине
     spacing: 1em,
     leading: 1em, // междустрочный интервал
+  )
+
+  show strong: strong-as-italic
+  show raw.where(block: false): set text(
+    font: "Times New Roman",
+    size: 14pt,
   )
 
   /*

@@ -1,0 +1,14 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %X{task_id} %X{dealer_id} %X{offer_id} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="io.temporal" level="INFO"/>
+    <logger name="com.example.feedprocessor" level="DEBUG"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
